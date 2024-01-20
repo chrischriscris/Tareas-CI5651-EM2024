@@ -1,0 +1,27 @@
+1. (3 puntos) — Considere el algoritmo StrupidSort para ordenar un arreglo de menor a
+mayor:
+def stupidSort(a):
+for x in permutaciones(a):
+if ordenado(x):
+return x
+Puede suponer que permutaciones es un iterador que devuelve, una a una, todas las permutaciones de un arreglo en tiempo constante. Además, ordenado es un predicado que
+verifica si un arreglo está ordenado de menor a mayor en tiempo Θ(n).
+Diga cotas inferior y superior para stupidSort (correspondiendo al peor y mejor caso,
+respectivamente). Esto es, defina dos funciones f y g tal que se cumpla que:
+• stupidSort ∈ O(f) • stupidSort ∈ Ω(g)
+2. (3 puntos) — En la sede del banco caben hasta C personas. La sede empieza vacía y los
+clientes entran uno a uno. Cuando la capacidad de la sede es superada, la misma cierra y
+la totalidad de los clientes es transferida a una sede más grande, con capacidad 2 × C.
+Nótese que si contamos cuántas personas deben trasladarse al entrar un cliente a la sede,
+ocurre uno de dos casos:
+• Si aún no se ha superado la capacidad de la sede, la cantidad de personas que debe
+trasladarse es O(1) — únicamente el cliente que entra.
+• Si se supera la capacidad de la sede, la cantidad de personas que debe trasladarse es
+O(C) — todos los clientes en la sede del banco más el cliente nuevo.
+Demuestre que el orden amortizado, en el peor caso, para el ingreso de un cliente es O(1)
+3. (3 puntos) — El problema ⊕–SAT modificación sobre el problema de satisfacibilidad booleana,
+donde la fórmula proposicional está en forma normal conjuntiva, pero cada cláusula está
+separada por disyunciones exclusivas (en vez de disyunciones tradicionales).
+Recordemos que P ⊕ Q es cierto sí y solo sí uno de entre P y Q es cierto (el otro siendo
+falso).
+Diga si ⊕–SAT ∈ P o si ⊕–SAT es NP–completo. Demuestre su afirmación.
