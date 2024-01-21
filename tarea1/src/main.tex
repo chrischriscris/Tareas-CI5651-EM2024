@@ -1,27 +1,98 @@
-1. (3 puntos) — Considere el algoritmo StrupidSort para ordenar un arreglo de menor a
-mayor:
+\documentclass[letterpaper, 12pt]{article}
+\usepackage[top=2 cm, bottom=2 cm,left=1.5 cm, right=1.5 cm]{geometry}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{csquotes}
+
+\setlength{\parindent}{1cm}
+\pagestyle{empty}
+
+\usepackage{amsmath}
+\usepackage[outputdir=aux]{minted}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{enumerate}
+\usepackage{graphicx} % Incluir imágenes
+\usepackage[document]{ragged2e}
+\usepackage{mathrsfs}
+\usepackage[T1]{fontenc}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{float} %required for the placement specifier H
+\makeatletter
+\makeatother
+% -----------------------------------------------
+
+% Preámbulo
+
+\title{Tarea}
+\author{Christopher Gómez}
+\date{Marzo 2022}
+
+\begin{document}
+\parbox[t]{.5\linewidth}{
+    \centering
+    \includegraphics[scale=0.4]{logo.png}
+    \begin{center}
+        UNIVERSIDAD SIMÓN BOLÍVAR \\
+        CI-5651 - Diseño de Algoritmos I \\
+        Prof. Ricardo Monascal \\
+    \end{center}
+}
+\hfill \framebox[5.5cm][c]{
+        \parbox[t]{.8\linewidth}{
+        \centering
+       Resuelto por:\\ Christopher Gómez
+        }}
+
+\phantom{This text will be invisible} \\
+\centerline {\textbf{Tarea}}
+\justify
+
+\begin{enumerate}
+
+% -------- PREGUNTA 1 --------
+
+\item Considere el algoritmo \texttt{stupidSort} para ordenar un arreglo de menor a
+mayor: \\
+
+\begin{minted}{python}
 def stupidSort(a):
-for x in permutaciones(a):
-if ordenado(x):
-return x
-Puede suponer que permutaciones es un iterador que devuelve, una a una, todas las permutaciones de un arreglo en tiempo constante. Además, ordenado es un predicado que
-verifica si un arreglo está ordenado de menor a mayor en tiempo Θ(n).
-Diga cotas inferior y superior para stupidSort (correspondiendo al peor y mejor caso,
-respectivamente). Esto es, defina dos funciones f y g tal que se cumpla que:
-• stupidSort ∈ O(f) • stupidSort ∈ Ω(g)
-2. (3 puntos) — En la sede del banco caben hasta C personas. La sede empieza vacía y los
-clientes entran uno a uno. Cuando la capacidad de la sede es superada, la misma cierra y
-la totalidad de los clientes es transferida a una sede más grande, con capacidad 2 × C.
-Nótese que si contamos cuántas personas deben trasladarse al entrar un cliente a la sede,
-ocurre uno de dos casos:
-• Si aún no se ha superado la capacidad de la sede, la cantidad de personas que debe
-trasladarse es O(1) — únicamente el cliente que entra.
-• Si se supera la capacidad de la sede, la cantidad de personas que debe trasladarse es
-O(C) — todos los clientes en la sede del banco más el cliente nuevo.
-Demuestre que el orden amortizado, en el peor caso, para el ingreso de un cliente es O(1)
-3. (3 puntos) — El problema ⊕–SAT modificación sobre el problema de satisfacibilidad booleana,
-donde la fórmula proposicional está en forma normal conjuntiva, pero cada cláusula está
-separada por disyunciones exclusivas (en vez de disyunciones tradicionales).
-Recordemos que P ⊕ Q es cierto sí y solo sí uno de entre P y Q es cierto (el otro siendo
-falso).
-Diga si ⊕–SAT ∈ P o si ⊕–SAT es NP–completo. Demuestre su afirmación.
+    for x in permutaciones(a):
+        if ordenado(x):
+            return x
+\end{minted}
+
+Puede suponer que \texttt{permutaciones} es un iterador que devuelve, una a una, todas las permutaciones de un arreglo en tiempo constante. Además, \texttt{ordenado} es un predicado que verifica si un arreglo está ordenado de menor a mayor en tiempo $\Theta(n)$. \\
+
+Diga cotas inferior y superior para \texttt{stupidSort} (correspondiendo al peor y mejor caso, respectivamente). Esto es, defina dos funciones $f$ y $g$ tal que se cumpla que: \\
+
+\begin{multicols}{2}
+    \begin{itemize}
+        \item \texttt{stupidSort} $\in O(f)$
+        \item \texttt{stupidSort} $\in \Omega(g)$
+    \end{itemize}
+\end{multicols}
+
+\item  En la sede del banco caben hasta C personas. La sede empieza vacía y los
+clientes entran uno a uno. Cuando la capacidad de la sede es superada, la misma cierra y la totalidad de los clientes es transferida a una sede más grande, con capacidad $2 \times C$.
+
+Nótese que si contamos cuántas personas deben trasladarse al entrar un cliente a la sede, ocurre uno de dos casos:
+
+
+\begin{itemize}
+    \item Si aún no se ha superado la capacidad de la sede, la cantidad de personas que debe trasladarse es $O(1)$ — únicamente el cliente que entra.
+    \item Si se supera la capacidad de la sede, la cantidad de personas que debe trasladarse es $O(C)$ — todos los clientes en la sede del banco más el cliente nuevo.
+\end{itemize}
+
+Demuestre que el orden amortizado, en el peor caso, para el ingreso de un cliente es $O(1)$. \\
+
+\item El problema $\oplus-$SAT modificación sobre el problema de satisfacibilidad booleana, donde la fórmula proposicional está en forma normal conjuntiva, pero cada cláusula está separada por disyunciones exclusivas (en vez de disyunciones tradicionales).
+
+Recordemos que $P \oplus Q$ es cierto sí y solo sí uno de entre P y Q es cierto (el otro siendo falso).
+
+Diga si $\oplus-$SAT $\in P$ o si $\oplus-$SAT es NP-completo. Demuestre su afirmación.
+
+\end{enumerate} \vspace{4mm}
+
+\end{document}
