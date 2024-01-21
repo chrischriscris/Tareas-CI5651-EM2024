@@ -74,11 +74,14 @@ Diga cotas inferior y superior para \texttt{stupidSort} (correspondiendo al peor
     \end{itemize}
 \end{multicols}
 
+Para el mejor caso, supongamos que el primer elemento que retorna el iterador \texttt{permutaciones} es el arreglo ordenado. En este caso, el algoritmo \texttt{stupidSort} retorna el arreglo ordenado en tiempo $\Theta(n)$, que es el tiempo que tarda \texttt{ordenado} en verificar que el arreglo está ordenado. Por lo tanto, $g(n) = n$. \\
+
+Por otro lado, el peor caso se da cuando el arreglo ordenado resulta ser el último retornado por {permutaciones}, lo cual solo ocurre cuando el iterador ha agotado todas las permutaciones posibles sobre un arreglo de $n$ elementos, que son $n!$. Para cada una de estas permutaciones \texttt{ordenado} verifica si está ordenado en $\Theta(n)$, por lo que el tiempo total es $O(n! \times n)$. Así, $f(n) = n! \times n$. \\
+
 \item  En la sede del banco caben hasta C personas. La sede empieza vacía y los
 clientes entran uno a uno. Cuando la capacidad de la sede es superada, la misma cierra y la totalidad de los clientes es transferida a una sede más grande, con capacidad $2 \times C$.
 
 Nótese que si contamos cuántas personas deben trasladarse al entrar un cliente a la sede, ocurre uno de dos casos:
-
 
 \begin{itemize}
     \item Si aún no se ha superado la capacidad de la sede, la cantidad de personas que debe trasladarse es $O(1)$ — únicamente el cliente que entra.
@@ -89,9 +92,11 @@ Demuestre que el orden amortizado, en el peor caso, para el ingreso de un client
 
 \item El problema $\oplus-$SAT modificación sobre el problema de satisfacibilidad booleana, donde la fórmula proposicional está en forma normal conjuntiva, pero cada cláusula está separada por disyunciones exclusivas (en vez de disyunciones tradicionales).
 
-Recordemos que $P \oplus Q$ es cierto sí y solo sí uno de entre $P$ y $Q$ es cierto (el otro siendo falso).
+Recordemos que $P \oplus Q$ es cierto si y solo si uno de entre $P$ y $Q$ es cierto (el otro siendo falso).
 
 Diga si $\oplus-$SAT $\in P$ o si $\oplus-$SAT es $NP-$completo. Demuestre su afirmación.
+
+
 
 \end{enumerate} \vspace{4mm}
 
