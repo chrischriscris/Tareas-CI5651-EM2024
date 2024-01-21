@@ -108,10 +108,14 @@ Se tiene que $\oplus-$SAT $\in P$. Para demostrarlo, basta con construir un algo
 Teniendo en cuenta lo anterior, que deriva de la definición y propiedades del operador $\oplus$, podemos plantear el problema como buscar una asignación en la que la cantidad de literales $true$ en cada cláusula sea impar, y para resolver este problema construiremos un sistema de ecuaciones lineales de la siguiente forma:
 
 \begin{itemize}
-    \item Sea $P$ una fórmula proposicional en forma normal conjuntiva, con $n$ cláusulas y $m$ átomos, cada cláusula $C_i$ tiene la forma $C_i = l_{i1} \oplus l_{i2} \oplus \dots \oplus l_{ij_i}$, donde $1 \leq i \leq n$ y $j_i$ es la cantidad de literales en la cláusula $C_i$.
+    \item Sea $P$ una fórmula proposicional en forma normal conjuntiva, con $n$ cláusulas y $m$ átomos, cada cláusula $C_i$ tiene la forma $C_i = l_{i1} \oplus l_{i2} \oplus \dots \oplus l_{ij_i}$, donde $1 \leq i \leq n$ y $j_i \leq m$ es la cantidad de literales en la cláusula $C_i$.
     \item Sea $A$ una matriz de $n \times m$, donde cada fila $i$ representa una cláusula $C_i$ y cada columna $j$ representa un átomo $a_j$. El valor de la entrada $A_{ij}$ es $1$ si el átomo $a_j$ aparece en la cláusula $C_i$, y $0$ en caso contrario.
     \item Sea $b$ un vector de $n$ elementos, donde cada elemento $i$ representa una cláusula $C_i$. El valor del elemento $b_i$ es $1$ si la cláusula $C_i$ tiene una cantidad par de literales negados, y $0$ en caso contrario.
 \end{itemize}
+
+Con lo anterior, podemos construir un sistema de ecuaciones lineales de la forma $Ax \equiv b \pmod{2}$, donde $x$ es un vector de $m$ elementos, y cada elemento $x_j$ representa un átomo $a_j$. Si el sistema tiene solución, cada elemento $x_j$ de la solución representa la asignación del átomo $a_j$, siendo $a_j \equiv true$ si $x_j \equiv 1 \pmod{2}$, y $a_j \equiv false$ si $x_j \equiv 0 \pmod{2}$. En caso contrario, el sistema no tiene solución y la fórmula proposicional $P$ no es satisfacible. \\
+
+Como se puede ver, el sistema de ecuaciones lineales se puede construir en tiempo polinomial, ya que solo se requiere recorrer la fórmula proposicional $P$ una vez para construir la matriz $A$ y el vector $b$, lo cual se puede hacer en tiempo $O(nm)$. Por otro lado, el sistema de ecuaciones lineales se puede resolver en tiempo polinomial, ya que se puede aplicar el algoritmo de eliminación Gaussiana en módulo 2 (cada operación se hace tomando el módulo 2 del resultado), que tiene complejidad $O(n^3)$. Por lo tanto, el problema $\oplus-$SAT se puede resolver de forma exacta en tiempo $O(n^3 + nm)$, quedando demostrado que $\oplus-$SAT $\in P$. \\
 
 \end{enumerate} \vspace{4mm}
 
