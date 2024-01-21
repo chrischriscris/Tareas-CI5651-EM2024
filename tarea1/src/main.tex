@@ -90,13 +90,28 @@ Nótese que si contamos cuántas personas deben trasladarse al entrar un cliente
 
 Demuestre que el orden amortizado, en el peor caso, para el ingreso de un cliente es $O(1)$. \\
 
-\item El problema $\oplus-$SAT modificación sobre el problema de satisfacibilidad booleana, donde la fórmula proposicional está en forma normal conjuntiva, pero cada cláusula está separada por disyunciones exclusivas (en vez de disyunciones tradicionales).
+\item El problema $\oplus-$SAT modificación sobre el problema de satisfacibilidad booleana, donde la fórmula proposicional está en forma normal conjuntiva, pero cada literal está separado por disyunciones exclusivas (en vez de disyunciones tradicionales).
 
-Recordemos que $P \oplus Q$ es cierto si y solo si uno de entre $P$ y $Q$ es cierto (el otro siendo falso).
+Recordemos que $P \oplus Q$ es \emph{cierto} si y solo si uno de entre $P$ y $Q$ es \emph{cierto} (el otro siendo falso).
 
-Diga si $\oplus-$SAT $\in P$ o si $\oplus-$SAT es $NP-$completo. Demuestre su afirmación.
+Diga si $\oplus-$SAT $\in P$ o si $\oplus-$SAT es $NP-$completo. Demuestre su afirmación. \\
 
+Se tiene que $\oplus-$SAT $\in P$. Para demostrarlo, basta con construir un algoritmo que resuelva el problema en tiempo polinomial, veamos algunas ideas para construirlo:
+\begin{itemize}
+    \item Sea $C$ una cláusula, esta tiene la forma $C = l_1 \oplus l_2 \oplus \dots \oplus l_n$, donde cada $l_i$, $1 \leq i \leq n$, es un literal.
+    \item Cualquier cadena dentro de la cláusula $C$ conformada por literales que sean $false$ evalúa a $false$. Es decir, $false \oplus false \oplus \dots \oplus false \equiv false$.
+    \item Al introducir un $true$ en una cadena, el resultado de la evaluación cambia a $true$. Es decir, $false \oplus \dots \oplus false \oplus true \oplus false \oplus \dots \oplus false \equiv true$.
+    \item Al introducir otro $true$ en la cadena, el resultado de la evaluación vuelve a cambiar a $false$, ya que $true \oplus true \equiv false$.
+    \item De las tres observaciones anteriores, se puede derivar que la evaluación de una cláusula $C$ solo depende de la cantidad de literales $true$ que tenga. Si la cantidad de literales $true$ es par, la evaluación es $false$, y si es impar, la evaluación es $true$.
+\end{itemize}
 
+Teniendo en cuenta lo anterior, que deriva de la definición y propiedades del operador $\oplus$, podemos plantear el problema como buscar una asignación en la que la cantidad de literales $true$ en cada cláusula sea impar, y para resolver este problema construiremos un sistema de ecuaciones lineales de la siguiente forma:
+
+\begin{itemize}
+    \item Sea $P$ una fórmula proposicional en forma normal conjuntiva, con $n$ cláusulas y $m$ átomos, cada cláusula $C_i$ tiene la forma $C_i = l_{i1} \oplus l_{i2} \oplus \dots \oplus l_{ij_i}$, donde $1 \leq i \leq n$ y $j_i$ es la cantidad de literales en la cláusula $C_i$.
+    \item Sea $A$ una matriz de $n \times m$, donde cada fila $i$ representa una cláusula $C_i$ y cada columna $j$ representa un átomo $a_j$. El valor de la entrada $A_{ij}$ es $1$ si el átomo $a_j$ aparece en la cláusula $C_i$, y $0$ en caso contrario.
+    \item Sea $b$ un vector de $n$ elementos, donde cada elemento $i$ representa una cláusula $C_i$. El valor del elemento $b_i$ es $1$ si la cláusula $C_i$ tiene una cantidad par de literales negados, y $0$ en caso contrario.
+\end{itemize}
 
 \end{enumerate} \vspace{4mm}
 
