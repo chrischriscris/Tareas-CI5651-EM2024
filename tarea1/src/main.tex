@@ -10,6 +10,7 @@
 
 \usepackage{amsmath}
 \usepackage[outputdir=aux]{minted}
+\usepackage{cancel}
 \usepackage{amssymb}
 \usepackage{multicol}
 \usepackage{enumerate}
@@ -25,7 +26,7 @@
 
 % Preámbulo
 
-\title{Tarea}
+\title{Tarea 1: Complejidad algorítmica y análisis amortizado}
 \author{Christopher Gómez}
 \date{Marzo 2022}
 
@@ -46,7 +47,7 @@
         }}
 
 \phantom{This text will be invisible} \\
-\centerline {\textbf{Tarea}}
+\centerline {\textbf{Tarea 1: Complejidad algorítmica y análisis amortizado}}
 \justify
 
 \begin{enumerate}
@@ -74,9 +75,11 @@ Diga cotas inferior y superior para \texttt{stupidSort} (correspondiendo al peor
     \end{itemize}
 \end{multicols}
 
-Para el mejor caso, supongamos que el primer elemento que retorna el iterador \texttt{permutaciones} es el arreglo ordenado. En este caso, el algoritmo \texttt{stupidSort} retorna el arreglo ordenado en tiempo $\Theta(n)$, que es el tiempo que tarda \texttt{ordenado} en verificar que el arreglo está ordenado. Por lo tanto, $g(n) = n$. \\
+Para el mejor caso, supongamos que el primer elemento que retorna el iterador \texttt{permutaciones} es el arreglo ordenado. En este caso, el algoritmo \texttt{stupidSort} retorna el arreglo ordenado en tiempo $\Theta(n)$, que es el tiempo que tarda \texttt{ordenado} en verificar que el arreglo está ordenado. Por lo tanto, $g(n) = n$.
 
 Por otro lado, el peor caso se da cuando el arreglo ordenado resulta ser el último retornado por {permutaciones}, lo cual solo ocurre cuando el iterador ha agotado todas las permutaciones posibles sobre un arreglo de $n$ elementos, que son $n!$. Para cada una de estas permutaciones \texttt{ordenado} verifica si está ordenado en $\Theta(n)$, por lo que el tiempo total es $O(n! \times n)$. Así, $f(n) = n! \times n$. \\
+
+% -------- PREGUNTA 2 --------
 
 \item  En la sede del banco caben hasta C personas. La sede empieza vacía y los
 clientes entran uno a uno. Cuando la capacidad de la sede es superada, la misma cierra y la totalidad de los clientes es transferida a una sede más grande, con capacidad $2 \times C$.
@@ -89,6 +92,26 @@ Nótese que si contamos cuántas personas deben trasladarse al entrar un cliente
 \end{itemize}
 
 Demuestre que el orden amortizado, en el peor caso, para el ingreso de un cliente es $O(1)$. \\
+
+Para el análisis amortizado se usará el método del potencial. Para ello, definamos el potencial $\Phi(S_i) = 2n_i - C_i$, donde $n_i$ es la cantidad de clientes en la sede del banco y $C_i$ es la capacidad de la sede, para un estado $S$ del banco. Así, tenemos dos casos para el ingreso de un cliente:
+
+\begin{itemize}
+    \item Para $n_i \leq C_{i-1}$ no nos interesa el costo amortizado, ya que el costo real es $O(1)$ y no es el peor caso.
+    \item Para $n_i > C_{i-1}$ se da el peor caso, en el que se supera la capacidad de la sede y se deben trasladar los $n_i$ clientes a una sede con capacidad $2 \times C_{i-1}$. Tenemos entonces que $C_i = 2 \times C_{i-1}$ y $C_{i-1} = n_i - 1$. Veamos el costo amortizado:
+    \begin{align*}
+        \hat{c_i} &= c_i + \Phi(S_i) - \Phi(S_{i-1}) &\\
+        &= n_i + (2n_i - C_i) - (2(n_i - 1) - C_{i-1}) & (\text{Def. de } \Phi \text{ y } C_i, C_{i-1}) \\
+        &= n_i + \cancel{2n_i} - 2C_{i-1} - (\cancel{2n_i} - 2 - C_{i-1}) & (\text{Aritmética, } C_i = 2C_{i-1}) \\
+        &= n_i - C_{i-1} + 2 & (\text{Aritmética}) \\
+        &= \cancel{n_i} - (\cancel{n_i} - 1) + 2 & (C_{i-1} = n_i - 1) \\
+        &= 3 & (\text{Aritmética}) \\
+        &= O(1)
+    \end{align*}
+
+    Luego, veamos que el potencial inicial es $\Phi(S_0) = -C_0$, suponiendo que la sede empieza vacía y la capacidad inicial es $C_0$; y para cualquier estado posterior $S_i$ se cumple que $\Phi(S_i) \geq -C_0$, ya que en el mejor caso $\Phi(S_i) = \Phi(S_{i-1}) + 2$, y en el peor caso (al superar la capacidad) $\Phi(S_i) = 2n_i - n_i + 1 = n_i + 1 > -C_0$. Por lo tanto, la función de potencial es correcta y hemos demostrado que el costo amortizado para el ingreso de un cliente en el peor caso es de $O(1)$.
+\end{itemize}
+
+% -------- PREGUNTA 3 --------
 
 \item El problema $\oplus-$SAT modificación sobre el problema de satisfacibilidad booleana, donde la fórmula proposicional está en forma normal conjuntiva, pero cada literal está separado por disyunciones exclusivas (en vez de disyunciones tradicionales).
 
@@ -113,7 +136,7 @@ Teniendo en cuenta lo anterior, que deriva de la definición y propiedades del o
     \item Sea $b$ un vector de $n$ elementos, donde cada elemento $i$ representa una cláusula $C_i$. El valor del elemento $b_i$ es $1$ si la cláusula $C_i$ tiene una cantidad par de literales negados, y $0$ en caso contrario.
 \end{itemize}
 
-Con lo anterior, podemos construir un sistema de ecuaciones lineales de la forma $Ax \equiv b \pmod{2}$, donde $x$ es un vector de $m$ elementos, y cada elemento $x_j$ representa un átomo $a_j$. Si el sistema tiene solución, cada elemento $x_j$ de la solución representa la asignación del átomo $a_j$, siendo $a_j \equiv true$ si $x_j \equiv 1 \pmod{2}$, y $a_j \equiv false$ si $x_j \equiv 0 \pmod{2}$. En caso contrario, el sistema no tiene solución y la fórmula proposicional $P$ no es satisfacible. \\
+Con lo anterior, podemos construir un sistema de ecuaciones lineales de la forma $Ax \equiv b \pmod{2}$, donde $x$ es un vector de $m$ elementos, y cada elemento $x_j$ representa un átomo $a_j$. Si el sistema tiene solución, cada elemento $x_j$ de la solución representa la asignación del átomo $a_j$, siendo $a_j \equiv true$ si $x_j \equiv 1 \pmod{2}$, y $a_j \equiv false$ si $x_j \equiv 0 \pmod{2}$. En caso contrario, el sistema no tiene solución y la fórmula proposicional $P$ no es satisfacible.
 
 Como se puede ver, el sistema de ecuaciones lineales se puede construir en tiempo polinomial, ya que solo se requiere recorrer la fórmula proposicional $P$ una vez para construir la matriz $A$ y el vector $b$, lo cual se puede hacer en tiempo $O(nm)$. Por otro lado, el sistema de ecuaciones lineales se puede resolver en tiempo polinomial, ya que se puede aplicar el algoritmo de eliminación Gaussiana en módulo 2 (cada operación se hace tomando el módulo 2 del resultado), que tiene complejidad $O(n^3)$. Por lo tanto, el problema $\oplus-$SAT se puede resolver de forma exacta en tiempo $O(n^3 + nm)$, quedando demostrado que $\oplus-$SAT $\in P$. \\
 
