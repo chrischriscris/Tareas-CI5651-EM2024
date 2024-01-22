@@ -55,8 +55,7 @@
 % -------- PREGUNTA 1 --------
 
 \item Considere el algoritmo \texttt{stupidSort} para ordenar un arreglo de menor a
-mayor: \\
-
+mayor:
 \begin{minted}{python}
 def stupidSort(a):
     for x in permutaciones(a):
@@ -66,8 +65,7 @@ def stupidSort(a):
 
 Puede suponer que \texttt{permutaciones} es un iterador que devuelve, una a una, todas las permutaciones de un arreglo en tiempo constante. Además, \texttt{ordenado} es un predicado que verifica si un arreglo está ordenado de menor a mayor en tiempo $\Theta(n)$. \\
 
-Diga cotas inferior y superior para \texttt{stupidSort} (correspondiendo al peor y mejor caso, respectivamente). Esto es, defina dos funciones $f$ y $g$ tal que se cumpla que: \\
-
+Diga cotas inferior y superior para \texttt{stupidSort} (correspondiendo al peor y mejor caso, respectivamente). Esto es, defina dos funciones $f$ y $g$ tal que se cumpla que:
 \begin{multicols}{2}
     \begin{itemize}
         \item \texttt{stupidSort} $\in O(f)$
@@ -93,7 +91,7 @@ Nótese que si contamos cuántas personas deben trasladarse al entrar un cliente
 
 Demuestre que el orden amortizado, en el peor caso, para el ingreso de un cliente es $O(1)$. \\
 
-Para el análisis amortizado se usará el método del potencial. Para ello, definamos el potencial $\Phi(S_i) = 2n_i - C_i$, donde $n_i$ es la cantidad de clientes en la sede del banco y $C_i$ es la capacidad de la sede, para un estado $S$ del banco. Así, tenemos dos casos para el ingreso de un cliente:
+Para el análisis amortizado se usará el método del potencial. Para ello, definamos el potencial $\Phi(S_i) = 2n_i - C_i$, donde $n_i$ es la cantidad de clientes en la sede del banco y $C_i$ es la capacidad de la sede, para un estado $S_i$ del banco. Así, tenemos dos casos para el ingreso de un cliente:
 
 \begin{itemize}
     \item Para $n_i \leq C_{i-1}$ no nos interesa el costo amortizado, ya que el costo real es $O(1)$ y no es el peor caso.
