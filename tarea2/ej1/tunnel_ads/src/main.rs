@@ -6,6 +6,6 @@ fn main() {
 
     let solution = tunnel_ads::solve(instance_path);
 
-    solution.iter().for_each(|i| print!("{} ", i));
+    solution.iter().for_each(|i| print!("{i} "));
     println!();
 }
