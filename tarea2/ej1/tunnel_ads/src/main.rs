@@ -1,13 +1,14 @@
-use std::io;
+use std::env;
+
+use tunnel_ads::parse_instance;
 
 fn main() {
-    println!("Guess the number!");
+    let args: Vec<String> = env::args().collect();
+    let file_path = &args[1];
 
-    println!("Please input your guess.");
+    let tuples = parse_instance(file_path);
 
-    let mut guess = String::new();
-
-    io::stdin().read_line(&mut guess).expect("Failed to read line");
-
-    println!("You guessed: {}", guess);
+    for tuple in tuples {
+        println!("{:?}", tuple);
+    }
 }
