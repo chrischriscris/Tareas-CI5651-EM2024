@@ -17,6 +17,8 @@ impl Petition {
     }
 }
 
+// Implementation of Ord and PartialOrd for petitions to be ordered by their end.
+
 impl Ord for Petition {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
         self.end.cmp(&other.end)
