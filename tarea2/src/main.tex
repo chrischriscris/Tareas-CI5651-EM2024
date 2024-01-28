@@ -8,6 +8,7 @@
 \setlength{\parindent}{1cm}
 \pagestyle{empty}
 
+\usepackage[colorlinks=true, urlcolor=blue, linkcolor=red]{hyperref} % Para insertar hipervínculos
 \usepackage{amsmath}
 \usepackage[outputdir=aux]{minted}
 \usepackage{amssymb}
@@ -53,29 +54,21 @@
 
 % -------- PREGUNTA 1 --------
 
-\item  En un nuevo túnel, diversos productos quieren colocar vallas para promover
-sus productos. Usted debe dar los permisos apropiados para colocar estas vallas y no desea que ninguna de estas se intersecte con otra (sin embargo, dos vallas pueden estar una al lado de la otra, esto es, compartir un extremo).
+\item  En un nuevo túnel, diversos productos quieren colocar vallas para promover sus productos. Usted debe dar los permisos apropiados para colocar estas vallas y no desea que ninguna de estas se intersecte con otra (sin embargo, dos vallas pueden estar una al lado de la otra, esto es, compartir un extremo).
 
 Las propuestas de publicidad incluyen el punto en donde la valla empezará (en metros, contando desde el inicio del túnel) y el tamaño de la misma (también en metros). Ninguna de estas condiciones es negociable. Los departamentos de publicidad de cada uno de los productos interesados han llegado a la conclusión de que quieren la valla en ese exacto punto, con esas exactas dimensiones o prefieren no colocar publicidad alguna. Todas las vallas se colocarán planas en una sola pared del túnel.
 
 Dadas $n$ peticiones de publicidad, donde la $i$-ésima petición tiene $p_i$ (el punto de inicio de la valla) y $t_i$ (el tamaño de la valla), diseñe un algoritmo \emph{eficiente} que permite escoger un conjunto maximal de peticiones tal que ninguna valla intersecte con otra.
 
-Por ejemplo, considere que $n = 3$ y las peticiones son:
-
-\begin{itemize}
-    \item $p_1 = 1$ y $t_1 = 4$
-    \item $p_2 = 2$ y $t_2 = 1$
-    \item $p_3 = 3$ y $t_3 = 3$
-\end{itemize}
-
-Un conjunto maximal sería $\{2, 3\}$, cubriendo los rangos $[2..3]$ y $[3..6]$.
-
 Su algoritmo debe usar tiempo $O(n\log n)$ y memoria adicional $O(n)$.
 
 Justifique \emph{informalmente} por qué su algoritmos es correcto y cumple con el orden asintótico propuesto.
 
-Además del informe expresando su solución, debe dar una implementación de su solución en el lenguaje de su elección (solamente como una función; el formato de entrada/salida no es relevante).
+Este problema puede ser resuelto utilizando un algoritmo voraz. Primero, ordenamos las peticiones de publicidad en orden creciente de sus puntos finales (pi + ti). Luego, iteramos sobre las peticiones en este orden y seleccionamos una p
 
+Este algoritmo es correcto porque siempre selecciona la petición con el punto final más pequeño que no se superpone con las ya seleccionadas, lo que permite dejar el mayor espacio posible para las peticiones restantes. Además, el algoritmo tiene un tiempo de ejecución de O(n log n) debido a la ordenación inicial y utiliza memoria adicional O(n) para almacenar las peticiones. Por lo tanto, cumple con el orden asintótico propuesto.
+
+Una implementación de este algoritmo en Rust se puede encontrar \href{https://gitfront.io/r/chrischriscris/swaWSXShzVoW/Tareas-CI5651-EM2024/tree/tarea2/ej1/}{aquí}.
 
 % -------- PREGUNTA 2 --------
 
