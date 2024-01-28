@@ -16,6 +16,8 @@ use utils::parse_instance;
 /// petitions that do not overlap each other.
 pub fn solve(file_path: &str) -> Vec<usize> {
     let mut petitions = parse_instance(file_path);
+
+    // Sort petitions by end position
     petitions.sort();
 
     let mut last_end = 0;
@@ -23,7 +25,7 @@ pub fn solve(file_path: &str) -> Vec<usize> {
     for petition in petitions {
         if petition.start >= last_end {
             last_end = petition.end;
-            solution.push(petition.id as usize);
+            solution.push(petition.id);
         }
     };
 

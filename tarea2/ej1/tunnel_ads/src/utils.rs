@@ -19,8 +19,7 @@ pub fn parse_instance(file_path: &str) -> Vec<Petition> {
 
     let mut petitions: Vec<Petition> = Vec::new();
 
-    let mut id = 1;
-    for petition in reader.lines() {
+    for (i, petition) in reader.lines().enumerate() {
         let petition = petition.expect("Error reading line");
         let mut numbers = petition.split_whitespace();
 
@@ -36,8 +35,7 @@ pub fn parse_instance(file_path: &str) -> Vec<Petition> {
             .parse()
             .expect("Error parsing number");
 
-        petitions.push(Petition::new(id, p, t));
-        id += 1;
+        petitions.push(Petition::new(i + 1, p, t));
     }
 
     petitions

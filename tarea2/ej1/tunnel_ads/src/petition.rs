@@ -1,6 +1,6 @@
 #[derive(Eq, PartialEq)]
 pub struct Petition {
-    pub id: u32,
+    pub id: usize,
     pub start: u32,
     pub end: u32,
 }
@@ -8,7 +8,7 @@ pub struct Petition {
 /// Represents a petition, with its id, start and end.
 impl Petition {
     /// Constructs a Petition, given its id, start and size.
-    pub fn new(id: u32, start: u32, size: u32) -> Petition {
+    pub fn new(id: usize, start: u32, size: u32) -> Petition {
         Petition {
             id,
             start,

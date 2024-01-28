@@ -62,11 +62,11 @@ Dadas $n$ peticiones de publicidad, donde la $i$-ésima petición tiene $p_i$ (e
 
 Su algoritmo debe usar tiempo $O(n\log n)$ y memoria adicional $O(n)$.
 
-Justifique \emph{informalmente} por qué su algoritmos es correcto y cumple con el orden asintótico propuesto.
+Justifique \emph{informalmente} por qué su algoritmos es correcto y cumple con el orden asintótico propuesto. \\
 
-Este problema puede ser resuelto utilizando un algoritmo voraz. Primero, ordenamos las peticiones de publicidad en orden creciente de sus puntos finales (pi + ti). Luego, iteramos sobre las peticiones en este orden y seleccionamos una p
+Este problema puede ser resuelto utilizando un algoritmo voraz, el cual consiste en ordenar las peticiones de publicidad en orden creciente de sus puntos finales $(p_i + t_i)$ y luego recorrer la lista, seleccionando la que se está considerando si no se superpone con las ya seleccionadas. \\
 
-Este algoritmo es correcto porque siempre selecciona la petición con el punto final más pequeño que no se superpone con las ya seleccionadas, lo que permite dejar el mayor espacio posible para las peticiones restantes. Además, el algoritmo tiene un tiempo de ejecución de O(n log n) debido a la ordenación inicial y utiliza memoria adicional O(n) para almacenar las peticiones. Por lo tanto, cumple con el orden asintótico propuesto.
+Este algoritmo es correcto porque siempre selecciona la petición con el punto final más pequeño que no se superpone con las ya seleccionadas, lo que permite dejar el mayor espacio posible para las peticiones restantes. Además, el algoritmo tiene un tiempo de ejecución de $O(n log n)$ debido a la ordenación inicial y utiliza memoria adicional $O(n)$ para almacenar las peticiones. Por lo tanto, cumple con el orden asintótico propuesto.
 
 Una implementación de este algoritmo en Rust se puede encontrar \href{https://gitfront.io/r/chrischriscris/swaWSXShzVoW/Tareas-CI5651-EM2024/tree/tarea2/ej1/}{aquí}.
 
