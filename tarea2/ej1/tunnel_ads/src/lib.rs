@@ -11,9 +11,9 @@ use utils::parse_instance;
 /// <pn> <tn>
 ///
 /// where p1, p2, ..., pn are the petition's start and t1, t2, ..., tn are the
-/// petition's size, returns a vector of usize, each one representing
-/// the index of the accepted ad petitions that maximizes the number of accepted
-/// petitions that do not overlap each other.
+/// petition's size, returns a vector of usize, each one representing the index
+/// of the accepted ad petitions that maximizes the number of accepted petitions
+/// that do not overlap each other.
 pub fn solve(file_path: &str) -> Vec<usize> {
     let mut petitions = parse_instance(file_path);
 

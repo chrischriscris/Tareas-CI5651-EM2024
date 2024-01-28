@@ -64,11 +64,40 @@ Su algoritmo debe usar tiempo $O(n\log n)$ y memoria adicional $O(n)$.
 
 Justifique \emph{informalmente} por qué su algoritmos es correcto y cumple con el orden asintótico propuesto. \\
 
-Este problema puede ser resuelto utilizando un algoritmo voraz, el cual consiste en ordenar las peticiones de publicidad en orden creciente de sus puntos finales $(p_i + t_i)$ y luego recorrer la lista, seleccionando la que se está considerando si no se superpone con las ya seleccionadas. \\
+Este problema puede ser resuelto utilizando un algoritmo voraz, el cual consiste en ordenar las peticiones de publicidad en orden creciente de sus puntos finales $(p_i + t_i)$ y luego recorrer la lista, seleccionando la que se está considerando si no se superpone con las ya seleccionadas. Veámoslo en pseudocódigo:
 
-Este algoritmo es correcto porque siempre selecciona la petición con el punto final más pequeño que no se superpone con las ya seleccionadas, lo que permite dejar el mayor espacio posible para las peticiones restantes. Además, el algoritmo tiene un tiempo de ejecución de $O(n log n)$ debido a la ordenación inicial y utiliza memoria adicional $O(n)$ para almacenar las peticiones. Por lo tanto, cumple con el orden asintótico propuesto.
+\begin{minted}{python}
+    def publicidad(peticiones: Conjunto[Peticion]) -> Conjunto[Peticion]:
+        peticiones.odernar(lambda p: p.comienzo + p.tamaño)
+        seleccionadas = {}
+        for peticion in peticiones:
+            if not se_superpone(peticion, seleccionadas):
+                seleccionadas.añadir(peticion)
+        return seleccionadas
+\end{minted}
 
-Una implementación de este algoritmo en Rust se puede encontrar \href{https://gitfront.io/r/chrischriscris/swaWSXShzVoW/Tareas-CI5651-EM2024/tree/tarea2/ej1/}{aquí}.
+Una noción intuitiva de por qué este algoritmo es correcto es que, al seleccionar la petición con el punto final más pequeño que no se superpone con las ya seleccionadas, se deja el mayor espacio posible para las peticiones restantes. Esto es, se selecciona la petición que deja el mayor espacio a la derecha para las peticiones restantes.
+
+Agregando un poco más de formalidad, definamos que un conjunto de peticiones es prometedor si constituye un subconjunto de alguno de los conjuntos maximales de peticiones que no se superponen. Luego, el algoritmo voraz es correcto si en cada iteración del ciclo, el conjunto de peticiones seleccionadas es prometedor, hasta que no hay más peticiones por considerar.
+
+\textbf{Caso base:} El conjunto vacío es prometedor, ya que es subconjunto de cualquier conjunto. En particular, de los conjuntos solución.
+
+\textbf{Caso inductivo:} Supongamos que P es prometedor. En una iteración dada se selecciona una petición $p$ tal que:
+
+\begin{enumerate}
+    \item No se superpone con ninguna de las peticiones seleccionadas.
+    \item Tiene el punto final más pequeño de las no seleccionadas.
+\end{enumerate}
+
+Se tiene entonces que $P \cup \{p\}$ es prometedor, ya que de no serlo (un subconjunto maximal de peticiones que no se superponen), entonces existen al menos dos peticiones $q_1$ y $q_2$ no seleccionadas que no se superponen entre sí, ni con ninguna de las peticiones seleccionadas, y que tienen puntos finales más pequeños que $p$ capaces de sustituir a $p$ para formar un conjunto más grande. Pero esto es una contradicción, ya que $p$ fue seleccionada por tener el punto final más pequeño de las no seleccionadas.
+
+Por lo tanto, el invariante se mantiene en todo momento y que el algoritmo es correcto.
+
+Luego, el algoritmo tiene un tiempo de ejecución de $O(n \log n)$ debido a la ordenación inicial, que se puede implementar en $O(n \log n)$, y el recorrido por la lista de peticiones ordenadas una sola vez, que tarda $O(n)$, ya que se puede implementar \texttt{se\_superpone} en $O(1)$, manteniendo una variable que almacene el último punto final seleccionado y comparando con este en cada iteración.
+
+Además, utiliza memoria adicional $O(n)$ para almacenar las peticiones, y una implementación \emph{in-place} de la ordenación no requiere más que memoria adicional $O(1)$, por lo que cumple con el orden asintótico propuesto.
+
+Una implementación de este algoritmo en Rust se puede encontrar \href{https://gitfront.io/r/chrischriscris/swaWSXShzVoW/Tareas-CI5651-EM2024/tree/tarea2/ej1/}{aquí}. \\
 
 % -------- PREGUNTA 2 --------
 
