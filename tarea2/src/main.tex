@@ -68,7 +68,7 @@ Este problema puede ser resuelto utilizando un algoritmo voraz, el cual consiste
 
 \begin{minted}{python}
     def publicidad(peticiones: Conjunto[Peticion]) -> Conjunto[Peticion]:
-        peticiones.odernar(lambda p: p.comienzo + p.tamaño)
+        peticiones.ordenar(lambda p: p.comienzo + p.tamaño)
         seleccionadas = {}
         for peticion in peticiones:
             if not se_superpone(peticion, seleccionadas):
@@ -91,18 +91,20 @@ Agregando un poco más de formalidad, definamos que un conjunto de peticiones es
 
 Se tiene entonces que $P \cup \{p\}$ es prometedor, ya que de no serlo (un subconjunto maximal de peticiones que no se superponen), entonces existen al menos dos peticiones $q_1$ y $q_2$ no seleccionadas que no se superponen entre sí, ni con ninguna de las peticiones seleccionadas, y que tienen puntos finales más pequeños que $p$ capaces de sustituir a $p$ para formar un conjunto más grande. Pero esto es una contradicción, ya que $p$ fue seleccionada por tener el punto final más pequeño de las no seleccionadas.
 
-Por lo tanto, el invariante se mantiene en todo momento y que el algoritmo es correcto.
+Por lo tanto, el invariante se mantiene en todo momento y el algoritmo es correcto.
 
 Luego, el algoritmo tiene un tiempo de ejecución de $O(n \log n)$ debido a la ordenación inicial, que se puede implementar en $O(n \log n)$, y el recorrido por la lista de peticiones ordenadas una sola vez, que tarda $O(n)$, ya que se puede implementar \texttt{se\_superpone} en $O(1)$, manteniendo una variable que almacene el último punto final seleccionado y comparando con este en cada iteración.
 
-Además, utiliza memoria adicional $O(n)$ para almacenar las peticiones, y una implementación \emph{in-place} de la ordenación no requiere más que memoria adicional $O(1)$, por lo que cumple con el orden asintótico propuesto.
+Además, utiliza memoria adicional $O(n)$ para almacenar las peticiones, y una implementación \emph{in-place} de la ordenación no requiere más que memoria adicional $O(1)$, por lo que cumple con el orden asintótico propuesto. \\
 
 Una implementación de este algoritmo en Rust se puede encontrar \href{https://gitfront.io/r/chrischriscris/swaWSXShzVoW/Tareas-CI5651-EM2024/tree/tarea2/ej1/}{aquí}. \\
+
+Un hecho interesante es que también tendríamos un algoritmo voraz correcto si en lugar de ordenar las peticiones por el punto final, las ordenamos por el punto de inicio en orden decreciente, pero no nos exime de tener que calcular la suma $p_i + t_i$ para cada petición, para verificar si se superpone con las ya seleccionadas. \\
 
 % -------- PREGUNTA 2 --------
 
 
-\item Considere las siguientes definiciones:
+\item Considere las siguientes definiciones: \\
 
 \textbf{Conjuntos definitivos de firmas funcionales}
 
@@ -135,7 +137,7 @@ Por ejemplo, para el mismo $T$ anterior:
 
 \textbf{Matroide asociada}
 
-Dado un conjunto de tipos $T$ y su conjunto de todas las firmas de funciones $F$, definimos $M_T = (F, I)$, donde $F' \in I$ si y sólo si $F'$ es definitivo. \\
+Dado un conjunto de tipos $T$ y su conjunto de todas las firmas de funciones $F$, definimos \linebreak $M_T = (F, \mathcal{I})$, donde $F' \in \mathcal{I}$ si y sólo si $F'$ es definitivo. \\
 
 \textbf{Potencial de una firma funcional}
 
@@ -145,8 +147,47 @@ El potencial de un conjunto de firmas de funciones es la suma del potencial para
 
 Se desea que:
 
-a) Demuestre que $M_T$ es una matroide.
-b) Plantee una función de costo $w$ de tal forma que para la matroide pesada $M_T$ , con $w$ como función de peso, los sub-conjuntos óptimos son los subconjuntos \emph{definitivos} con \emph{potencial máximo}.
+\begin{enumerate}
+    \item Demuestre que $M_T$ es una matroide. \\
+
+    Para demostrar que $M_T$ es una matroide, debemos demostrar que cumple con las dos propiedades de las matroides:
+
+    \begin{enumerate}
+        \item \textbf{Propiedad hereditaria}: Es trivial, porque si $F' \in \mathcal{I}$ (es definitivo), entonces no contiene más de una firma de función con la misma imagen, y no es posible tomar un subconjunto $F'' \subseteq F'$ que contenga más de una firma de función con la misma imagen, ya que para que eso ocurra $F''$ debe contener al menos una firma de función que no está en $F'$, contradiciendo que $F'' \subseteq F'$. Por lo tanto, $F''$ también es definitivo y $M_T$ cumple con la propiedad hereditaria.
+        \item \textbf{Propiedad de intercambio}: Sean $F', F'' \in \mathcal{I}$, con $n=|F'| < |F''| = m$, tenemos que en $F'$, por ser definitivo, existen $n$ tipos \emph{distintos} ocurriendo como imagen cada una de sus firmas. De igual forma, existen en $F''$ $m$ tipos \emph{distintos} ocurriendo como imagen en cada una de sus firmas. Trivialmente, como $m > n$, necesariamente ha de existir al menos una firma $t \in F''$ que tiene como imagen un tipo que no ocurre como imagen en $F'$, y por ende, que no existe en $F'$, por lo que agregarla a $F'$ no haría que se repita ningún tipo como imagen. Por lo tanto, $F' \cup \{t\}$ es definitivo y $M_T$ cumple con la propiedad de intercambio.
+    \end{enumerate}
+
+    Así, $M_T$ es una matroide. \\
+
+    \item Plantee una función de costo $w$ de tal forma que para la matroide pesada $M_T$ , con $w$ como función de peso, los sub-conjuntos óptimos son los subconjuntos \emph{definitivos} con \emph{potencial máximo}. \\
+
+    Veamos, podríamos definir de forma ingenua la función de costo como:
+    \begin{center}
+        \begin{align*}
+            w_{naive}: F \rightarrow \mathbb{N} \qquad (\subseteq \mathbb{R}^+) \\
+            w_{naive}(X \rightarrow Y) = |Y|^{|X|}
+        \end{align*}
+    \end{center}
+
+    Sin embargo, aunque es correcta, no es la más computacionalmente eficiente. Tenemos que el potencial de cualquier firma es estrictamente positivo, por lo que cualquier firma aporta a maximizar potencial de un conjunto; así, un subconjunto \emph{definitivo} con el potencial máximo (llamémosle $C$) necesariamente contiene todas las firmas que puede contener sin dejar de ser \emph{definitivo}, es decir, una firma por cada tipo de $A \in T$, donde $A$ ocurre como imagen de la firma.
+
+    Luego, buscamos que cada firma de $C$ sea tal que al calcular su potencial sea el máximo de entre cualquier otra firma con la misma imagen en $F$, lo cual ocurre cuando el dominio de la firma es el más grande posible, es decir, el tipo con mayor cardinalidad en $T$. Con esto en mente, definimos la función de costo como:
+    \begin{align*}
+        w: F \rightarrow \mathbb{N} \qquad (\subseteq \mathbb{R}^+) \\
+        w(X \rightarrow Y) = |X|
+    \end{align*}
+
+    Así, sea $p = |T|$, al ordenar los elementos de $F$ en orden decreciente según $w$, obtendremos a $C$ como los primeros $p$ elementos de la secuencia ordenada, o sea, una firma por cada tipo de $T$ con el tipo de mayor cardinalidad como dominio. Escrito como conjunto: \\
+
+    \begin{center}
+        $C = \{X \rightarrow Y \in F \mid X = \max_{A \in T} |A|\}$
+    \end{center}
+
+    \textbf{Nota:} En caso de que existan varios tipos con el mismo cardinal, se puede escoger cualquiera de ellos, o incluso escoger algunos dominios con uno de ellos y otros con otro, con cuidado de no repetir tipos como imagen. \\
+
+    A nivel de implementación, se puede implementar un algoritmo que halle este conjunto en $\Theta(n)$, ya que al hallar alguno de los conjuntos de cardinalidad máxima, basta con recorrer el resto de los tipos y agregar una firma por cada uno de ellos, con el tipo de mayor cardinalidad como dominio. \\
+
+\end{enumerate}
 
 \end{enumerate} \vspace{4mm}
 

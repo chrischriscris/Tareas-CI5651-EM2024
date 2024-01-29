@@ -4,4 +4,4 @@ Tareas de Diseño de Algoritmos I, dictado en la Universidad Simón Bolívar en 
 
 ---
 
-Hecho con :heart: por chrischriscris
+Hecho con :heart: por [chrischriscris](https://www.github.com/chrischriscris)
