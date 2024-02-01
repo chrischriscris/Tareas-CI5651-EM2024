@@ -26,7 +26,7 @@
 
 % Preámbulo
 
-\title{Tarea n:}
+\title{Tarea 3: Divide y vencerás}
 \author{Christopher Gómez}
 \date{Enero 2024}
 
@@ -47,18 +47,51 @@
         }}
 
 \phantom{This text will be invisible} \\
-\centerline {\textbf{Tarea n:}}
+\centerline {\textbf{Tarea 3: Divide y vencerás}}
 \justify
 
 \begin{enumerate}
 
 % -------- PREGUNTA 1 --------
 
-\item Pregunta:
+\item Para las siguientes recurrencias, use el teorema maestro visto en clase para
+hallar una fórmula cerrada para $T(n)$:
+
+\begin{enumerate}
+    \item $T(n) = 3T(\frac{n}{4}) + \frac{3(n^2 - 1)}{2}$
+    \item $T(n) = 7T(\frac{n}{7}) + 2n - 3$
+    \item $T(n) = 5T(\frac{n}{2}) + 2n$
+    \item $T(n) = \frac{\sum_{i=1}^n (T(\frac{n}{2}) + i)}{n}$
+\end{enumerate}
+
+% -------- PREGUNTA 2 --------
+
+\item Definimos los números de Perrin con la siguiente recurrencia:
+
+% Funcion a trozos
+\[
+P(n) =
+\begin{cases}
+    3 & \text{si } n = 0 \\
+    0 & \text{si } n = 1 \\
+    2 & \text{si } n = 2 \\
+    P(n - 2) + P(n - 3) & \text{si } 3 \leq n
+\end{cases}
+\]
+
+Se desea que diseñe un algoritmo que tome tiempo $\Theta(\log n)$ para hallar el valor de $P(n)$. Puede suponer que todas las operaciones aritméticas involucradas (sumas, multiplicaciones, etc.) toman tiempo $\Theta(1)$.
 
 
+% -------- PREGUNTA 3 --------
 
+\item Dada una cadena de caracteres $S[1..n]$ compuesta únicamente de paréntesis que abren y que cierran, queremos un árbol de segmentos para hacer consultas de la forma $maxBP(i, j)$ que debe devolver la longitud de la sub-cadena (no necesariamente contigua) bien parentizada más larga, comprendida en el rango $[i..j]$.
 
+Por ejemplo, si $S = [(, ), ), (, (, ), ), (, (, ), ), (]$ y solicitamos $maxBP(3, 10)$, el rango corresponde a $S' = [), (, (, ), ), (, (, )]$.
+
+La sub-cadena bien parentizada de mayor longitud en $S'$ sería $[(, (, ), )]$ (de longitud 4).
+
+Describa cómo sería el proceso con el cuál construiría el valor precalculado de cada nodo,
+incluyendo el caso base (las hojas) y el caso recursivo (nodos intermedios)
 
 
 \end{enumerate} \vspace{4mm}
