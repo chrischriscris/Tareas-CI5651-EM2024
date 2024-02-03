@@ -3,16 +3,24 @@
 Para compilar el programa se debe ejecutar el siguiente comando:
 
 ```bash
-comando1
+make
 ```
 
 Para ejecutar el programa se debe ejecutar el siguiente comando:
 
 ```bash
-comando2
+./perrin_solver <n>
 ```
 
-La función específica que resuelve el problema es `funcion` en el archivo [archivo](tunnel_ads/src/lib.rs).
+Donde `<n>` es el número de la secuencia de Perrin que se desea calcular.
+
+Adicionalmente, se puede ejecutar el siguiente comando para ejecutar benchmarks comparativos entre la implementación O(log n) y una implementación O(n) ingenua:
+
+```bash
+make bench
+```
+
+La función que resuelve el problema es ` Perrin` en el archivo [perrin/Perrin.go](perrin/perrin.go).
 
 ---
 Hecho con <3 por chrischriscris
