@@ -50,3 +50,4 @@ cabal.project.local~
 
 # ========== Executables ==========
 perrin_solver
+Main
