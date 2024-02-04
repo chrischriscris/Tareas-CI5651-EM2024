@@ -180,9 +180,9 @@ Se tiene que podemos obtener el valor de cada $P(n)$ a partir de $n=3$ haciendo 
 \end{pmatrix}
 \end{equation*}
 
-Así, podemos obtener el valor de $P(n)$ en tiempo logarítmico utilizando potenciación rápida de matrices, en la que se ejecutan $\Theta(\log n)$ multiplicaciones de matrices, que se pueden tomar como $\Theta(1)$ porque el tamaño de las matrices a multiplicar no crece con $n$ (aunque luego en implementación no sea del todo cierto cuando los números se hacen muy grandes). El algoritmo entonces es el siguiente:
-
 \newpage
+
+Así, podemos obtener el valor de $P(n)$ en tiempo logarítmico utilizando potenciación rápida de matrices, en la que se ejecutan $\Theta(\log n)$ multiplicaciones de matrices, que se pueden tomar como $\Theta(1)$ porque el tamaño de las matrices a multiplicar no crece con $n$ (aunque luego en implementación no sea del todo cierto cuando los números se hacen muy grandes). El algoritmo entonces es el siguiente:
 
 \begin{minted}{python}
     def perrin(n):
@@ -204,7 +204,7 @@ Así, podemos obtener el valor de $P(n)$ en tiempo logarítmico utilizando poten
 
 Donde el último paso viene de que solo nos interesa el primer valor de $P^{(n-2)}V$, por lo que no necesitamos calcular toda la multiplicación. \\
 
-Una implementación de este algoritmo en Go se puede encontrar \href{}{aquí}, además de un benchmark que compara el tiempo de ejecución de este algoritmo con el de una implementación iterativa ingenua que corre en tiempo lineal. Se puede ver cómo el algoritmo ingenuo resulta más rápido para $n$ hasta 100, pero luego el de exponenciación rápida se distancia hasta ser alrededor de 60 veces más rápido para $n=10^6$.
+Una implementación de este algoritmo en Go se puede encontrar \href{https://gitfront.io/r/chrischriscris/swaWSXShzVoW/Tareas-CI5651-EM2024/tree/tarea3/ej2/}{aquí}, además de un benchmark que compara el tiempo de ejecución de este algoritmo con el de una implementación iterativa ingenua que corre en tiempo lineal. Se puede ver cómo el algoritmo ingenuo resulta más rápido para $n$ hasta 100, pero luego el de exponenciación rápida se distancia hasta ser alrededor de 60 veces más rápido para $n=10^6$.
 
 \newpage
 % -------- PREGUNTA 3 --------
@@ -236,7 +236,7 @@ Con esta información, la cadena de entrada se divide por la mitad y se construy
 
 Con esto, el árbol se construye en tiempo lineal (porque la cantidad de nodos está acotada por $4n$) y se pueden hacer consultas de $maxBP(i, j)$ en tiempo logarítmico, utilizando el mismo caso recursivo para ir bajando por el árbol y combinando los valores de los nodos que se encuentran en el camino de la raíz a los nodos que representan el rango $[i..j]$. El resultado de la consulta será el valor de $wp$ calculado.
 
-Una implementación en Haskell de la construcción del árbol de segmentos y su consulta se puede encontrar \href{}{aquí}.
+Una implementación en Haskell de la construcción del árbol de segmentos y su consulta se puede encontrar \href{https://gitfront.io/r/chrischriscris/swaWSXShzVoW/Tareas-CI5651-EM2024/tree/tarea3/ej3/}{aquí}.
 
 \end{enumerate} \vspace{4mm}
 

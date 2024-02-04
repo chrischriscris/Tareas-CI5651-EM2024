@@ -20,7 +20,7 @@ Adicionalmente, se puede ejecutar el siguiente comando para ejecutar benchmarks 
 make bench
 ```
 
-La función que resuelve el problema es `Perrin` en el archivo [perrin/Perrin.go](perrin/perrin.go).
+La función que resuelve el problema es `Perrin` en el archivo [perrin/perrin.go](perrin/perrin.go).
 
 ---
 Hecho con <3 por chrischriscris
