@@ -2,7 +2,8 @@
 all: Main
 
 Main: src/*.hs
-	ghc -o Main src/*.hs -O2
+	ghc -o WPSTree src/*.hs -O2
 
 clean:
-	rm -f Main src/*.o src/*.hi
+	rm -f WPSTree src/*.o src/*.hi
+

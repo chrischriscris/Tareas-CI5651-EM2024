@@ -30,6 +30,19 @@
 \author{Christopher Gómez}
 \date{Enero 2024}
 
+\ExplSyntaxOn
+\RenewDocumentCommand{\texttt}{m}
+ {
+  \tl_set:Nn \l_nemgathos_upquotes_tl { #1 }
+  \tl_replace_all:Nnn \l_nemgathos_upquotes_tl { '' } { \textquotedbl }
+  \tl_replace_all:Nnn \l_nemgathos_upquotes_tl { `` } { \textquotedbl }
+  \tl_replace_all:Nnn \l_nemgathos_upquotes_tl { ' } { \textquotesingle }
+  \tl_replace_all:Nnn \l_nemgathos_upquotes_tl { ` } { \textquotesingle }
+  { \ttfamily \tl_use:N \l_nemgathos_upquotes_tl }
+ }
+\tl_new:N \l_nemgathos_upquotes_tl
+\ExplSyntaxOff
+
 \begin{document}
 \parbox[t]{.5\linewidth}{
     \centering
@@ -179,8 +192,28 @@ Por ejemplo, si $S = [(, ), ), (, (, ), ), (, (, ), ), (]$ y solicitamos $maxBP(
 
 La sub-cadena bien parentizada de mayor longitud en $S'$ sería $[(, (, ), )]$ (de longitud 4).
 
-Describa cómo sería el proceso con el cuál construiría el valor precalculado de cada nodo,
-incluyendo el caso base (las hojas) y el caso recursivo (nodos intermedios)
+Describa cómo sería el proceso con el cuál construiría el valor precalculado de cada nodo, incluyendo el caso base (las hojas) y el caso recursivo (nodos intermedios). \\
+
+Para construir el árbol de segmentos, cada nodo (representando un rango de valores) estará asociado a una tupla de 3 enteros $(l, r, wp)$, donde $l$ y $r$ representan el número de paréntesis que abren y cierran sin balancear en el rango, respectivamente, y $wp$ es la longitud de la sub-cadena bien parentizada más larga en el rango.
+
+Con esta información, la cadena de entrada se divide por la mitad y se construyen los nodos hijos con los valores correspondientes a los rangos que representan. Se presentan dos casos:
+
+\begin{itemize}
+    \item \textbf{Caso base:} Si el rango es de tamaño 1, el nodo hoja tendrá valores $(1, 0, 0)$ si el caracter es \texttt{'('}, y $(0, 1, 0)$ si es \texttt{')'}.
+    \item \textbf{Caso recursivo:} Los valores de los nodos hijos se combinan para obtener el valor del nodo padre de la siguiente manera:
+    \begin{itemize}
+        \item $l = l_1 + l_2 - \min(l_1, r_2)$
+        \item $r = r_1 + r_2 - \min(l_1, r_2)$
+        \item $wp = wp_1 + wp_2 + 2\min(l_1, r_2)$
+        \item Donde $(l_1, r_1, wp_1)$ y $(l_2, r_2, wp_2)$ son los valores de los nodos izquierdo y derecho, y $(l, r, wp)$ es el valor del nodo padre.
+    \end{itemize}
+
+    El cálculo descrito viene justificado por que el padre toma los paréntesis que abren del lado izquierdo y los que cierran del lado derecho, añade a $wp$ aquellos que se balancean al unir los dos rangos, y resta a $l$ y $r$ aquellos que siguen quedando sin balancear luego de la unión.
+\end{itemize}
+
+Con esto, el árbol se construye en tiempo lineal (porque la cantidad de nodos está acotada por $4n$) y se pueden hacer consultas de $maxBP(i, j)$ en tiempo logarítmico, utilizando el mismo caso recursivo para ir bajando por el árbol y combinando los valores de los nodos que se encuentran en el camino de la raíz a los nodos que representan el rango $[i..j]$. El resultado de la consulta será el valor de $wp$ calculado.
+
+Una implementación en Haskell de la construcción del árbol de segmentos y su consulta se puede encontrar \href{}{aquí}.
 
 \end{enumerate} \vspace{4mm}
 

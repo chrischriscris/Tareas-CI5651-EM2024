@@ -23,9 +23,9 @@ combine :: STree -> STree -> STree
 combine s1 s2 = Node (combineValues (getValue s1) (getValue s2)) s1 s2
 
 combineValues :: (Int, Int, Int) -> (Int, Int, Int) -> (Int, Int, Int)
-combineValues (l1, r1, wp1) (l2, r2, wp2)
-  | l1 >= r2 = (l1 - r2 + l2, r1, 2 * r2 + wp1 + wp2)
-  | otherwise = (l2, r2 - l1 + r1, 2 * l1 + wp1 + wp2)
+combineValues (l1, r1, wp1) (l2, r2, wp2) = (l1 + l2 - newWP, r1 + r2 - newWP, wp1 + wp2 + 2*newWP)
+  where
+    newWP = min l1 r2
 
 getValue :: STree -> (Int, Int, Int)
 getValue (Leaf v) = v
@@ -37,7 +37,7 @@ getValue (Node v _ _) = v
 -- well-parenthesized substring in the range [i, j]
 queryWPSTree :: STree -> Int -> Int -> Int
 queryWPSTree sTree i j
-  | i > j || i < 0 || j > n = error "Invalid query"
+  | i > j || i < 0 || j > n = error $ "Invalid query" ++ show (i, j, n)
   | otherwise = result
   where
     n = treeStringSize sTree - 1
