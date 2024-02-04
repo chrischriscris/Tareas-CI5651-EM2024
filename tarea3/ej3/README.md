@@ -9,7 +9,7 @@ make
 Para ejecutar el programa se debe ejecutar el siguiente comando:
 
 ```bash
-./Main "<parentheses_string>"
+./WPSTree "<parentheses_string>"
 ```
 
 Donde `<parentheses_string>` es la cadena de paréntesis que se desea evaluar.
