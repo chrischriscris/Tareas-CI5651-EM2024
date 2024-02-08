@@ -26,7 +26,7 @@
 
 % Preámbulo
 
-\title{Tarea n:}
+\title{Tarea 4: Programación dinámica}
 \author{Christopher Gómez}
 \date{Enero 2024}
 
@@ -47,19 +47,107 @@
         }}
 
 \phantom{This text will be invisible} \\
-\centerline {\textbf{Tarea n:}}
+\centerline {\textbf{Tarea 4: Programación dinámica}}
 \justify
 
 \begin{enumerate}
 
 % -------- PREGUNTA 1 --------
 
-\item Pregunta:
+\item Considere el algoritmo de \emph{Programación Dinámica} propuesto en clase para el problema de distancia de edición entre dos cadenas de caracteres.
+
+Construya la tabla correspondiente al proceso para decidir la distancia de edición entre su \textbf{primer nombre} y su \textbf{primer apellido}, \emph{sin ahorro de memoria}.
+
+Por ejemplo, si su nombre es \emph{Fulano Mengano Apellidez Surnameson}, se desea que construya
+la tabla $6 \times 9$ para la distancia de edición entre \texttt{fulano} y \texttt{apellidez}.
+
+% -------- PREGUNTA 2 --------
+
+\item Sea $A[1..n]$ un arreglo de enteros.
+
+Decimos que $B$ es un sub-arreglo de $A$ si se pueden remover elementos del arreglo $A$,
+respetando el orden en el que aparecen, para obtener $B$.
+
+Decimos que $B[1..k]$ es bueno si el arreglo no está vacío y para todo $i$, tal que $1 \leq i \leq k$ se
+cumple que $B[i]$ es divisible entre $i$.
+
+Consideramos que dos sub-arreglos son diferentes si provienen de posiciones diferentes en $A$, incluso si los valores son iguales.
+
+Por ejemplo, si $A = [2, 2, 1, 22, 15]$
+
+Los sub-arreglos buenos serían 13, que son:
+
+\begin{multicols}{5}
+    \begin{itemize}
+        \item $[2]$
+        \item $[2, 2]$
+        \item $[2, 2, 15]$
+        \item $[2, 22]$
+        \item $[2, 22, 15]$
+        \item $[2]$
+        \item $[2, 22]$
+        \item $[2, 22, 15]$
+        \item $[1]$
+        \item $[1, 22]$
+        \item $[1, 22, 15]$
+        \item $[22]$
+        \item $[15]$
+    \end{itemize}
+\end{multicols}
+
+Queremos saber la cantidad de sub-arreglos buenos de $A$.
+
+Se desea que diseñe un algoritmo usando \emph{Programación Dinámica}, que resuelva este problema en tiempo $O(n^2)$ y con memoria adicional $O(n)$.
+
+% -------- PREGUNTA 3 --------
+
+\item Se desea que implemente, en el lenguaje de su elección, un cliente para probar el proceso de inicialización virtual de arreglos. Su programa debe cumplir con las siguientes características:
+
+\begin{itemize}
+    \item  Al invocarse, debe recibir como argumento del sistema el tamaño del arreglo a utilizar.
+    \item El arreglo será indexado a cero (las posiciones válidas, para un arreglo de tamaño n,
+    serán desde la 0 hasta la n - 1).
+
+    Debe presentar al usuario un cliente con cuatro opciones:
+    \begin{itemize}
+        \item \texttt{ASIGNAR POS VAL}, que tiene el efecto de asignar el valor \texttt{VAL} en la posición {POS} del arreglo.
+
+        Su programa debe reportar un error si la posición \texttt{POS} no es una posición válida del arreglo.
+
+        \item \texttt{CONSULTAR POS}, que debe reportar si la posición \texttt{POS} está inicializada o no. En caso de estar inicializada, debe devolver el valor asociado a esa posición.
+
+        Su programa debe reportar un error si la posición \texttt{POS} no es una posición válida del arreglo.
+
+        \item \texttt{LIMPIAR}, que tiene el efecto de limpiar la tabla y hace que \textbf{todas} las posiciones queden sin inicializar.
+
+        \item \texttt{SALIR}, que dale del programa.
+    \end{itemize}
+
+    \item Todas las operaciones involucradas en su programa deben tomar tiempo $\Theta(1)$.
+
+    \item Debe implementar estas operaciones siguiendo el proceso de inicialización virtual visto en clase, usando los dos arreglos auxiliares, \textbf{no} con métodos alternativos (como tablas de hash o tipos conjuntos de la librerías de su lenguaje de escogencia).
+\end{itemize}
 
 
+% -------- PREGUNTA 4 --------
 
+\item ¡Esta aerolinea es un desastre! El transporte automatizado de equipaje se ha descompuesto y ha dejado las maletas de los pasajeros regadas por toda la pista. Es tu trabajo volver a recogerlas todas y colocarlas en el avión. Pero, ¡de prisa! Mientras más tiempo tomes, más se retrasará el vuelo en salir.
 
+Decides hacer una lista de todas las cosas que sabes, para organizarte mejor:
 
+\begin{itemize}
+    \item La cantidad, $n$, de equipajes que se han caído. También sabes que $1 \leq n \leq 24$.
+
+    \item La posición $(x, y)$ de cada equipaje. Además, dadas las dimensiones del aeropuerto, sabes que $|x| \leq 100$ y $|y| \leq 100$ y que ambas dimensiones son números enteros.
+    \item El avión está en la posición $(0, 0)$ y es a donde quieres llevar todas las maletas que se han dispersado.
+    \item Transitar entre dos puntos $a$ y $b$, toma tanto tiempo como \textbf{el cuadrado de la distancia cartesiana} entre ellos.
+    \item Solamente te puedes detener en la posición de una maleta o en la del avión, por temor a que te multen las autoridades del aeropuerto.
+    \item Puedes cargar a lo sumo dos maletas a la vez (una en cada mano) y una vez que tomas una maleta, solamente puedes soltarla en el avión.
+\end{itemize}
+
+¿Cuál es la mínima cantidad de tiempo necesaria para recoger todas las maletas?
+
+Se desea que diseñe un algoritmo usando \emph{Programación Dinámica}, que resuelva este problema en tiempo y memoria $O(n \times 2^n)$.
 
 \end{enumerate} \vspace{4mm}
 
