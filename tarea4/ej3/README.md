@@ -3,16 +3,16 @@
 Para compilar el programa se debe ejecutar el siguiente comando:
 
 ```bash
-comando1
+make
 ```
 
 Para ejecutar el programa se debe ejecutar el siguiente comando:
 
 ```bash
-comando2
+./virtualinit
 ```
 
-La función específica que resuelve el problema es `función` en el archivo [ruta/archivo](ruta/archivo).
+*Nota*: El programa reporta las posiciones sin inicializar como `NULL`.
 
 ---
 Hecho con <3 por chrischriscris
