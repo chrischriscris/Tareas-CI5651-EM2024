@@ -61,6 +61,26 @@ Construya la tabla correspondiente al proceso para decidir la distancia de edici
 Por ejemplo, si su nombre es \emph{Fulano Mengano Apellidez Surnameson}, se desea que construya
 la tabla $6 \times 9$ para la distancia de edición entre \texttt{fulano} y \texttt{apellidez}.
 
+\begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+        \rowcolor[HTML]{C0C0C0}
+        \textbf{} & \textbf{} & \textbf{g} & \textbf{o} & \textbf{m} & \textbf{e} & \textbf{z} \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{} & \cellcolor[HTML]{FFFFFF} & 1 & 2 & 3 & 4 & 5 \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{c} & 1 & 1 & 1 & 2 & 3 & 4 \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{h} & 2 & 2 & 2 & 2 & 3 & 4 \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{r} & 3 & 3 & 3 & 3 & 3 & 4 \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{i} & 4 & 4 & 4 & 4 & 4 & 4 \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{s} & 5 & 5 & 5 & 5 & 5 & 5 \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{t} & 6 & 6 & 6 & 6 & 6 & 6 \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{o} & 7 & 7 & 7 & 7 & 7 & 7 \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{p} & 8 & 8 & 8 & 8 & 8 & 8 \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{h} & 9 & 9 & 9 & 9 & 9 & 9 \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{e} & 10 & 10 & 10 & 10 & 10 & 10 \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{r} & 11 & 11 & 11 & 11 & 11 & 11 \\ \hline \rowcolor[HTML]{C0C0C0}
+    \end{tabular}
+\end{center}
+
 % -------- PREGUNTA 2 --------
 
 \item Sea $A[1..n]$ un arreglo de enteros.
@@ -105,8 +125,7 @@ Se desea que diseñe un algoritmo usando \emph{Programación Dinámica}, que res
 
 \begin{itemize}
     \item  Al invocarse, debe recibir como argumento del sistema el tamaño del arreglo a utilizar.
-    \item El arreglo será indexado a cero (las posiciones válidas, para un arreglo de tamaño n,
-    serán desde la 0 hasta la n - 1).
+    \item El arreglo será indexado a cero (las posiciones válidas, para un arreglo de tamaño n, serán desde la $0$ hasta la $n - 1$).
 
     Debe presentar al usuario un cliente con cuatro opciones:
     \begin{itemize}
@@ -128,6 +147,7 @@ Se desea que diseñe un algoritmo usando \emph{Programación Dinámica}, que res
     \item Debe implementar estas operaciones siguiendo el proceso de inicialización virtual visto en clase, usando los dos arreglos auxiliares, \textbf{no} con métodos alternativos (como tablas de hash o tipos conjuntos de la librerías de su lenguaje de escogencia).
 \end{itemize}
 
+Una implementación de este cliente en C se puede encontrar \href{https://www.google.com}{aquí}.
 
 % -------- PREGUNTA 4 --------
 
