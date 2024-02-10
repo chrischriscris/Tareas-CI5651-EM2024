@@ -66,20 +66,30 @@ la tabla $6 \times 9$ para la distancia de edición entre \texttt{fulano} y \tex
         \hline
         \rowcolor[HTML]{C0C0C0}
         \textbf{} & \textbf{} & \textbf{g} & \textbf{o} & \textbf{m} & \textbf{e} & \textbf{z} \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{} & \cellcolor[HTML]{FFFFFF} & 1 & 2 & 3 & 4 & 5 \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{c} & 1 & 1 & 1 & 2 & 3 & 4 \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{h} & 2 & 2 & 2 & 2 & 3 & 4 \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{r} & 3 & 3 & 3 & 3 & 3 & 4 \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{i} & 4 & 4 & 4 & 4 & 4 & 4 \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{s} & 5 & 5 & 5 & 5 & 5 & 5 \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{t} & 6 & 6 & 6 & 6 & 6 & 6 \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{o} & 7 & 7 & 7 & 7 & 7 & 7 \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{p} & 8 & 8 & 8 & 8 & 8 & 8 \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{h} & 9 & 9 & 9 & 9 & 9 & 9 \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{e} & 10 & 10 & 10 & 10 & 10 & 10 \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{r} & 11 & 11 & 11 & 11 & 11 & 11 \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{} & 0 \cellcolor[HTML]{AEC6CF}
+        & 1 & 2 & 3 & 4 & 5 \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{c} & 1 \cellcolor[HTML]{AEC6CF} & 1 & 2 & 3 & 4 & 5 \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{h} & 2 \cellcolor[HTML]{AEC6CF} & 2 & 2 & 3 & 4 & 5 \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{r} & 3 \cellcolor[HTML]{AEC6CF} & 3 & 3 & 3 & 4 & 5 \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{i} & 4 \cellcolor[HTML]{AEC6CF} & 4 & 4 & 4 & 4 & 5 \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{s} & 5 \cellcolor[HTML]{AEC6CF} & 5 & 5 & 5 & 5 & 5 \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{t} & 6 & 6 \cellcolor[HTML]{AEC6CF}& 6 & 6 & 6 & 6 \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{o} & 7 & 7 & 6 \cellcolor[HTML]{AEC6CF} & 7 & 7 & 7 \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{p} & 8 & 8 & 7 \cellcolor[HTML]{AEC6CF} & 7 & 8 & 8 \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{h} & 9 & 9 & 8 & 8 \cellcolor[HTML]{AEC6CF} & 8 & 9 \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{e} & 10 & 10 & 9 & 9 & 8 \cellcolor[HTML]{AEC6CF} & 9 \\ \hline \rowcolor[HTML]{C0C0C0}
+        \textbf{r} & 11 & 11 & 10 & 10 & 9 & 9 \cellcolor[HTML]{AEC6CF} \\ \hline \rowcolor[HTML]{C0C0C0}
     \end{tabular}
 \end{center}
+
+La tabla resultante se puede interpretar como que la distancia de edición entre \texttt{christopher} y \texttt{gomez} es 9, y se logra eliminando \texttt{chris}, intercambiando la \texttt{t} por una \texttt{g}, eliminando la \texttt{p} luego de la \texttt{o} e intercambiando la \texttt{h} y la \texttt{r} por una \texttt{m} y una \texttt{z} respectivamente. Esto es:
+
+\begin{itemize}
+    \item \texttt{christopher} $\rightarrow$ \texttt{topher} (5 eliminaciones).
+    \item \texttt{topher} $\rightarrow$ \texttt{gopher} (1 reemplazo).
+    \item \texttt{gopher} $\rightarrow$ \texttt{goher} (1 eliminación).
+    \item \texttt{goher} $\rightarrow$ \texttt{gomez} (2 reemplazos).
+\end{itemize}
 
 % -------- PREGUNTA 2 --------
 
