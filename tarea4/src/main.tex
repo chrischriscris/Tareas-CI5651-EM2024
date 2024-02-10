@@ -20,6 +20,9 @@
 \usepackage[T1]{fontenc}
 \usepackage[table,xcdraw]{xcolor}
 \usepackage{float} %required for the placement specifier H
+
+\usepackage{concrete}
+\usepackage{euler}
 \makeatletter
 \makeatother
 % -----------------------------------------------
@@ -35,7 +38,7 @@
     \centering
     \includegraphics[scale=0.4]{logo.png}
     \begin{center}
-        UNIVERSIDAD SIMÓN BOLÍVAR \\
+        Universidad Simón Bolívar \\
         CI-5651 - Diseño de Algoritmos I \\
         Prof. Ricardo Monascal \\
     \end{center}
@@ -64,21 +67,20 @@ la tabla $6 \times 9$ para la distancia de edición entre \texttt{fulano} y \tex
 \begin{center}
     \begin{tabular}{|c|c|c|c|c|c|c|}
         \hline
-        \rowcolor[HTML]{C0C0C0}
-        \textbf{} & \textbf{} & \textbf{g} & \textbf{o} & \textbf{m} & \textbf{e} & \textbf{z} \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{} & 0 \cellcolor[HTML]{AEC6CF}
-        & 1 & 2 & 3 & 4 & 5 \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{c} & 1 \cellcolor[HTML]{AEC6CF} & 1 & 2 & 3 & 4 & 5 \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{h} & 2 \cellcolor[HTML]{AEC6CF} & 2 & 2 & 3 & 4 & 5 \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{r} & 3 \cellcolor[HTML]{AEC6CF} & 3 & 3 & 3 & 4 & 5 \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{i} & 4 \cellcolor[HTML]{AEC6CF} & 4 & 4 & 4 & 4 & 5 \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{s} & 5 \cellcolor[HTML]{AEC6CF} & 5 & 5 & 5 & 5 & 5 \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{t} & 6 & 6 \cellcolor[HTML]{AEC6CF}& 6 & 6 & 6 & 6 \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{o} & 7 & 7 & 6 \cellcolor[HTML]{AEC6CF} & 7 & 7 & 7 \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{p} & 8 & 8 & 7 \cellcolor[HTML]{AEC6CF} & 7 & 8 & 8 \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{h} & 9 & 9 & 8 & 8 \cellcolor[HTML]{AEC6CF} & 8 & 9 \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{e} & 10 & 10 & 9 & 9 & 8 \cellcolor[HTML]{AEC6CF} & 9 \\ \hline \rowcolor[HTML]{C0C0C0}
-        \textbf{r} & 11 & 11 & 10 & 10 & 9 & 9 \cellcolor[HTML]{AEC6CF} \\ \hline \rowcolor[HTML]{C0C0C0}
+        & & \textbf{g} & \textbf{o} & \textbf{m} & \textbf{e} & \textbf{z} \\ \hline
+        & 0 \cellcolor[HTML]{B2DAFA}
+        & 1 & 2 & 3 & 4 & 5 \\ \hline
+        \textbf{c} & 1 \cellcolor[HTML]{B2DAFA} & 1 & 2 & 3 & 4 & 5 \\ \hline
+        \textbf{h} & 2 \cellcolor[HTML]{B2DAFA} & 2 & 2 & 3 & 4 & 5 \\ \hline
+        \textbf{r} & 3 \cellcolor[HTML]{B2DAFA} & 3 & 3 & 3 & 4 & 5 \\ \hline
+        \textbf{i} & 4 \cellcolor[HTML]{B2DAFA} & 4 & 4 & 4 & 4 & 5 \\ \hline
+        \textbf{s} & 5 \cellcolor[HTML]{B2DAFA} & 5 & 5 & 5 & 5 & 5 \\ \hline
+        \textbf{t} & 6 & 6 \cellcolor[HTML]{B2DAFA}& 6 & 6 & 6 & 6 \\ \hline
+        \textbf{o} & 7 & 7 & 6 \cellcolor[HTML]{B2DAFA} & 7 & 7 & 7 \\ \hline
+        \textbf{p} & 8 & 8 & 7 \cellcolor[HTML]{B2DAFA} & 7 & 8 & 8 \\ \hline
+        \textbf{h} & 9 & 9 & 8 & 8 \cellcolor[HTML]{B2DAFA} & 8 & 9 \\ \hline
+        \textbf{e} & 10 & 10 & 9 & 9 & 8 \cellcolor[HTML]{B2DAFA} & 9 \\ \hline
+        \textbf{r} & 11 & 11 & 10 & 10 & 9 & 9 \cellcolor[HTML]{B2DAFA} \\ \hline
     \end{tabular}
 \end{center}
 
@@ -91,6 +93,7 @@ La tabla resultante se puede interpretar como que la distancia de edición entre
     \item \texttt{goher} $\rightarrow$ \texttt{gomez} (2 reemplazos).
 \end{itemize}
 
+\newpage
 % -------- PREGUNTA 2 --------
 
 \item Sea $A[1..n]$ un arreglo de enteros.
@@ -129,6 +132,7 @@ Queremos saber la cantidad de sub-arreglos buenos de $A$.
 
 Se desea que diseñe un algoritmo usando \emph{Programación Dinámica}, que resuelva este problema en tiempo $O(n^2)$ y con memoria adicional $O(n)$.
 
+\pagebreak
 % -------- PREGUNTA 3 --------
 
 \item Se desea que implemente, en el lenguaje de su elección, un cliente para probar el proceso de inicialización virtual de arreglos. Su programa debe cumplir con las siguientes características:
@@ -159,6 +163,7 @@ Se desea que diseñe un algoritmo usando \emph{Programación Dinámica}, que res
 
 Una implementación de este cliente en C se puede encontrar \href{https://www.google.com}{aquí}.
 
+\newpage
 % -------- PREGUNTA 4 --------
 
 \item ¡Esta aerolinea es un desastre! El transporte automatizado de equipaje se ha descompuesto y ha dejado las maletas de los pasajeros regadas por toda la pista. Es tu trabajo volver a recogerlas todas y colocarlas en el avión. Pero, ¡de prisa! Mientras más tiempo tomes, más se retrasará el vuelo en salir.

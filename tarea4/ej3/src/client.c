@@ -69,6 +69,9 @@ int run_client(int n) {
 
         // SALIR
         else if (strcmp(token, "SALIR") == 0) {
+            free(T);
+            free(a);
+            free(b);
             break;
         } else {
             printf("Error: Invalid command\n");
