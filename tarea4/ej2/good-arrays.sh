@@ -2,7 +2,7 @@
 
 # Returns the number of good sub-arrays of the passed array
 function good_arrays {
-    A=("$@")
+    local A=("$@")
     local n=${#A[@]}
 
     C1=( $(for i in $(seq $n); do echo 1; done) )
@@ -14,13 +14,13 @@ function good_arrays {
 
         local acc=0
         for i in $(seq 0 $(($n-1))); do
-            if [ $i -ge $(($j-1)) ] && [ $((${A[$i]} % $j)) -eq 0 ]; then
+            if [ $((${A[$i]} % $j)) -eq 0 ]; then
                 C1[$i]=$acc
                 result=$(($result+$acc))
             fi
+
             acc=$(($acc+${C0[$i]}))
         done
-
     done
 
     return $result
