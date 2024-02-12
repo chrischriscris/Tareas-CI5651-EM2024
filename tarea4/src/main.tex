@@ -145,7 +145,7 @@ Para resolver este problema vamos a definir una tabla C[1..n][1..n], donde C[i][
 \end{center}
 
 \begin{itemize}
-    \item Como caso base, como cualquier entero es divisible entre 1, existe un sub-arreglo bueno de tamaño 1 que contiene a cada elemento de $A$.
+    \item Para el caso base, como cualquier entero es divisible entre 1, existe un sub-arreglo bueno de tamaño 1 que contiene a cada elemento de $A$.
     \item Si $A[j]$ no es divisible entre $i$, entonces no existe un sub-arreglo bueno de tamaño $i$ que contenga a $A[j]$.
     \item Para el caso recursivo, la cantidad de sub-arreglos buenos de tamaño $i$ que contienen a $A[j]$ es igual a la cantidad de sub-arreglos buenos de tamaño $i - 1$ que se pueden formar con los elementos anteriores a $A[j]$, para luego agregarle $A[j]$ al final.
     \item La solución al problema es la suma de todos los valores de la tabla C.
@@ -243,6 +243,60 @@ Decides hacer una lista de todas las cosas que sabes, para organizarte mejor:
 ¿Cuál es la mínima cantidad de tiempo necesaria para recoger todas las maletas?
 
 Se desea que diseñe un algoritmo usando \emph{Programación Dinámica}, que resuelva este problema en tiempo y memoria $O(n \times 2^n)$.
+
+% ----------------------------------------
+% M = conjunto de maletas
+% T[C] = Mejor tiempo acumulado al llevar las maletas en M - C
+%
+% T[M] = 0
+% T[empty] = sol.
+%
+% T[C] = min(
+%     T[C U {ei, ej}] + d(0, ei) + d(ei, ej) + d(ej, 0),
+%     T[C U {ek} + 2d(0, el
+% )
+
+% parejaDP(S: Conjunto, f: funcion, p: Arreglo):
+%     if S==E:
+%         return p[s]
+%
+%     if p[S] != -1:
+%         return p[S]
+%
+%     for el_i in M-S:
+%         mejor = 0
+%         for el_j in M-S-{el_i}:
+%             if f(el_i, e_j) > mejor:
+%                 mejor_el_j = el_j
+%                 mejor = f(el_i, el_j)
+%         p[s] = parejaDP(S U {el_i, el_j}, f, p) + mejor
+%             return p[s]
+%
+
+% parejaDP(C: Conjunto, d: funcion, p: Arreglo):
+%     if C==M:
+%         return p[s]
+%
+%     if p[C] != -1:
+%         return p[C]
+%
+%     for el_i in M-S:
+%         base = d(0, el_i)
+%         min = base
+%         for el_j in M-S-{el_i}:
+%             dist = base + d(el_i, el_j) + d(el_j, 0)
+%             if dist < min:
+%                 mejor_el_j = el_j
+%                 mejor = dist
+%
+%         if mejor == base:
+%             p[C] = parejaDP(C U {el_i}, d, p) + base
+%         else:
+%             p[C] = parejaDP(C U {el_i, el_j}, d, p) + mejor
+%
+%         return p[C]
+
+% ----------------------------------------
 
 \end{enumerate} \vspace{4mm}
 
