@@ -28,42 +28,45 @@ function ryanairDP(R::Int, S::Array{Tuple{Int, Int}}, memo::Array{Int}, n::Int)
         return memo[R+1]
     end
 
-    min1 = Inf64
-    min1_P = (0, 0)
-    for i in 1:n
+    min2suitcases = Inf64
+    min2suitcasesi = 0
+    min2suitcasesj = 0
+    for i in 1:n-1
         if !contains(R, i)
             for j in i+1:n
                 if !contains(R, j)
-                    distOABO = squaredist(O, S[i]) + squaredist(S[i], S[j]) + squaredist(S[j], O)
-                    if distOABO < min1
-                        min1 = distOABO
-                        min1_P = (i, j)
+                    time = squaredist(O, S[i]) + squaredist(S[i], S[j]) + squaredist(S[j], O)
+                    if time < min2suitcases
+                        min2suitcases = time
+                        min2suitcasesi = i
+                        min2suitcasesj = j
                     end
                 end
             end
         end
     end
 
-    min2 = Inf64
-    min2_i = 0
+    min1suitcase = Inf64
+    min1suitcasei = 0
     for i in 1:n
         if !contains(R, i)
-            distOAO = 2 * squaredist(O, S[i])
-            if distOAO < min2
-                min2 = distOAO
-                min2_i = i
+            time = 2 * squaredist(O, S[i])
+            if time < min1suitcase
+                min1suitcase = time
+                min1suitcasei = i
             end
         end
     end
 
-    if min1_P == (0, 0)
-        memo[R+1] = ryanairDP(union(R, min2_i), S, memo, n) + min2
-        return memo[R+1]
+    case1 = ryanairDP(union(R, min1suitcasei), S, memo, n) + min1suitcase
+
+    # There's only one suitcase left, pick it up
+    if min2suitcases == Inf64
+        return memo[R+1] = case1
     end
 
-    rec1 = ryanairDP(union(R, min1_P[1], min1_P[2]), S, memo, n) + min1
-    rec2 = ryanairDP(R | (1 << (min2_i - 1)), S, memo, n) + min2
+    case2 = ryanairDP(union(R, min2suitcasesi, min2suitcasesj), S, memo, n) + min2suitcases
 
-    memo[R+1] = min(rec1, rec2)
-    return memo[R+1]
+    # Store the most optimal case
+    return memo[R+1] = min(case1, case2)
 end

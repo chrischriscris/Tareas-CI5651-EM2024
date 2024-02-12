@@ -7,10 +7,10 @@ function main()
         exit(1)
     end
 
-    filename = ARGS[1]
-    M = parseinstance(filename)
+    path = ARGS[1]
+    S = parseinstance(path)
 
-    println(ryanair(M))
+    println(ryanair(S))
 end
 
 main()

@@ -6,16 +6,16 @@
 #
 # Returns an Array of tuples of integers contained in the file
 function parseinstance(path::String)
-    M::Array{Tuple{Int, Int}} = []
+    S::Array{Tuple{Int, Int}} = []
 
     open(path) do file
         for line in eachline(file)
             x, y = split(line)
-            push!(M, (parse(Int, x), parse(Int, y)))
+            push!(S, (parse(Int, x), parse(Int, y)))
         end
     end
 
-    return M
+    return S
 end
 
 # Given two points A and B, returns the square of the euclidean distance
