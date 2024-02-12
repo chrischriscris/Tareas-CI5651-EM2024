@@ -213,7 +213,7 @@ Una implementación de este algoritmo en Bash se puede encontrar \href{https://w
 
         \item \texttt{LIMPIAR}, que tiene el efecto de limpiar la tabla y hace que \textbf{todas} las posiciones queden sin inicializar.
 
-        \item \texttt{SALIR}, que dale del programa.
+        \item \texttt{SALIR}, que sale del programa.
     \end{itemize}
 
     \item Todas las operaciones involucradas en su programa deben tomar tiempo $\Theta(1)$.
@@ -253,48 +253,8 @@ Se desea que diseñe un algoritmo usando \emph{Programación Dinámica}, que res
 %
 % T[C] = min(
 %     T[C U {ei, ej}] + d(0, ei) + d(ei, ej) + d(ej, 0),
-%     T[C U {ek} + 2d(0, el
+%     T[C U {ek} + 2d(0, el)
 % )
-
-% parejaDP(S: Conjunto, f: funcion, p: Arreglo):
-%     if S==E:
-%         return p[s]
-%
-%     if p[S] != -1:
-%         return p[S]
-%
-%     for el_i in M-S:
-%         mejor = 0
-%         for el_j in M-S-{el_i}:
-%             if f(el_i, e_j) > mejor:
-%                 mejor_el_j = el_j
-%                 mejor = f(el_i, el_j)
-%         p[s] = parejaDP(S U {el_i, el_j}, f, p) + mejor
-%             return p[s]
-%
-
-% parejaDP(C: Conjunto, d: funcion, p: Arreglo):
-%     if C==M:
-%         return p[s]
-%
-%     if p[C] != -1:
-%         return p[C]
-%
-%     for el_i in M-S:
-%         base = d(0, el_i)
-%         min = base
-%         for el_j in M-S-{el_i}:
-%             dist = base + d(el_i, el_j) + d(el_j, 0)
-%             if dist < min:
-%                 mejor_el_j = el_j
-%                 mejor = dist
-%
-%         if mejor == base:
-%             p[C] = parejaDP(C U {el_i}, d, p) + base
-%         else:
-%             p[C] = parejaDP(C U {el_i, el_j}, d, p) + mejor
-%
-%         return p[C]
 
 % ----------------------------------------
 
