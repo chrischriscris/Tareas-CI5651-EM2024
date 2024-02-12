@@ -5,7 +5,7 @@ O = (0, 0)
 # to pick them all up and return to the origin.
 #
 # At most 2 suitcases can be picked up at the same time.
-function ryanair(S::Array{Tuple{Int, Int}})
+function ryanair(S::Array{Tuple{Int,Int}})
     n = length(S)
     memo = repeat([-1], 1 << n)
 
@@ -19,7 +19,7 @@ end
 # S: The list of coordinates of the suitcases
 # memo: A memoization table
 # n: The number of suitcases
-function ryanairDP(R::Int, S::Array{Tuple{Int, Int}}, memo::Array{Int}, n::Int)
+function ryanairDP(R::Int, S::Array{Tuple{Int,Int}}, memo::Array{Int}, n::Int)
     if isfull(R, n)
         return 0
     end
@@ -28,11 +28,17 @@ function ryanairDP(R::Int, S::Array{Tuple{Int, Int}}, memo::Array{Int}, n::Int)
         return memo[R+1]
     end
 
-    min2suitcases = Inf64
-    min2suitcasesi = 0
-    min2suitcasesj = 0
-    for i in 1:n-1
+    min1suitcase = min2suitcases = Inf64
+    min1suitcasei = min2suitcasesi = min2suitcasesj = 0
+
+    for i in 1:n
         if !contains(R, i)
+            time = 2 * squaredist(O, S[i])
+            if time < min1suitcase
+                min1suitcase = time
+                min1suitcasei = i
+            end
+
             for j in i+1:n
                 if !contains(R, j)
                     time = squaredist(O, S[i]) + squaredist(S[i], S[j]) + squaredist(S[j], O)
@@ -46,18 +52,6 @@ function ryanairDP(R::Int, S::Array{Tuple{Int, Int}}, memo::Array{Int}, n::Int)
         end
     end
 
-    min1suitcase = Inf64
-    min1suitcasei = 0
-    for i in 1:n
-        if !contains(R, i)
-            time = 2 * squaredist(O, S[i])
-            if time < min1suitcase
-                min1suitcase = time
-                min1suitcasei = i
-            end
-        end
-    end
-
     case1 = ryanairDP(union(R, min1suitcasei), S, memo, n) + min1suitcase
 
     # There's only one suitcase left, pick it up
@@ -67,6 +61,6 @@ function ryanairDP(R::Int, S::Array{Tuple{Int, Int}}, memo::Array{Int}, n::Int)
 
     case2 = ryanairDP(union(R, min2suitcasesi, min2suitcasesj), S, memo, n) + min2suitcases
 
-    # Store the most optimal case
+    # Store the most optimal of the two cases
     return memo[R+1] = min(case1, case2)
 end
