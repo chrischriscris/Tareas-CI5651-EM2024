@@ -1,4 +1,4 @@
-# Ejercicio 1
+# Ejercicio 3
 
 Para compilar el programa se debe ejecutar el siguiente comando:
 
@@ -9,7 +9,7 @@ make
 Para ejecutar el programa se debe ejecutar el siguiente comando:
 
 ```bash
-./virtualinit
+./virtualinit <n>
 ```
 
 *Nota*: El programa reporta las posiciones sin inicializar como `NULL`.

@@ -1,4 +1,4 @@
-# Ejercicio 1
+# Ejercicio 2
 
 Para ejecutar el programa se debe ejecutar el siguiente comando:
 
