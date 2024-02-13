@@ -6,7 +6,7 @@
 #
 # Returns an Array of tuples of integers contained in the file
 function parseinstance(path::String)
-    S::Array{Tuple{Int, Int}} = []
+    S::Array{Tuple{Int,Int}} = []
 
     open(path) do file
         for line in eachline(file)
@@ -19,25 +19,23 @@ function parseinstance(path::String)
 end
 
 # Given two points A and B, returns the square of the euclidean distance
-function squaredist(A, B)
-    x1, y1 = A
-    x2, y2 = B
-    return (x2 - x1)^2 + (y2 - y1)^2
+function squaredist(A::Tuple{Int,Int}, B::Tuple{Int,Int})
+    return (B[1] - A[1])^2 + (B[2] - A[2])^2
 end
 
 # ===== Set operations using bit manipulation =====
 
-# All of them substract 1 because Julia is 1-indexed
-
-function contains(c, i)
-    return (c & (1 << (i - 1))) != 0
-end
-
-function isfull(c, n)
+function isfull(c::Int, n::Int)
     return c == (1 << n) - 1
 end
 
-function union(c, args...)
+# These substract 1 because Julia is 1-indexed
+
+function contains(c::Int, i::Int)
+    return (c & (1 << (i - 1))) != 0
+end
+
+function union(c::Int, args::Int...)
     for i in args
         c = c | (1 << (i - 1))
     end
