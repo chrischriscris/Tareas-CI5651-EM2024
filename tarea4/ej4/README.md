@@ -3,7 +3,7 @@
 Para ejecutar el programa se debe navegar al directorio `src` y ejecutar el siguiente comando:
 
 ```bash
-julia main.jl <path_to_input_file>
+./run-ryanair.sh <path_to_input_file>
 ```
 
 El archivo de entrada debe tener el siguiente formato:
