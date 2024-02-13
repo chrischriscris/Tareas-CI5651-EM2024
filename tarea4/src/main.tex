@@ -247,35 +247,57 @@ Se desea que diseñe un algoritmo usando \emph{Programación Dinámica}, que res
 Sea $S$ el conjunto total de las posiciones de las maletas, definamos una tabla $memo[R]$ tal que $memo[R]$ representa el tiempo mínimo necesario para recoger y llevar todas las maletas en $S \setminus R$ al avión, donde $R \subseteq S$. Así, $R$ representa el subconjunto de maletas restantes por recoger y la solución está en $memo[\emptyset]$, es decir, cuando ya no hay maletas por recoger.
 
 Notemos que:
-
-
 \begin{itemize}
     \item $memo[S] = 0$, ya que no se ha recogido ninguna maleta.
-    \item Para el caso recursivo, definamos la función $g: S \times S \rightarrow \mathbb{Z}^*$, que devuelve el tiempo que toma transportarse de la posición $A$ a la posición $B$. Así, tenemos que:
-
+    \item Para el caso recursivo, definamos la función $g: \mathbb{Z} \times \mathbb{Z} \rightarrow \mathbb{Z}^*$, que devuelve el tiempo que toma transportarse de una posición a otra. Así, tenemos que, sea $O$ la posición del avión:
     \begin{align*}
         memo[R] = \min \left( \begin{array}{l}
-            \min_{A, B \in S\setminus R}^{A \neq B} \left( memo[R \setminus \{A, B\}] + g(0, A) + g(A, B) + g(e_j, 0) \right), \\
-            \min_{e_k \in R} \left( memo[R \setminus \{e_k\}] + 2 \times g(0, e_k) \right)
+            \min_{A, B \in S\setminus R}^{A \neq B} \left( memo[R \cup \{A, B\}] + g(O, A) + g(A, B) + g(B, 0) \right), \\
+            \min_{A \in S \setminus R} \left( memo[R \cup \{A\}] + 2 \times g(O, A) \right)
         \end{array} \right)
     \end{align*}
-
+    Así, para un subconjunto $R$ se toma el mínimo entre:
+    \begin{itemize}
+        \item El mínimo tiempo acumulado si se deciden recoger dos maletas en $S \setminus R$ y llevarlas al avión.
+        \item El mínimo tiempo acumulado si se decide recoger una maleta en $S \setminus R$ y llevarla al avión.
+    \end{itemize}
 \end{itemize}
-% ----------------------------------------
-% M = conjunto de maletas
-% T[C] = Mejor tiempo acumulado al llevar las maletas en M - C
-%
-% T[M] = 0
-% T[empty] = sol.
-%
-% T[C] = min(
-%     T[C U {ei, ej}] + d(0, ei) + d(ei, ej) + d(ej, 0),
-%     T[C U {ek} + 2d(0, el)
-% )
 
+Así, un algoritmo de Programación Dinámica Top-Down que resuelve este problema es (sean $n$ la cantidad de maletas, $S$ el conjunto de posiciones de las maletas, $O$ la posición del avión y $g$ la función que devuelve el tiempo que toma transportarse de una posición a otra, implicitos):
 
+\begin{minted}{python}
+    memo = [None] * (2^n) # Para P(S) subconjuntos de S
+    ryanairDP({}, memo) # Llamada que resuelve el problema
 
-% ----------------------------------------
+    def ryanairDP(R: Conjunto[Maleta], memo: Arreglo[Entero]):
+        if R == S:
+            return 0
+
+        if memo[R] != None:
+            return memo[R]
+
+        min_t_1_maleta, min_t_2_maletas = Infinito, Infinito
+        min_1_maleta_A, min_2_maletas_A, min_2_maletas_B = None, None, None
+        for A in S-R:
+            # Tiempo de O->A->O
+            if 2 * g(O, A) < min_t_1_maleta:
+                min_t_1_maleta = 2 * g(O, A)
+                min_1_maleta_A = A
+
+                for B in S-R-{A}:
+                    # Tiempo de O->A->B->O
+                    if  g(O, A) + g(A, B) + g(B, O) < min_t_2_maletas:
+                        min_t_2_maletas =  g(O, A) + g(A, B) + g(B, O)
+                        min_2_maletas_A, min_2_maletas_B = A, B
+
+        caso1 = ryanairDP(R U {min1suitcasei}, memo) + min_t_1_maleta
+        caso2 = ryanairDP(R U {min2suitcasesi, min2suitcasesj}, memo) + min_t_2_maletas
+
+        memo[R] = min(caso1, caso2)
+        return memo[R]
+\end{minted}
+
+Con este algoritmo se consideran a lo sumo todos los subconjuntos de $S$, que son $2^n$, y para cada subconjunto se consideran a lo sumo todas las combinaciones de maletas que se pueden recoger, que son a lo sumo $n \times (n - 1)$. Así, el algoritmo toma tiempo y memoria $O(n \times 2^n)$.
 
 \end{enumerate} \vspace{4mm}
 

@@ -28,39 +28,22 @@ function ryanairDP(R::Int, S::Array{Tuple{Int,Int}}, memo::Array{Int}, n::Int)
         return memo[R+1]
     end
 
-    min1suitcase = min2suitcases = Inf64
-    min1suitcasei = min2suitcasesi = min2suitcasesj = 0
+    i = 1
+    while i <= n && contains(R, i)
+        i += 1
+    end
 
-    for i in 1:n
-        if !contains(R, i)
-            time = 2 * squaredist(O, S[i])
-            if time < min1suitcase
-                min1suitcase = time
-                min1suitcasei = i
-            end
+    min = ryanairDP(union(R, i), S, memo, n) + 2 * squaredist(O, S[i])
+    for j in i+1:n
+        if contains(R, j)
+            continue
+        end
 
-            for j in i+1:n
-                if !contains(R, j)
-                    time = squaredist(O, S[i]) + squaredist(S[i], S[j]) + squaredist(S[j], O)
-                    if time < min2suitcases
-                        min2suitcases = time
-                        min2suitcasesi = i
-                        min2suitcasesj = j
-                    end
-                end
-            end
+        time = ryanairDP(union(R, i, j), S, memo, n) + squaredist(O, S[i]) + squaredist(S[i], S[j]) + squaredist(S[j], O)
+        if time < min
+            min = time
         end
     end
 
-    case1 = ryanairDP(union(R, min1suitcasei), S, memo, n) + min1suitcase
-
-    # There's only one suitcase left, pick it up
-    if min2suitcases == Inf64
-        return memo[R+1] = case1
-    end
-
-    case2 = ryanairDP(union(R, min2suitcasesi, min2suitcasesj), S, memo, n) + min2suitcases
-
-    # Store the most optimal of the two cases
-    return memo[R+1] = min(case1, case2)
+    return memo[R+1] = min
 end
