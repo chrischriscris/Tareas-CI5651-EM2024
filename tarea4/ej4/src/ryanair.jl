@@ -7,16 +7,16 @@ function ryanair(S::Array{Tuple{Int,Int}})
     memo = repeat([-1], 1 << n)
 
     # Precalculates distances between all pairs and from the origin
-    timeO = [squaredist((0, 0), S[i]) for i in 1:n]
-    time::Matrix{Int} = zeros(Int, n, n)
+    tO = [squaredist((0, 0), S[i]) for i in 1:n]
+    t = zeros(Int, n, n)
     for i in 1:n
         for j in i+1:n
-            time[i, j] = squaredist(S[i], S[j])
-            time[j, i] = time[i, j]
+            t[i, j] = squaredist(S[i], S[j])
+            t[j, i] = t[i, j]
         end
     end
 
-    return ryanairDP(0, S, memo, timeO, time)
+    return ryanairDP(0, S, memo, tO, t)
 end
 
 # Solves the problem using Dynamic Programming
@@ -25,8 +25,9 @@ end
 # R: A bitmask representing the suitcases that remain to be picked up
 # S: The list of coordinates of the suitcases
 # memo: A memoization table
-# n: The number of suitcases
-function ryanairDP(R::Int, S::Array{Tuple{Int,Int}}, memo::Array{Int}, timeO::Array{Int}, time::Matrix{Int})
+# tO: The distances from the origin to each suitcase
+# t: The distances between each pair of suitcases
+function ryanairDP(R::Int, S::Array{Tuple{Int,Int}}, memo::Array{Int}, tO::Array{Int}, t::Matrix{Int})
     n = length(S)
     if isfull(R, n)
         return 0
@@ -41,15 +42,15 @@ function ryanairDP(R::Int, S::Array{Tuple{Int,Int}}, memo::Array{Int}, timeO::Ar
         i += 1
     end
 
-    mintime = ryanairDP(union(R, i), S, memo, timeO, time) + 2 * timeO[i]
+    mintime = ryanairDP(union(R, i), S, memo, tO, t) + 2 * tO[i]
     for j in i+1:n
         if contains(R, j)
             continue
         end
 
-        cost = ryanairDP(union(R, i, j), S, memo, timeO, time) + timeO[i] + time[i, j] + timeO[j]
-        if cost < mintime
-            mintime = cost
+        time = ryanairDP(union(R, i, j), S, memo, tO, t) + tO[i] + t[i, j] + tO[j]
+        if time < mintime
+            mintime = time
         end
     end
 
