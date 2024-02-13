@@ -266,35 +266,27 @@ Notemos que:
 Así, un algoritmo de Programación Dinámica Top-Down que resuelve este problema es (sean $n$ la cantidad de maletas, $S$ el conjunto de posiciones de las maletas, $O$ la posición del avión y $g$ la función que devuelve el tiempo que toma transportarse de una posición a otra, implicitos):
 
 \begin{minted}{python}
-    memo = [None] * (2^n) # Para P(S) subconjuntos de S
-    ryanairDP({}, memo) # Llamada que resuelve el problema
+memo = [None] * (2^n) # Para P(S) subconjuntos de S
+ryanairDP({}, memo) # Llamada que resuelve el problema
 
-    def ryanairDP(R: Conjunto[Maleta], memo: Arreglo[Entero]):
-        if R == S:
-            return 0
+def ryanairDP(R: Conjunto[Maleta], memo: Arreglo[Entero]):
+    if R == S:
+        return 0
 
-        if memo[R] != None:
-            return memo[R]
-
-        min_t_1_maleta, min_t_2_maletas = Infinito, Infinito
-        min_1_maleta_A, min_2_maletas_A, min_2_maletas_B = None, None, None
-        for A in S-R:
-            # Tiempo de O->A->O
-            if 2 * g(O, A) < min_t_1_maleta:
-                min_t_1_maleta = 2 * g(O, A)
-                min_1_maleta_A = A
-
-                for B in S-R-{A}:
-                    # Tiempo de O->A->B->O
-                    if  g(O, A) + g(A, B) + g(B, O) < min_t_2_maletas:
-                        min_t_2_maletas =  g(O, A) + g(A, B) + g(B, O)
-                        min_2_maletas_A, min_2_maletas_B = A, B
-
-        caso1 = ryanairDP(R U {min1suitcasei}, memo) + min_t_1_maleta
-        caso2 = ryanairDP(R U {min2suitcasesi, min2suitcasesj}, memo) + min_t_2_maletas
-
-        memo[R] = min(caso1, caso2)
+    if memo[R] is not None:
         return memo[R]
+
+    A = (S-R)[0] # Escoge alguna maleta que no se haya recogido
+
+    # Se calcula el mínimo tiempo si se decide llevarla sola o con otra maleta
+    mintiempo = ryanairDP(R U {A}, memo) + 2 * g(O, A)
+    for B in S-R-{A}:
+        costo = ryanairDP(R U {A, B}, memo) + g(O, A) + g(A, B) + g(B, O)
+        if  costo < mintiempo:
+            mintiempo = costo
+
+    memo[R] = mintiempo
+    return memo[R]
 \end{minted}
 
 Con este algoritmo se consideran a lo sumo todos los subconjuntos de $S$, que son $2^n$, y para cada subconjunto se consideran a lo sumo todas las combinaciones de maletas que se pueden recoger, que son a lo sumo $n \times (n - 1)$. Así, el algoritmo toma tiempo y memoria $O(n \times 2^n)$.

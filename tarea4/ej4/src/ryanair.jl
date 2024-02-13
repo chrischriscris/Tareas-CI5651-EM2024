@@ -8,7 +8,13 @@ function ryanair(S::Array{Tuple{Int,Int}})
 
     # Precalculates distances between all pairs and from the origin
     timeO = [squaredist((0, 0), S[i]) for i in 1:n]
-    time = [squaredist(S[i], S[j]) for i in 1:n, j in 1:n]
+    time::Matrix{Int} = zeros(Int, n, n)
+    for i in 1:n
+        for j in i+1:n
+            time[i, j] = squaredist(S[i], S[j])
+            time[j, i] = time[i, j]
+        end
+    end
 
     return ryanairDP(0, S, memo, timeO, time)
 end
