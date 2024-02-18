@@ -1,3 +1,7 @@
+#set document(
+  title: "Tarea n: ",
+  author: "Christopher Gómez",
+)
 #set page(margin: 1in)
 #set par(leading: 0.55em, first-line-indent: 1.8em, justify: true)
 #set text(font: "New Computer Modern")
@@ -32,12 +36,10 @@
   ]
 )
 
-
-
 = Tarea n:
 
 // Pregunta 1
-+
++ Holas
 
 // ...
 +
