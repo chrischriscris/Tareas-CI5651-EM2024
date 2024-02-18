@@ -1,6 +1,6 @@
 # Ejercicio 4
 
-Para ejecutar el programa se debe navegar al directorio `src` y ejecutar el siguiente comando:
+Para ejecutar el programa se debe ejecutar el siguiente comando:
 
 ```bash
 ./run-ryanair.sh <path_to_input_file>

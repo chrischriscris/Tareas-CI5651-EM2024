@@ -13,7 +13,7 @@
 
 #grid(
   columns: (1fr, 1fr),
-  block[
+  block(inset: (bottom: 2em))[
     #set align(center)
     #image("logo.png",width: 50%)
     Universidad Simón Bolívar \
@@ -34,10 +34,10 @@
 
 
 
-= Tarea n: 
+= Tarea n:
 
 // Pregunta 1
-+ 
++
 
 // ...
 +
