@@ -1,3 +1,7 @@
+#set document(
+  title: "Tarea n: ",
+  author: "Christopher Gómez",
+)
 #set page(margin: 1in)
 #set par(leading: 0.55em, first-line-indent: 1.8em, justify: true)
 #set text(font: "New Computer Modern")
@@ -13,7 +17,7 @@
 
 #grid(
   columns: (1fr, 1fr),
-  block[
+  block(inset: (bottom: 2em))[
     #set align(center)
     #image("logo.png",width: 50%)
     Universidad Simón Bolívar \
@@ -32,12 +36,10 @@
   ]
 )
 
-
-
-= Tarea n: 
+= Tarea n:
 
 // Pregunta 1
-+ 
++ Holas
 
 // ...
 +
