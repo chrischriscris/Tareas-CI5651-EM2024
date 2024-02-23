@@ -1,4 +1,6 @@
-#set document(title: [Tarea 5: Grafos], author: "Christopher Gómez")
+#let doc_title = "Tarea 5: Grafos"
+
+#set document(title: doc_title, author: "Christopher Gómez")
 #set page(margin: 2cm)
 #set text(font: "New Computer Modern", lang: "es")
 #show raw: set text(font: "JetBrains Mono")
@@ -35,7 +37,7 @@
   ]
 )
 
-= Tarea 5: Grafos
+= #doc_title
 
 #enum[
 

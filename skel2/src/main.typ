@@ -1,23 +1,24 @@
-#set document(
-  title: "Tarea n: ",
-  author: "Christopher Gómez",
-)
-#set page(margin: 1in)
-#set par(leading: 0.55em, first-line-indent: 1.8em, justify: true)
-#set text(font: "New Computer Modern")
-#show raw: set text(font: "New Computer Modern Mono")
-#show par: set block(spacing: 0.55em)
+#let doc_title = "Tarea n: "
+
+#set document(title: doc_title, author: "Christopher Gómez")
+#set page(margin: 2cm)
+#set text(font: "New Computer Modern", lang: "es")
+#show raw: set text(font: "JetBrains Mono")
+#set par(leading: 0.55em, justify: true)
+#show par: set block(above: 1em, spacing: 0.55em)
 #show heading: it => {
   set align(center)
   set text(14pt)
-  block[
-    #it
-  ]
+  block(height: 1.5em)[#it]
 }
+#set list(tight: false)
+#set enum(tight: false)
+
+// Start of the document
 
 #grid(
   columns: (1fr, 1fr),
-  block(inset: (bottom: 2em))[
+  block[
     #set align(center)
     #image("logo.png",width: 50%)
     Universidad Simón Bolívar \
@@ -36,10 +37,22 @@
   ]
 )
 
-= Tarea n:
+= #doc_title
+
+#enum[
 
 // Pregunta 1
-+ Holas
 
-// ...
-+
+Enunciado \ \
+
+Solución
+
+][
+
+// Pregunta n
+
+Enunciado \ \
+
+Solución
+
+]
