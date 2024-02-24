@@ -26,7 +26,23 @@ de su apellido, usando el método de precondicionamiento visto en clase.
 Para el ejemplo de `fulanomeg`, debe ver el ancestro común más bajo entre `e` y
 `g`.
 ][
-Solución
+En este caso, se construye un árbol binario para `christopegmz`: \ \
+
+#align(center)[
+```
+ c
+  \
+   h
+ /   \
+e     r
+\   /   \
+ g i     s
+    \     \
+     o     t
+    / \     \
+   m   p     z
+```
+]
 ][
 // Pregunta 2
 Sea un conjunto $C$ de $n$ números enteros positivos distintos. ¿Cuál es la
