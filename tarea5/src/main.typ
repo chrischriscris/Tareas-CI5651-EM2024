@@ -42,7 +42,6 @@ _Pista: El teorema de *König* puede ser de utilidad._
 Solución
 ][
 // Pregunta 3
-
 Considere un modificación del clásico juego de la vieja, en donde:
 
 - El primer jugador juega con — y el segundo juega con |.
