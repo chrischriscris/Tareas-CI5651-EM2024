@@ -26,23 +26,46 @@ de su apellido, usando el método de precondicionamiento visto en clase.
 Para el ejemplo de `fulanomeg`, debe ver el ancestro común más bajo entre `e` y
 `g`.
 ][
-En este caso, se construye un árbol binario para `christopegmz`: \ \
+En este caso, la cadena a considerar es `christopegmz`. En la @arbol se
+puede ver el árbol binario resultante, con el etiquetado en pre-order a la
+izquierda de cada nodo y el etiquetado por niveles a la derecha, necesario para
+el recorrido de Euler.
+
+#figure(caption: [Arbol binario para `christopegmz`])[
+#image("img/arbol.svg", width: 250pt)
+]<arbol> \
+
+Luego, el recorrido de Euler tomando en cuenta dichas etiquetas será:
 
 #align(center)[
-```
- c
-  \
-   h
- /   \
-e     r
-\   /   \
- g i     s
-    \     \
-     o     t
-    / \     \
-   m   p     z
-```
+#tablex(
+  columns: (auto, ) * 23,
+  [1], [2], [3], [5], [3], [2], [4], [6], [8], cellx(fill: rgb("b1dff9"))[10],
+  [8], [11], [8], [6], cellx(fill: rgb("f29898"))[4], [7], [9],
+  cellx(fill: rgb("b1dff9"))[12], [9], [7], [4], [2], [1]
+)
 ]
+
+Y la tabla resultante del precondicionamiento es:
+
+#align(center)[
+#tablex(
+  columns: (auto, ) * 13,
+  cellx(align: center)[Nodo], [1], [2], [3], [4], [5], [6], [7], [8], [9],
+  cellx(fill: rgb("b1dff9"))[10], [11], cellx(fill: rgb("b1dff9"))[12],
+  cellx(align: center)[Primera etiqueta], [0], [1], [2], [6], [3], [7], [15],
+  [8], [16], cellx(fill: rgb("b1dff9"))[9], [11], cellx(fill: rgb("b1dff9"))[17]
+)
+] \
+
+Como se puede concluir con la tabla y el recorrido de Euler, y como se indica
+con los colores de las celdas, la primera aparición de `m` (nodo 10) es en la
+posición 9 y la primera aparición de `z` (nodo 12) es en la posición 17, y la
+etiqueta más pequeña que se puede encontrar en el recoorrido de Euler en el
+rango $[9..17]$ del arreglo es 4, que corresponde a la etiqueta de `r`.
+
+Se concluye entonces que el ancestro común más bajo entre `m` y `z` es `r`, y
+podemos corroborar que el resultado es correcto con la @arbol.
 ][
 // Pregunta 2
 Sea un conjunto $C$ de $n$ números enteros positivos distintos. ¿Cuál es la
@@ -61,14 +84,15 @@ Solución
 Considere un modificación del clásico juego de la vieja, en donde:
 
 - El primer jugador juega con — y el segundo juega con |.
-- Cada casilla puede tener alguno de estos símbolos, ninguno o ambos (en cuyo caso se
-  forma un +).
+- Cada casilla puede tener alguno de estos símbolos, ninguno o ambos (en cuyo
+  caso se forma un +).
 - En cada turno, el jugador no puede jugar en la misma casilla que el jugador
   anterior.
 - Gana aquel jugador que logre formar tres + en una misma fila, columna o
   diagonal.
 
-Por ejemplo, la siguiente es una configuración ganadora (donde la última jugada fue de |):
+Por ejemplo, la siguiente es una configuración ganadora (donde la última jugada
+fue de |):
 
 #align(center)[
 #tablex(
