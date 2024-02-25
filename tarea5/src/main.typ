@@ -31,7 +31,7 @@ puede ver el árbol binario resultante, con el etiquetado en pre-order a la
 izquierda de cada nodo y el etiquetado por niveles a la derecha, necesario para
 el recorrido de Euler.
 
-#figure(caption: [Arbol binario para `christopegmz`])[
+#figure(caption: [Árbol binario para `christopegmz`])[
 #image("img/arbol.svg", width: 250pt)
 ]<arbol> \
 
@@ -79,14 +79,13 @@ $O(1)$.
 
 _Pista: El teorema de *König* puede ser de utilidad._
 ][
-Ejemplos:
-
-```
-{1, 2, 3} -> 2
-{2, 3, 4, 5} -> 2
-{4, 1} -> 1
-```
-
+// Ejemplos:
+//
+// ```
+// {1, 2, 3} -> 2
+// {2, 3, 4, 5} -> 2
+// {4, 1} -> 1
+// ```
 Veamos, para resolver este problema, comencemos construyendo un grafo
 $ G_C = (C, E) \ E = { (x, y) | x, y in C, x + y "es primo" } $ es decir,
 un grafo donde los vértices son los elementos de $C$ y hay una arista entre cada
@@ -111,21 +110,32 @@ pseudocódigo para resolver el problema sería:
 ```python
 def no_suma_primo(C: Conjunto[Entero]) -> Entero:
     E = {}
-    for x, y in C^2:
-        if es_primo(x + y):
-            E.añadir((x, y))
+    P = {}
+    I = {}
+
+    for i in C:
+        if es_par(i):
+            P.añadir(i)
+        else:
+            I.añadir(i)
+
+    for p in P:
+        for i in I:
+            if es_primo(p + i):
+                E.añadir((p, i))
 
     G = {C, E}
-    M = hopcroft_karp(G)
+    M = hopcroft_karp(G, P, I)
 
     return tamaño(M)
 ```
 ]
 
-$G_C$ tiene a lo sumo $n^2$ aristas, y el algoritmo de _Hopcroft-Karp_ tiene
-una complejidad de $O(|E| sqrt(|V|))$, por lo que el algoritmo planteado tiene
-una complejidad de $O(n^2 sqrt(n))$ (suponiendo que la verificación de
-primalidad es $O(1)$).
+El número de aristas de $G_C$ está acotado por $n^2$, y el algoritmo de
+_Hopcroft-Karp_ tiene una complejidad de $O(|E| sqrt(|V|))$, por lo que el
+algoritmo planteado tiene una complejidad de $O(n^2 sqrt(n))$ (suponiendo que
+la verificación de primalidad es $O(1)$), ya que la construcción de $G_C$ es
+$O(n^2)$.
 ][
 // Pregunta 3
 Considere un modificación del clásico juego de la vieja, en donde:
