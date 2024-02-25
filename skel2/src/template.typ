@@ -1,6 +1,6 @@
 #let conf(font: "CMU Concrete", math_font: "Neo Euler", title, doc) = {
   set document(title: [#title], author: "Christopher Gómez")
-  set page(margin: 2cm)
+  set page(margin: 2cm, numbering: "1")
   set text(font: font, lang: "es")
   show raw: set text(font: "JetBrains Mono")
   show math.equation: set text(font: math_font)
@@ -27,8 +27,9 @@
     ],[
       #set align(end)
       #rect(
-        fill: rgb("#C4E6FF"),
-        outset: 0.5em
+        fill: rgb("c4e6ff"),
+        outset: 0.5em,
+        radius: 5pt
       )[
         #set align(center)
         Resuelto por: \

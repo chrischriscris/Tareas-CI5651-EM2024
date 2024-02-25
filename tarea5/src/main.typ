@@ -44,17 +44,18 @@ Luego, el recorrido de Euler tomando en cuenta dichas etiquetas será:
   [8], [11], [8], [6], cellx(fill: rgb("f29898"))[4], [7], [9],
   cellx(fill: rgb("b1dff9"))[12], [9], [7], [4], [2], [1]
 )
-]
+] \
 
 Y la tabla resultante del precondicionamiento es:
 
 #align(center)[
 #tablex(
   columns: (auto, ) * 13,
-  cellx(align: center)[Nodo], [1], [2], [3], [4], [5], [6], [7], [8], [9],
+  align: (center),
+  [Nodo], [1], [2], [3], [4], [5], [6], [7], [8], [9],
   cellx(fill: rgb("b1dff9"))[10], [11], cellx(fill: rgb("b1dff9"))[12],
-  cellx(align: center)[Primera etiqueta], [0], [1], [2], [6], [3], [7], [15],
-  [8], [16], cellx(fill: rgb("b1dff9"))[9], [11], cellx(fill: rgb("b1dff9"))[17]
+  [Primera etiqueta], [0], [1], [2], [6], [3], [7], [15], [8], [16],
+  cellx(fill: rgb("b1dff9"))[9], [11], cellx(fill: rgb("b1dff9"))[17]
 )
 ] \
 
@@ -78,7 +79,51 @@ $O(1)$.
 
 _Pista: El teorema de *König* puede ser de utilidad._
 ][
-Solución
+Ejemplos:
+
+```
+{1, 2, 3} -> 2
+{2, 3, 4, 5} -> 2
+{4, 1} -> 1
+```
+
+Veamos, para resolver este problema, comencemos construyendo un grafo
+$ G_C = (C, E) \ E = { (x, y) | x, y in C, x + y "es primo" } $ es decir,
+un grafo donde los vértices son los elementos de $C$ y hay una arista entre cada
+par de vértices cuya suma sea un número primo.
+
+Luego, lo que buscamos es "romper" todas estas aristas, es decir, remover para
+cada una uno de sus extremos, de forma que no queden vértices conectados.
+Queremos además remover la menor cantidad de vértices posible, por lo que
+buscamos la cardinalidad de un cubrimiento mínimo $M$ de $G_C$.
+
+Notemos que $G_C$ es un grafo bipartito (TODO: demostrar), por lo que usando el
+_teorema de *König*_ sabemos que el número de vértices en un cubrimiento mínimo
+es igual al número de aristas en un emparejamiento máximo. Así, podemos resolver
+el problema hayando la cardinalidad de un emparejamiento máximo en $G_C$ con el
+algoritmo de _Hopcroft-Karp_. Un pseudocódigo para resolver el problema sería:
+
+#align(center)[
+#block(fill: rgb("f0f8ff"), inset: 1em, radius: 5pt, stroke: gray)[
+```python
+def no_suma_primo(C: Conjunto[Entero]) -> Entero:
+    E = {}
+    for x, y in C^2:
+        if es_primo(x + y):
+            E.añadir((x, y))
+
+    G = {C, E}
+    M = hopcroft_karp(G)
+
+    return tamaño(M)
+```
+]
+]
+
+$G_C$ tiene a lo sumo $n^2$ aristas, y el algoritmo de _Hopcroft-Karp_ tiene
+una complejidad de $O(|E| sqrt(|V|))$, por lo que el algoritmo planteado tiene
+una complejidad de $O(n^2 sqrt(n))$ (suponiendo que la verificación de
+primalidad es $O(1)$).
 ][
 // Pregunta 3
 Considere un modificación del clásico juego de la vieja, en donde:
@@ -101,7 +146,7 @@ fue de |):
   align: (center, center, center),
   hlinex(stroke: rgb("#FFFFFF"), start: 0, end: 2),
   vlinex(stroke: rgb("#FFFFFF"), start: 0, end: 2),
-  [+], [+] , [—] , vlinex(stroke: rgb("#FFFFFF"), start: 0, end: 2),
+  [+], [+] , [+] , vlinex(stroke: rgb("#FFFFFF"), start: 0, end: 2),
   [|], [—] , [+] ,
   [—], [ ] , [|] ,
   hlinex(stroke: rgb("#FFFFFF"), start: 0, end: 2),
