@@ -1,5 +1,5 @@
 #import "@preview/tablex:0.0.8": tablex, cellx, hlinex, vlinex
-#import "template.typ": conf, question
+#import "template.typ": conf, question, pseudocode
 
 #show: doc => conf("Tarea 5: Grafos", doc)
 
@@ -92,19 +92,22 @@ $ G_C = (C, E) \ E = { (x, y) | x, y in C, x + y "es primo" } $ es decir,
 un grafo donde los vértices son los elementos de $C$ y hay una arista entre cada
 par de vértices cuya suma sea un número primo.
 
-Luego, lo que buscamos es "romper" todas estas aristas, es decir, remover para
+Luego, lo que buscamos es \"romper\" todas estas aristas, es decir, remover para
 cada una uno de sus extremos, de forma que no queden vértices conectados.
 Queremos además remover la menor cantidad de vértices posible, por lo que
 buscamos la cardinalidad de un cubrimiento mínimo $M$ de $G_C$.
 
-Notemos que $G_C$ es un grafo bipartito (TODO: demostrar), por lo que usando el
-_teorema de *König*_ sabemos que el número de vértices en un cubrimiento mínimo
-es igual al número de aristas en un emparejamiento máximo. Así, podemos resolver
-el problema hayando la cardinalidad de un emparejamiento máximo en $G_C$ con el
-algoritmo de _Hopcroft-Karp_. Un pseudocódigo para resolver el problema sería:
+Notemos que $G_C$ es un grafo bipartito, ya que podemos particionar los vértices
+en pares e impares, porque la suma de dos números con la misma paridad es par,
+por lo que toda arista tendrá un extremo par y otro impar.
 
-#align(center)[
-#block(fill: rgb("f0f8ff"), inset: 1em, radius: 5pt, stroke: gray)[
+Así, sabemos por el _teorema de *König*_ que para $G_C$ el número de vértices
+en un cubrimiento mínimo es igual al número de aristas en un emparejamiento
+máximo, por lo que podemos resolver el problema hayando la cardinalidad de un
+emparejamiento máximo en $G_C$ con el algoritmo de _Hopcroft-Karp_. Un
+pseudocódigo para resolver el problema sería:
+
+#pseudocode[
 ```python
 def no_suma_primo(C: Conjunto[Entero]) -> Entero:
     E = {}
@@ -117,7 +120,6 @@ def no_suma_primo(C: Conjunto[Entero]) -> Entero:
 
     return tamaño(M)
 ```
-]
 ]
 
 $G_C$ tiene a lo sumo $n^2$ aristas, y el algoritmo de _Hopcroft-Karp_ tiene

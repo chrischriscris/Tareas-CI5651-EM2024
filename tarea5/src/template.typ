@@ -44,7 +44,6 @@
 }
 
 // Helper for questions
-
 #let question(..args) = {
   let questions = args.pos()
   let n = questions.len()
@@ -65,4 +64,16 @@
 
     i += 2
   }
+}
+
+// Helper for pseucode
+#let pseudocode(code-block) = {
+  align(center)[
+  #block(
+    fill: rgb("f0f8ff"),
+    inset: 1em,
+    radius: 5pt,
+    stroke: gray
+  )[#code-block]
+  ]
 }
