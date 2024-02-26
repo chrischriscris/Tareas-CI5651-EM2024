@@ -4,6 +4,7 @@
   set text(font: font, lang: "es")
   show raw: set text(font: "JetBrains Mono")
   show math.equation: set text(font: math_font)
+  show link: doc => underline[#text(fill: blue)[#doc]]
   set par(leading: 0.55em, justify: true)
   show par: set block(above: 1em, spacing: 0.55em)
   show heading: it => {
@@ -15,7 +16,6 @@
   set enum(tight: false)
 
   // Start of the document
-
   grid(
     columns: (1fr, 1fr),
     block[

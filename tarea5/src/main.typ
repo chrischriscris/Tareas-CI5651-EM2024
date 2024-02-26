@@ -79,13 +79,6 @@ $O(1)$.
 
 _Pista: El teorema de *König* puede ser de utilidad._
 ][
-// Ejemplos:
-//
-// ```
-// {1, 2, 3} -> 2
-// {2, 3, 4, 5} -> 2
-// {4, 1} -> 1
-// ```
 Veamos, para resolver este problema, comencemos construyendo un grafo
 $ G_C = (C, E) \ E = { (x, y) | x, y in C, x + y "es primo" } $ es decir,
 un grafo donde los vértices son los elementos de $C$ y hay una arista entre cada
@@ -112,8 +105,12 @@ def no_suma_primo(C: Conjunto[Entero]) -> Entero:
     E = {}
     P = {}
     I = {}
+    r = 0
 
     for i in C:
+        if i == 1:
+            r = 1
+            continue
         if es_par(i):
             P.añadir(i)
         else:
@@ -124,18 +121,26 @@ def no_suma_primo(C: Conjunto[Entero]) -> Entero:
             if es_primo(p + i):
                 E.añadir((p, i))
 
-    G = {C, E}
+    G = {P U I, E}
     M = hopcroft_karp(G, P, I)
 
-    return tamaño(M)
+    return tamaño(M) + r
 ```
 ]
+
+Un caso especial a tener en cuenta es que el 2 es el único número primo par, por
+lo que si $1 in C$, este se excluye del grafo $G_C$ a construir y se suma 1 al
+resultado, ya que la suma de 1 consigo mismo es primo, caso que no se
+consideraría al hallar cubrimiento mínimo de $G_C$.
 
 El número de aristas de $G_C$ está acotado por $n^2$, y el algoritmo de
 _Hopcroft-Karp_ tiene una complejidad de $O(|E| sqrt(|V|))$, por lo que el
 algoritmo planteado tiene una complejidad de $O(n^2 sqrt(n))$ (suponiendo que
 la verificación de primalidad es $O(1)$), ya que la construcción de $G_C$ es
 $O(n^2)$.
+
+Una implementación de este algoritmo en PHP se puede encontrar
+#link("https://www.google.com")[aquí].
 ][
 // Pregunta 3
 Considere un modificación del clásico juego de la vieja, en donde:
