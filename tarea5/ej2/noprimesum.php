@@ -1,34 +1,4 @@
 <?php
-function isPrime(int $n): bool {
-    if ($n == 2 || $n == 3) {
-        return true;
-    }
-
-    if ($n < 2 || $n % 2 == 0) {
-        return false;
-    }
-
-    if ($n < 9) {
-        return true;
-    }
-
-    if ($n % 3 == 0) {
-        return false;
-    }
-
-    $root = (int) sqrt($n);
-    $f = 5;
-    while ($f <= $root) {
-        if ($n % $f == 0 || $n % ($f + 2) == 0) {
-            return false;
-        }
-
-        $f += 6;
-    }
-
-    return true;
-}
-
 class HopcroftKarp {
     const INF = 2147483647;
     const NIL = -1;
@@ -49,6 +19,11 @@ class HopcroftKarp {
         $this->dist = [];
     }
 
+    /**
+     * Modified BFS to find the shortest augmenting path; alternates between
+     * layers of the bipartite graph (matched and unmatched vertices).
+     * @return bool
+     */
     private function bfs(): bool {
         $Q = new SplQueue();
 
@@ -62,7 +37,6 @@ class HopcroftKarp {
         }
 
         $this->dist[self::NIL] = self::INF;
-
         while (!$Q->isEmpty()) {
             $u = $Q->dequeue();
             if ($this->dist[$u] < $this->dist[self::NIL]) {
@@ -78,6 +52,11 @@ class HopcroftKarp {
         return $this->dist[self::NIL] != self::INF;
     }
 
+    /**
+     * Modified DFS to find an augmenting path.
+     * @param int $u
+     * @return bool
+     */
     private function dfs(int $u): bool {
         if ($u == self::NIL) {
             return true;
@@ -86,12 +65,10 @@ class HopcroftKarp {
         foreach ($this->G->adj[$u] as $v) {
             if ($this->dist[$this->pair_v[$v]] == $this->dist[$u] + 1 &&
                 $this->dfs($this->pair_v[$v])) {
-                if ($this->dfs($this->pair_v[$v])) {
-                    $this->pair_u[$u] = $v;
-                    $this->pair_v[$v] = $u;
+                $this->pair_u[$u] = $v;
+                $this->pair_v[$v] = $u;
 
-                    return true;
-                }
+                 return true;
             }
         }
 
@@ -99,6 +76,10 @@ class HopcroftKarp {
         return false;
     }
 
+    /**
+     * Finds the cardinality of the maximum matching in the bipartite graph.
+     * @return int
+     */
     public function max_matching(): int {
         foreach ($this->G->A as $u) {
             $this->pair_u[$u] = self::NIL;
