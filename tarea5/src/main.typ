@@ -194,6 +194,7 @@ representa el estado ganador con un 1, el perdedor con un -1.
 Una implementación de este algoritmo en Kotlin se puede encontrar #link("https://www.google.com")[aquí].
 
 Con dicha implementación se pudo verificar que el valor resultante de la raíz
-del árbol minimax es 1, lo que indica que si ambos jugadores juegan de forma
-óptima, el primer jugador tiene una estrategia ganadora.
+del árbol minimax es -1, lo que indica que si ambos jugadores juegan de forma
+óptima, el primer jugador siempre terminará perdiendo, o lo que es lo mismo, el
+segundo jugador tiene una estrategia ganadora.
 ]
