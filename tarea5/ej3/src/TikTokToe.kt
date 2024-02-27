@@ -8,9 +8,7 @@ class TikTokToeMovesIterator(private val state: TikTokToe): Iterator<TikTokToe> 
             if (nextMove != state.lastMove &&
                 state.board[nextMove] != state.currentPlayer &&
                 state.board[nextMove] != 3
-            ) {
-                break;
-            }
+            ) break;
 
             nextMove++;
         }
@@ -42,8 +40,8 @@ class TikTokToe(val board: IntArray, val currentPlayer: Int, val lastMove: Int) 
     public fun makeMove(index: Int): TikTokToe {
         val newBoard = board.copyOf();
         newBoard[index] += currentPlayer;
-
         val newPlayer = if (currentPlayer == 1) 2 else 1;
+
         return TikTokToe(newBoard, newPlayer, index);
     }
 
@@ -54,21 +52,6 @@ class TikTokToe(val board: IntArray, val currentPlayer: Int, val lastMove: Int) 
 
     public fun successors(): TikTokToeMovesIterator {
         return TikTokToeMovesIterator(this);
-    }
-
-    public fun printBoard() {
-        for (i in 0..8) {
-            if (i % 3 == 0) print("|");
-            print(when (board[i]) {
-                1 -> "/"
-                2 -> "\\"
-                3 -> "X"
-                else -> " "
-            });
-
-            if (i % 3 == 2) print("|\n");
-            else print("|");
-        }
     }
 }
 
@@ -109,5 +92,10 @@ class TikTokToeMinimaxAgent {
 fun main() {
     val board = TikTokToe(IntArray(9), 1, -1);
     val agent = TikTokToeMinimaxAgent();
+
+    for (successor in board.successors()) {
+        println(agent.minimax(successor, Int.MIN_VALUE, Int.MAX_VALUE));
+    }
+
     println(agent.minimax(board, Int.MIN_VALUE, Int.MAX_VALUE));
 }
