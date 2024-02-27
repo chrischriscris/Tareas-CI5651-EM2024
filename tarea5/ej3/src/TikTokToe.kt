@@ -92,10 +92,5 @@ class TikTokToeMinimaxAgent {
 fun main() {
     val board = TikTokToe(IntArray(9), 1, -1);
     val agent = TikTokToeMinimaxAgent();
-
-    for (successor in board.successors()) {
-        println(agent.minimax(successor, Int.MIN_VALUE, Int.MAX_VALUE));
-    }
-
     println(agent.minimax(board, Int.MIN_VALUE, Int.MAX_VALUE));
 }
