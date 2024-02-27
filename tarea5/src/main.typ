@@ -170,7 +170,15 @@ fue de |):
 )]
 
 Diga si hay una estrategia ganadora para alguno de los jugadores involucrados.
-Para resolver este problema, utilice el método *minmax*.
+Para resolver este problema, utilice el método *minimax*.
 ][
-Solución
+Para encontrar si hay alguna estrategia ganadora, modelamos primero los estados
+del juego para poder aplicar el método *minimax*.
+
+De esta forma, definimos un estado como un arreglo de 9 elementos, donde cada
+elemento puede es un número entre 0 y 4, siendo 0 si la casilla está vacía, 1 si
+tiene un —, 2 si tiene un | y 3 si tiene un +.
+
+Codificar los estados de esta manera presenta la ventaja de que para jugar en una
+casilla basta sumar el valor del símbolo a la casilla
 ]
