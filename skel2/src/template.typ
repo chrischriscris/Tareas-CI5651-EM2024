@@ -77,3 +77,5 @@
   )[#code-block]
   ]
 }
+
+#let GITFRONT_REPO = "https://gitfront.io/r/chrischriscris/swaWSXShzVoW/Tareas-CI5651-EM2024/tree/";

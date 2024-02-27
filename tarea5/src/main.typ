@@ -1,5 +1,5 @@
 #import "@preview/tablex:0.0.8": tablex, cellx, hlinex, vlinex
-#import "template.typ": conf, question, pseudocode
+#import "template.typ": conf, question, pseudocode, GITFRONT_REPO
 
 #show: doc => conf("Tarea 5: Grafos", doc)
 
@@ -140,7 +140,7 @@ la verificación de primalidad es $O(1)$), ya que la construcción de $G_C$ es
 $O(n^2)$.
 
 Una implementación de este algoritmo en PHP se puede encontrar
-#link("https://www.google.com")[aquí].
+#link(GITFRONT_REPO + "tarea5/ej2/")[aquí].
 ][
 // Pregunta 3
 Considere un modificación del clásico juego de la vieja, en donde:
@@ -191,7 +191,8 @@ un agente minimax sobre el árbol de estados del juego, partiendo del tablero
 vacío, y ver si el agente puede forzar una victoria o termina perdiendo. Se
 representa el estado ganador con un 1, el perdedor con un -1.
 
-Una implementación de este algoritmo en Kotlin se puede encontrar #link("https://www.google.com")[aquí].
+Una implementación de este algoritmo en Kotlin se puede encontrar
+#link(GITFRONT_REPO + "tarea5/ej3/")[aquí].
 
 Con dicha implementación se pudo verificar que el valor resultante de la raíz
 del árbol minimax es -1, lo que indica que si ambos jugadores juegan de forma
