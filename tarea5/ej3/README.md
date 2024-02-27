@@ -1,4 +1,4 @@
-# Ejercicio 1
+# Ejercicio 3
 
 Para compilar el programa se debe ejecutar el siguiente comando:
 
