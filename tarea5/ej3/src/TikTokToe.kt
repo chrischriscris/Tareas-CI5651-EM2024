@@ -31,20 +31,20 @@ class TikTokToeMovesIterator(private val state: TikTokToe): Iterator<TikTokToe> 
  * @param lastMove: Int - index of the last move
  */
 class TikTokToe(val board: IntArray, val currentPlayer: Int, val lastMove: Int) {
-    public fun makeMove(index: Int): TikTokToe {
-        val newBoard = board.copyOf();
-        newBoard[index] += currentPlayer;
-
-        val newPlayer = if (currentPlayer == 1) 2 else 1;
-        return TikTokToe(newBoard, newPlayer, index);
-    }
-
     companion object {
         val WINNING_COMBINATIONS = listOf(
             intArrayOf(0, 1, 2), intArrayOf(3, 4, 5), intArrayOf(6, 7, 8),
             intArrayOf(0, 3, 6), intArrayOf(1, 4, 7), intArrayOf(2, 5, 8),
             intArrayOf(0, 4, 8), intArrayOf(2, 4, 6)
         );
+    }
+
+    public fun makeMove(index: Int): TikTokToe {
+        val newBoard = board.copyOf();
+        newBoard[index] += currentPlayer;
+
+        val newPlayer = if (currentPlayer == 1) 2 else 1;
+        return TikTokToe(newBoard, newPlayer, index);
     }
 
     // If exists a winning combination that sums 9
@@ -77,28 +77,32 @@ class TikTokToe(val board: IntArray, val currentPlayer: Int, val lastMove: Int) 
  */
 class TikTokToeMinimaxAgent {
     public fun minimax(state: TikTokToe, alpha: Int, beta: Int): Int {
-        val maximizing = state.currentPlayer == 1;
+        val horizontalTurn = state.currentPlayer == 1;
         if (state.isWinning()) {
-            return if (maximizing) -1 else 1;
+            return if (horizontalTurn) -1 else 1;
         }
 
-        if (maximizing) {
-            var value = Int.MIN_VALUE;
+        if (horizontalTurn) {
+            var best = Int.MIN_VALUE;
             for (successor in state.successors()) {
-                value = maxOf(value, minimax(successor, alpha, beta));
-                if (beta <= maxOf(alpha, value)) break;
+                best = minimax(successor, alpha, beta);
+                best = maxOf(best, alpha);
+                val newAlpha = maxOf(alpha, best);
+                if (beta <= newAlpha) break;
             }
 
-            return value;
+            return best;
         }
 
-        var value = Int.MAX_VALUE;
+        var best = Int.MAX_VALUE;
         for (successor in state.successors()) {
-            value = minOf(value, minimax(successor, alpha, beta));
-            if (minOf(beta, value) <= alpha) break;
+            best = minimax(successor, alpha, beta);
+            best = minOf(best, beta);
+            val newBeta = minOf(beta, best);
+            if (newBeta <= alpha) break;
         }
 
-        return value;
+        return best;
     }
 }
 

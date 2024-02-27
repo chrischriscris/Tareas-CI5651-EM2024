@@ -180,5 +180,20 @@ elemento puede es un número entre 0 y 4, siendo 0 si la casilla está vacía, 1
 tiene un —, 2 si tiene un | y 3 si tiene un +.
 
 Codificar los estados de esta manera presenta la ventaja de que para jugar en una
-casilla basta sumar el valor del símbolo a la casilla
+casilla basta sumar el valor del símbolo a la casilla correspondiente.
+
+Luego, para saber si un estado es ganador, basta con sumar los valores de las
+casillas en las filas, columnas y diagonales, y verificar si alguna suma es 9,
+lo que indicaría que un jugador ha ganado.
+
+Con esto, saber si un estado es ganador consiste simplemente en hacer ejecutar
+un agente minimax sobre el árbol de estados del juego, partiendo del tablero
+vacío, y ver si el agente puede forzar una victoria o termina perdiendo. Se
+representa el estado ganador con un 1, el perdedor con un -1.
+
+Una implementación de este algoritmo en Kotlin se puede encontrar #link("https://www.google.com")[aquí].
+
+Con dicha implementación se pudo verificar que el valor resultante de la raíz
+del árbol minimax es 1, lo que indica que si ambos jugadores juegan de forma
+óptima, el primer jugador tiene una estrategia ganadora.
 ]
