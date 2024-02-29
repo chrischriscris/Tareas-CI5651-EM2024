@@ -1,4 +1,4 @@
-#import "template.typ": conf, question
+#import "template.typ": conf, question, pseudocode, GITFRONT_REPO
 
 #show: doc => conf("Tarea n: ", doc)
 
