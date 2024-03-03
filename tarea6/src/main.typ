@@ -46,7 +46,29 @@ Diseñe un algoritmo que pueda ejecutar esta acción en tiempo
 Una estructura de datos que permita _dividir_ o _reunir_ subarreglos eficientemente con una
 _alta probabilidad_, puede llevar al camino del bien.
 ][
-Solución 1
+Analizando el problema, notamos que podemos expresar el resultado de
+`multiswap(a, b)` según dos casos como:
+
+- Si $b-a <= N+1-b$ (la parada se da porque `a` alcanza el primer valor de `b`):
+
+  `multiswap(a, b)` = $A[1..a) + A[b..2b-a) + A[a..b) + A[2b-a..N]$. Es decir,
+  se intercambia $A[a..b)$ con $A[b..2b-a)$ y se deja el resto igual.
+
+- En caso contrario (la parada se da porque `b` se sale del rango del arreglo):
+
+  `multiswap(a, b)` = $A[1..a) + A[b..N] + A[a+N-b+1..b) + A[a..a+N-b+1)$. Esta
+  vez se intercambia $A[a..a+N-b+1)$ con $A[b..N]$ y se deja el resto igual.
+
+Donde el operador $+$ representa la concatenación de arreglos.
+
+De esta forma, el problema consiste en hallar una forma de intercambiar dos
+subarreglos de rangos disjuntos en tiempo promedio $O(log(N))$, con lo cual
+lograríamos el objetivo de hacer $N$ operaciones en tiempo promedio $O(N log(N))$.
+
+Así, sabiendo que un treap bien construido (de forma que en el caso promedio
+se encuentra balanceado) nos permitirá hacer las operaciones de `split` y
+`merge` en tiempo promedio $O(log(N))$, podemos aprovechar esta estructura para
+resolver el problema.
 
 Una implementación de este algoritmo en _TODO_ se puede encontrar
 #link(GITFRONT_REPO + "tarea6/ej1/")[aquí].
