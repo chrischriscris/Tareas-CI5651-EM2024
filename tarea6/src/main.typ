@@ -56,8 +56,8 @@ Analizando el problema, notamos que podemos expresar el resultado de
 
 - En caso contrario (la parada se da porque `b` se sale del rango del arreglo):
 
-  `multiswap(a, b)` = $A[1..a) + A[b..N] + A[a+N-b+1..b) + A[a..a+N-b+1)$. Esta
-  vez se intercambia $A[a..a+N-b+1)$ con $A[b..N]$ y se deja el resto igual.
+  `multiswap(a, b)` = $A[1..a) + A[b..N] + A(a+N-b..b) + A[a..a+N-b]$. Esta
+  vez se intercambia $A[a..a+N-b]$ con $A[b..N]$ y se deja el resto igual.
 
 Donde el operador $+$ representa la concatenación de arreglos.
 
@@ -91,7 +91,7 @@ formas en tiempo $O(|N| + Q log |N|)$, usando memoria adicional $O(|N|)$.
 Realice un precondicionamiento adecuado en $O(|N|)$, que le permita responder
 cada consulta en $O(log |N|)$.
 ][
-Solución 2
+Esto puede lograrse usando una modificación de la descomposición Heavy–Light.
 
 Una implementación de este algoritmo en _TODO_ se puede encontrar
 #link(GITFRONT_REPO + "tarea6/ej2/")[aquí].
