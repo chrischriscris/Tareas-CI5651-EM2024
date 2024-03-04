@@ -10,8 +10,8 @@ def multiswap(A, a, b):
 def main():
     n = int(argv[1])
     A = list(range(1, n+1))
-    multiswap(A, 1, 4)
-    print(A)
+    multiswap(A, 120, 2500)
+    print(" ".join(map(str, A)))
 
 if __name__ == '__main__':
     main()

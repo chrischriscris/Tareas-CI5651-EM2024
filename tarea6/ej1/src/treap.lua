@@ -2,7 +2,7 @@ local treap = {}
 
 treap.__index = treap
 
-function treap.new(value)
+function treap.create(value)
     local t = {}
     setmetatable(t, treap)
 
@@ -15,10 +15,12 @@ function treap.new(value)
     return t
 end
 
+-- Returns the implicit index of the treap
 local function size(t)
     if t == nil then
         return 0
     end
+
     return t.size
 end
 
@@ -38,6 +40,71 @@ function treap:split(x)
     self.left = right
     self.size = size(self.left) + size(self.right) + 1
     return left, self
+end
+
+function treap.merge(t1, t2)
+    if t1 == nil then
+        return t2
+    end
+
+    if t2 == nil then
+        return t1
+    end
+
+    if t1.priority > t2.priority then
+        t1.right = treap.merge(t1.right, t2)
+        t1.size = size(t1.left) + size(t1.right) + 1
+        return t1
+    end
+
+    t2.left = treap.merge(t1, t2.left)
+    t2.size = size(t2.left) + size(t2.right) + 1
+    return t2
+end
+
+-- Inserts a new node with value after the index x
+-- The leftmost node has index 1
+function treap:insert(x, value)
+    local new_node = treap.create(value)
+    local left, right = self:split(x)
+
+    return treap.merge(treap.merge(left, new_node), right)
+end
+
+function treap:push_back(value)
+    return self:insert(size(self) + 1, value)
+end
+
+-- Walks the treap in in-order and prints the values
+function treap:print()
+    treap.print_rec(self)
+    io.write("\n")
+end
+
+function treap:print_rec()
+    if self == nil then
+        return
+    end
+
+    treap.print_rec(self.left)
+    io.write(self.value, " ")
+    treap.print_rec(self.right)
+end
+
+function treap:print_preorder()
+    if self == nil then
+        return
+    end
+
+    io.write("me: ", self.value)
+    print()
+
+    io.write("left: ")
+    treap.print_preorder(self.left)
+    print()
+
+    io.write("right: ")
+    treap.print_preorder(self.right)
 end
 
 return treap
