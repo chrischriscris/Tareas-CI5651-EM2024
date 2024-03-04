@@ -1,4 +1,4 @@
-local treap = require("treap")
+local treap = require("src.treap")
 local multiswap = {}
 
 function multiswap.multiswap(t, a, b)
@@ -8,7 +8,7 @@ function multiswap.multiswap(t, a, b)
 
     local n = t.size
 
-    if b - a <= n + 1 - b then
+    if b - a <= n - b + 1 then
         local subarr1, rest1 = t:split(a - 1)
         local subarr2, rest2 = rest1:split(b - a)
         local subarr3, subarr4 = rest2:split(b - a)
@@ -21,7 +21,7 @@ function multiswap.multiswap(t, a, b)
 
     local subarr1, rest1 = t:split(a - 1)
     local subarr2, rest2 = rest1:split(n - b + 1)
-    local subarr3, subarr4 = rest2:split(n - b + 1)
+    local subarr3, subarr4 = rest2:split(2 * b - n - a - 1)
 
     local new = treap.merge(subarr1, subarr4)
     new = treap.merge(new, subarr3)

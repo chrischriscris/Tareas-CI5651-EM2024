@@ -78,7 +78,7 @@ end
 -- Walks the treap in in-order and prints the values
 function treap:print()
     treap.print_rec(self)
-    io.write("\n")
+    print()
 end
 
 function treap:print_rec()

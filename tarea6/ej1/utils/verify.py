@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from sys import argv
 
 def multiswap(A, a, b):
@@ -10,8 +12,16 @@ def multiswap(A, a, b):
 def main():
     n = int(argv[1])
     A = list(range(1, n+1))
-    multiswap(A, 120, 2500)
-    print(" ".join(map(str, A)))
+    swaps = []
+    with open(argv[2], 'r') as f:
+        for line in f:
+            swaps.append(list(map(int, line.split())))
+
+    for swap in swaps:
+        multiswap(A, swap[0], swap[1])
+
+    print(" ".join(map(str, A)), end=" ")
+    print()
 
 if __name__ == '__main__':
     main()
