@@ -129,9 +129,13 @@ formas en tiempo $O(|N| + Q log |N|)$, usando memoria adicional $O(|N|)$.
 Realice un precondicionamiento adecuado en $O(|N|)$, que le permita responder
 cada consulta en $O(log |N|)$.
 ][
-Esto puede lograrse usando una modificación de la descomposición Heavy–Light.
+Podemos usar esto aplicando la descomposición Heavy–Light en el árbol $A$, con
+el que se arma luego un árbol de segmentos de cada cadena pesada, tomando como
+valor de cada nodo del árbol $p(c)$, donde $c$ es la conexión que representa el
+nodo; luego, el árbol contendría un campo para responder consultas de tipo
+$"forall"$ y otro para consultas de tipo $"exists"$.
 
-Una implementación de este algoritmo en _TODO_ se puede encontrar
+Una implementación de este algoritmo en Swift se puede encontrar
 #link(GITFRONT_REPO + "tarea6/ej2/")[aquí].
 ][
 // Pregunta 3
