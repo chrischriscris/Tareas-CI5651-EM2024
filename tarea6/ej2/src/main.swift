@@ -1,41 +1,52 @@
-// ========== GRAPH ==========
+// ========== TREE ==========
+class Node<T>: CustomStringConvertible {
+    var value: T
+    var size: Int = 1
+    var depth: Int = 0
+    var children: [Node<T>] = []
 
-/**
- * Graph as an adjacency map of elements of type T
- */
-class Graph<T: Hashable>: CustomStringConvertible {
-    var adjacencyMap: [T: [T]] = [:]
+    init(value: T) {
+        self.value = value
+    }
 
     var description: String {
-        var s = ""
-        for (vertex, edges) in adjacencyMap {
-            s += "\(vertex) -> \(edges)\n"
-        }
-        return s
+        return "\(value)"
     }
 
-    func addEdge(from: T, to: T) {
-        if adjacencyMap[from] == nil {
-            adjacencyMap[from] = []
-        }
-        adjacencyMap[from]?.append(to)
+    func add(child: Node<T>) {
+        children.append(child)
     }
 
+    func printTree() {
+        print(self.value)
+        for child in children {
+            child.printTree()
+        }
+    }
 }
 
-let edges = [
-    [1, 2], [1, 3], [1, 4],
-    [2, 5], [2, 6],
-    [3, 7],
-    [6, 8],
-    [7, 9],
-    [8, 10], [8, 11]
+var nodesByPreorder = [
+    [1],
+    [2, 3, 4],
+    [5, 6],
+    [],
+    [8],
+    [10, 11],
+    [],
+    [],
+    [7],
+    [9],
+    [],
+    []
 ]
 
-var graph = Graph<Int>()
-for edge in edges {
-    graph.addEdge(from: edge[0], to: edge[1])
+func buildTree(_ nodesByPreorder: [[Int]]) -> Node<Int> {
+    var stack: [Node<Int>] = []
+    if nodesByPreorder.count == 0 {
+        return Node(value: 0)
+    }
 }
 
-// ========== LABELED GRAPH ==========
+let tree = buildTree(nodesByPreorder)
+tree.printTree()
 
