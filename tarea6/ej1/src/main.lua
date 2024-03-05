@@ -8,7 +8,6 @@ for i = 2, n do
     t = t:push_back(i)
 end
 
--- Read the file in arg[2] in the format "a b"
 local f = io.open(arg[2], "r")
 local swaps = {}
 

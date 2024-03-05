@@ -65,12 +65,50 @@ De esta forma, el problema consiste en hallar una forma de intercambiar dos
 subarreglos de rangos disjuntos en tiempo promedio $O(log(N))$, con lo cual
 lograríamos el objetivo de hacer $N$ operaciones en tiempo promedio $O(N log(N))$.
 
-Así, sabiendo que un treap bien construido (de forma que en el caso promedio
-se encuentra balanceado) nos permitirá hacer las operaciones de `split` y
-`merge` en tiempo promedio $O(log(N))$, podemos aprovechar esta estructura para
-resolver el problema.
+Así, la idea  consiste en construir un treap implícito en base a la
+permutación identidad (que en el caso promedio se encontrará aproximadamente
+balanceado) y nos permitirá hacer las operaciones de `split` y `merge` en
+tiempo promedio $O(log(N))$. Un pseudocódigo para el programa que resuelve el
+problema es el siguiente:
 
-Una implementación de este algoritmo en _TODO_ se puede encontrar
+#pseudocode[
+```python
+def multi_multiswap(A: Lista[Entero], swaps: Lista[Tupla[Entero, Entero]]):
+    t = construir_treap(A)
+    for swap in swaps:
+        t = multiswap(t, swap.a, swap.b)
+
+    imprimir_inorden(t)
+
+def multiswap(t: Treap, a: Entero, b: Entero) -> Treap:
+    if t is None:
+        return
+
+    n = t.tamaño()
+
+    if b - a <= n - b + 1:
+        sub1, r1 = t.dividir(a - 1)
+        sub2, r2 = r1.dividir(b - a)
+        sub3, sub4 = r2.dividir(b - a)
+
+        return t.mezclar(sub1, sub3, sub2, sub4)
+
+    sub1, r1 = t.dividir(a - 1)
+    sub2, r2 = r1.dividir(n - b + 1)
+    sub3, sub4 = r2.dividir(2 * b - n - a - 1)
+
+
+    return t.mezclar(sub1, sub3, sub2, sub4)
+```
+]
+
+La construcción de un treap implícito toma memoria adicional $O(N)$, ya que
+por cada nodo se almacenan una cantidad constante de campos, y tiempo
+$O(N log(N))$ en el caso promedio. Luego, cada operación `multiswap` hace una
+cantidad constante de operaciones que en promedio toman tiempo $O(log(N))$,
+por lo que el tiempo total de ejecución es $O(N log(N))$ en el caso promedio.
+
+Una implementación de este algoritmo en Lua se puede encontrar
 #link(GITFRONT_REPO + "tarea6/ej1/")[aquí].
 ][
 // Pregunta 2
