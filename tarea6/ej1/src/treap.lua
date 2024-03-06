@@ -24,6 +24,8 @@ local function size(t)
     return t.size
 end
 
+-- Returns L, R where L is the treap with the first x elements and R is the
+-- treap with the rest
 function treap:split(x)
     if self == nil then
         return nil, nil
@@ -42,6 +44,7 @@ function treap:split(x)
     return left, self
 end
 
+-- Merges two treaps
 function treap.merge(t1, t2)
     if t1 == nil then
         return t2
@@ -89,22 +92,6 @@ function treap:print_rec()
     treap.print_rec(self.left)
     io.write(self.value, " ")
     treap.print_rec(self.right)
-end
-
-function treap:print_preorder()
-    if self == nil then
-        return
-    end
-
-    io.write("me: ", self.value)
-    print()
-
-    io.write("left: ")
-    treap.print_preorder(self.left)
-    print()
-
-    io.write("right: ")
-    treap.print_preorder(self.right)
 end
 
 return treap
