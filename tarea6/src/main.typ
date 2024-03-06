@@ -129,13 +129,28 @@ formas en tiempo $O(|N| + Q log |N|)$, usando memoria adicional $O(|N|)$.
 Realice un precondicionamiento adecuado en $O(|N|)$, que le permita responder
 cada consulta en $O(log |N|)$.
 ][
-Podemos usar esto aplicando la descomposición Heavy–Light en el árbol $A$, con
-el que se arma luego un árbol de segmentos de cada cadena pesada, tomando como
-valor de cada nodo del árbol $p(c)$, donde $c$ es la conexión que representa el
-nodo; luego, el árbol contendría un campo para responder consultas de tipo
-$"forall"$ y otro para consultas de tipo $"exists"$.
+Podemos resolver el problema aplicando la descomposición Heavy–Light, la idea
+es la siguiente:
 
-Una implementación de este algoritmo en Swift se puede encontrar
+- Se obtiene una descomposición Heavy–Light del árbol $A$.
+- Se construye un árbol de segmentos para las aristas $c$ de cada cadena pesada,
+  tomando como valores de las aristas el valor de $p(c)$.
+- Cada árbol de segmentos contendrá un campo para responder consultas de tipo
+  $"forall"$ y otro para consultas de tipo $"exists"$, en los que se acumulan los
+  valores de los hijos con un $and$ y un $or$ respectivamente.
+- Por cada consulta se realiza el procedimiento usual: se halla el ancestro
+  común más bajo de $x$ y $y$, se descompone el camino entre $x$ y el ancestro
+  común más bajo en cadenas pesadas y se responde la consulta con los valores
+  acumulados en los árboles de segmentos correspondientes.
+
+Veamos que para el precondicionamiento se obtiene una descomposición Heavy–Light
+en tiempo y memoria $O(|N|)$, y otro con el mismo requerimiento asintótico de
+tiempo y memoria para hallar el ancestro común más bajo de cualesquiera dos
+nodos. Luego, por cada consulta se halla el ancestro común más bajo en tiempo
+$O(log |N|)$ y se responde la consulta en tiempo $O(log |N|)$, por lo que el
+tiempo total de ejecución para responder $Q$ consultas es $O(|N| + Q log |N|)$.
+
+Una implementación parcial de este algoritmo en Swift se puede encontrar
 #link(GITFRONT_REPO + "tarea6/ej2/")[aquí].
 ][
 // Pregunta 3
