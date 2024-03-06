@@ -44,7 +44,88 @@ class Node<T>: CustomStringConvertible {
             child.printPreorder();
         }
     }
+
+    func clone() -> Node<T> {
+        let node = Node(value: value);
+        for child in children {
+            node.add(child: child.clone());
+        }
+
+        return node;
+    }
 }
+
+class PreconditionedLCA<T: Hashable>: CustomStringConvertible {
+    var tree: Node<T>;
+    var eulerTour: [Int] = [];
+    var firstOccurrence: [Int: Int] = [:];
+    var nodeToTag: [T: Int] = [:];
+    var tagToNode: [Int: T] = [:];
+
+    init(_ _tree: Node<T>) {
+        tree = _tree.clone();
+        bfs(tree);
+        eulerTourDFS(tree);
+    }
+
+    var description: String {
+        return "EulerTour: \(eulerTour)\n"
+            + "FirstOccurrence: \(firstOccurrence)";
+    }
+
+    func bfs(_ node: Node<T>) {
+        var queue: [Node<T>] = [node];
+        var tag = 0;
+        while !queue.isEmpty {
+            let current = queue.removeFirst();
+            current.count = tag;
+            nodeToTag[current.value] = tag;
+            tagToNode[tag] = current.value;
+            tag += 1;
+
+            for child in current.children {
+                queue.append(child);
+            }
+        }
+    }
+
+    func eulerTourDFS(_ node: Node<T>) {
+        if firstOccurrence[node.count] == nil {
+            firstOccurrence[node.count] = eulerTour.count;
+        }
+
+        eulerTour.append(node.count);
+        firstOccurrence[node.count] = eulerTour.count - 1;
+        for child in node.children {
+            eulerTourDFS(child);
+            eulerTour.append(node.count);
+        }
+    }
+
+    func lca(_ a: T, _ b: T) -> T {
+        let aTag = nodeToTag[a]!;
+        let bTag = nodeToTag[b]!;
+
+        var left = firstOccurrence[aTag]!;
+        var right = firstOccurrence[bTag]!;
+        if left > right {
+            let temp = left;
+            left = right;
+            right = temp;
+        }
+
+        // This should be a segment tree
+        var lca = eulerTour[left];
+        for i in (left + 1)...right {
+            if eulerTour[i] < lca {
+                lca = eulerTour[i];
+            }
+        }
+
+        return tagToNode[lca]!;
+    }
+}
+
 
 /**
  * DFS to calculate the depth of each node and the number of nodes
@@ -208,7 +289,6 @@ func buildSegmentTree<T>(
 }
 
 // ========== MAIN ==========
-
 func main() {
     let nodes: [Node<Int>] = (1...11).map { Node(value: $0) };
 
@@ -228,6 +308,8 @@ func main() {
     for chain in heavyLightDecomposition(tree) {
         segmentTrees.append(buildSegmentTree(chain, predicate));
     }
+
+    print(PreconditionedLCA(tree).lca(8, 5));
 }
 
 main();
