@@ -1,11 +1,11 @@
-all: src/main
+all: hldSample
 
-src/main: src/main.swift
-	swiftc src/main.swift -o src/main
+hldSample: Sources/main.swift
+	swiftc Sources/main.swift -o hldSample
 
-run: src/main
-	./src/main
+run: hldSample
+	./hldSample
 
-clean: src/main
-	rm -f src/main
+clean: hldSample
+	rm -f hldSample
 

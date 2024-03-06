@@ -1,3 +1,5 @@
+// ===== TREE =====
+
 /**
  * Node class for a tree.
  * It has a value, a count of nodes in the subtree rooted at the current node,
@@ -55,6 +57,9 @@ class Node<T>: CustomStringConvertible {
     }
 }
 
+/**
+ * Implementation of LCA algorithm using Euler Tour and Segment Tree.
+ */
 class PreconditionedLCA<T: Hashable>: CustomStringConvertible {
     var tree: Node<T>;
     var eulerTour: [Int] = [];
@@ -183,7 +188,7 @@ func heavyLightDecomposition<T>(_ tree: Node<T>) -> [[T]] {
     return chains;
 }
 
-// ========== TREE ==========
+// ========== Segment Trees ==========
 /**
  * Segment tree for a list of booleans.
  * Supports queries for existence and all in a given range.
@@ -290,6 +295,7 @@ func buildSegmentTree<T>(
 
 // ========== MAIN ==========
 func main() {
+    // Build the tree and the predicate for the decomposition
     let nodes: [Node<Int>] = (1...11).map { Node(value: $0) };
 
     let tree = nodes[0];
@@ -301,15 +307,42 @@ func main() {
     nodes[7].add(children: Array(nodes[9...10]));
 
     func predicate(parent a: Int, child b: Int) -> Bool {
-        return [1, 2, 9].contains(a);
+        return (a + b) % 2 == 0;
     }
 
+    // Create a segment tree for each chain
+    print("Chains found:");
     var segmentTrees: [BoolSegmentTree] = [];
     for chain in heavyLightDecomposition(tree) {
+        print(chain);
         segmentTrees.append(buildSegmentTree(chain, predicate));
     }
+    print();
 
-    print(PreconditionedLCA(tree).lca(8, 5));
+    // Find the LCA of the two nodes
+    let lcaFinder = PreconditionedLCA(tree);
+    let first = lcaFinder.lca(8, 5);
+
+    /**
+     * Crawl the way up to the LCA using the Segment Trees for each chain
+     * to calculate the result for each one.
+     * If a light edge is trespassed, combine the result using and/or (all/exists).
+     */
+
+    print("LCA between 8 and 5: \(first)\n");
+    print("Exists a connection that sums a pair number between 1 and 11?");
+
+    var a = nodes[0].chainIndex;
+    var b = nodes[10].chainIndex - 1;
+    print("  \(segmentTrees[nodes[0].chainNumber].exists(a, b))");
+
+    print("Do all those connections sum a pair number?");
+    print("  \(segmentTrees[nodes[0].chainNumber].all(a, b))");
+
+    a = nodes[1].chainIndex;
+    b = nodes[7].chainIndex - 1;
+    print("And between 2 and 8?");
+    print("  \(segmentTrees[nodes[2].chainNumber].all(a, b))");
 }
 
 main();
