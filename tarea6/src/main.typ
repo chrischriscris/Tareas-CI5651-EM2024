@@ -197,8 +197,5 @@ tiempo $O((N + Q) log N)$ y memoria $O(N log N)$.
 
 - El tiempo y el espacio son uno.
 ][
-Solucion 3
-
-Una implementación de este algoritmo en _TODO_ se puede encontrar
-#link(GITFRONT_REPO + "tarea6/ej3/")[aquí].
+501 Not Implemented.
 ]
