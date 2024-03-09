@@ -18,7 +18,21 @@ permutado más largo) y $"LCP"[k]$ (el prefijo común más largo), como fue vist
 en clase.
 ]
 ][
-Solución 1
+Para este caso, la cadena de caracteres $n$ es `18-10892`, con lo que el árbol
+de sufijos sería el siguiente:
+
+```plaintext
+0: 18-10892$
+1: 8-10892$
+2: -10892$
+3: 10892$
+4: 0892$
+5: 892$
+6: 92$
+7: 2$
+8: $
+```
+
 ][
 Sea $P = {p_1 , p_2 , dots , p_n }$ un conjunto de puntos en el plano
 cartesiano. Definimos una *capa* como aquellos puntos que forman parte del
