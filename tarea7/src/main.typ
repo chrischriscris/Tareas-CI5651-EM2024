@@ -1,9 +1,11 @@
 #import "template.typ": conf, question, pseudocode, GITFRONT_REPO
+#import "ej3/prefixSuffix.typ": buildKMPTable
 
 #show: doc => conf(
     "Tarea 7: Cadenas de caracteres/Geometría computacional",
     doc
 )
+
 
 #question[
 Sea $n$ una cadena de caracteres que tiene su número de carné (sin el guión):
@@ -21,17 +23,9 @@ en clase.
 Para este caso, la cadena de caracteres $n$ es `18-10892`, con lo que el árbol
 de sufijos sería el siguiente:
 
-```plaintext
-0: 18-10892$
-1: 8-10892$
-2: -10892$
-3: 10892$
-4: 0892$
-5: 892$
-6: 92$
-7: 2$
-8: $
-```
+#figure(caption: [Árbol de sufijos para `1810892`])[
+#image("img/suffixtree.svg", width: 250pt)
+]<arbol> \
 
 ][
 Sea $P = {p_1 , p_2 , dots , p_n }$ un conjunto de puntos en el plano
@@ -63,5 +57,16 @@ Considere los siguientes ejemplos:
 
 Diseñe un algoritmo que pueda responder a esta consulta usando tiempo $O(n)$.
 ][
-Solución 3
+Ejemplo:
+
+#let test1 = "ABRACADABRA"
+#let test2 = "SEVENTY SEVEN AAAAAAA SEVENTY SEVEN"
+
+#buildKMPTable(test1).map(i => str(i)).join(" ")
+
+#buildKMPTable(test2).map(i => str(i)).join(" ")
+
+With ALGORITMO #buildKMPTable("ALGORITMO").map(i => str(i)).join(" ")
+With ABRACADABRA #buildKMPTable("ABRACADABRA").map(i => str(i)).join(" ")
+With AREPERA #buildKMPTable("AREPERA").map(i => str(i)).join(" ")
 ]
