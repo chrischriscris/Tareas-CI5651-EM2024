@@ -1,6 +1,6 @@
 // Gets the largest substring T of the given string S such that T is both a
 // prefix and a suffix of S, and T != S. If no such substring exists, returns
-// a lambda characte (representing the empty string).
+// a lambda character (representing the empty string).
 #let prefix-suffix(S) = {
   if S.len() == 0 {
     return $lambda$;

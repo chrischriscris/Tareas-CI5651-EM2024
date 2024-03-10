@@ -8,7 +8,7 @@ make
 
 Al compilar el documento se generará un archivo `prefixSuffix.pdf` que contiene la solución a las entradas dadas.
 
-Las entradas se son leídas como una lista de strings en el archivo [inputs.json](inputs.json). El formato de las entradas es el siguiente:
+Las entradas son leídas como una lista de strings en el archivo [inputs.json](inputs.json).
 
 La función específica que resuelve el problema es `prefix-suffix` en el archivo [prefix-suffix.typ](prefix-suffix.typ).
 
