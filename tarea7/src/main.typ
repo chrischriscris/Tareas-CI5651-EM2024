@@ -1,11 +1,10 @@
 #import "template.typ": conf, question, pseudocode, GITFRONT_REPO
-#import "ej3/prefixSuffix.typ": buildKMPTable
+#import "ej3/prefix-suffix.typ": prefix-suffix
 
 #show: doc => conf(
     "Tarea 7: Cadenas de caracteres/Geometría computacional",
     doc
 )
-
 
 #question[
 Sea $n$ una cadena de caracteres que tiene su número de carné (sin el guión):
@@ -50,23 +49,41 @@ subcadena $T$ de $S$ más grande, tal que:
 
 Considere los siguientes ejemplos:
 
+#let example1 = "ABRACADABRA";
+#let example2 = "AREPERA";
+#let example3 = "ALGORITMO";
+
 - Para la cadena #underline(`ABRA`)`CAD`#underline(`ABRA`), la respuesta
-  sería `ABRA`.
-- Para la cadena #underline(`A`)`REPER`#underline(`A`), la respuesta sería `A`.
-- Para la cadena `ALGORITMO`, la respuesta sería $lambda$ (la cadena vacía).
+  sería #raw(prefix-suffix(example1)).
+- Para la cadena #underline(`A`)`REPER`#underline(`A`), la respuesta sería
+  #raw(prefix-suffix(example2)).
+- Para la cadena `ALGORITMO`, la respuesta sería #prefix-suffix(example3).
+  (la cadena vacía).
 
 Diseñe un algoritmo que pueda responder a esta consulta usando tiempo $O(n)$.
 ][
-Ejemplo:
+Notemos que a la hora de hacer el preprocesamiento de una cadena dada $S$ en
+el algoritmo de KMP, se calcula una tabla de saltos que se puede interpretar
+exactamente como lo que se pide (y de hecho, es ese el invariante que se
+mantiene en cada iteración de la construcción): la longitud del prefijo de
+$S[0..i]$ más largo que también es sufijo de $S[0..i]$ sin ser $S[0..i]$.
 
-#let test1 = "ABRACADABRA"
-#let test2 = "SEVENTY SEVEN AAAAAAA SEVENTY SEVEN"
+De esta forma, el algoritmo que resolvería este problema consiste simplemente
+en preprocesar de dicha manera $S$ y retornar una subcadena en el rango
+$[0, r)$, donde $r$ es el último elemento de la tabla de saltos.
 
-#buildKMPTable(test1).map(i => str(i)).join(" ")
+El algoritmo sería entonces el siguiente:
 
-#buildKMPTable(test2).map(i => str(i)).join(" ")
+#pseudocode[
+```python
+def prefix_suffix(s: Cadena) -> Cadena:
+    tabla = preprocesar(s)
 
-With ALGORITMO #buildKMPTable("ALGORITMO").map(i => str(i)).join(" ")
-With ABRACADABRA #buildKMPTable("ABRACADABRA").map(i => str(i)).join(" ")
-With AREPERA #buildKMPTable("AREPERA").map(i => str(i)).join(" ")
+    return s.subcadena(0, tabla.último())
+```
+]
+
+Una implementación de este algoritmo se utilizó al compilar el código fuente de
+este documento y mostrar los resultados de los ejemplos en el enunciado,
+se puede encontrar #link(GITFRONT_REPO + "tarea7/src/ej3/")[aquí].
 ]

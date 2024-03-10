@@ -1,18 +1,18 @@
 # Ejercicio 3
 
-Para compilar el programa se debe ejecutar el siguiente comando:
+Para compilar el documento se debe ejecutar el siguiente comando:
 
 ```bash
-comando1
+make
 ```
 
-Para ejecutar el programa se debe ejecutar el siguiente comando:
+Al compilar el documento se generará un archivo `prefixSuffix.pdf` que contiene la solución a las entradas dadas.
 
-```bash
-comando2
-```
+Las entradas se son leídas como una lista de strings en el archivo [inputs.json](inputs.json). El formato de las entradas es el siguiente:
 
-La función específica que resuelve el problema es `función` en el archivo [ruta/archivo](ruta/archivo).
+La función específica que resuelve el problema es `prefix-suffix` en el archivo [prefix-suffix.typ](prefix-suffix.typ).
+
+El uso de la función en el código fuente de la solución se encuentra [aquí](../main.typ#L57).
 
 ---
 Hecho con <3 por chrischriscris
