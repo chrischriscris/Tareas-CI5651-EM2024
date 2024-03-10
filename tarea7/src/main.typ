@@ -1,3 +1,4 @@
+#import "@preview/tablex:0.0.8": tablex, cellx, hlinex, vlinex
 #import "template.typ": conf, question, pseudocode, GITFRONT_REPO
 #import "ej3/prefix-suffix.typ": prefix-suffix
 
@@ -19,12 +20,46 @@ permutado más largo) y $"LCP"[k]$ (el prefijo común más largo), como fue vist
 en clase.
 ]
 ][
-Para este caso, la cadena de caracteres $n$ es `18-10892`, con lo que el árbol
+Para este caso, la cadena de caracteres $n$ es `1810892`, con lo que el árbol
 de sufijos sería el siguiente:
 
 #figure(caption: [Árbol de sufijos para `1810892`])[
-#image("img/suffixtree.svg", width: 250pt)
+#image("img/suffixtree.svg", width: 251pt)
 ]<arbol> \
+
+A partir de esto, podemos construir el arreglos de sufijos:
+
+#align(center)[
+#tablex(
+  columns: (50pt,) * 2,
+  align: (center, left),
+  [*Índice*], [*Sufijo*],
+  [0], [1810892],
+  [1], [810892],
+  [2], [10892],
+  [3], [0892],
+  [4], [892],
+  [5], [92],
+  [6], [2]
+)
+] \
+
+Y tras ordenar los sufijos lexicográficamente, obtenemos el siguiente arreglo:
+
+#align(center)[
+#tablex(
+  columns: (50pt,) * 2,
+  align: (center, left),
+  [*Índice*], [*Sufijo*],
+  [3], [0892],
+  [2], [10892],
+  [0], [1810892],
+  [6], [2],
+  [1], [810892],
+  [4], [892],
+  [5], [92]
+)
+] \
 
 ][
 Sea $P = {p_1 , p_2 , dots , p_n }$ un conjunto de puntos en el plano
@@ -38,7 +73,7 @@ conjunto de puntos $P$?
 Diseñe un algoritmo que pueda responder a esta consulta usando tiempo
 $O(n^2 log n)$ y memoria $O(n)$.
 ][
-Solución 2
+Hacer el Graham scan $n$ veces xd.
 ][
 Considere una cadena de caracteres $S$, de longitud $n$. Se desea hallar la
 subcadena $T$ de $S$ más grande, tal que:
