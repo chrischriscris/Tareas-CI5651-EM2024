@@ -31,36 +31,56 @@ A partir de esto, podemos construir el arreglos de sufijos:
 
 #align(center)[
 #tablex(
-  columns: (50pt,) * 2,
+  columns: (auto,) * 2,
   align: (center, left),
-  [*Índice*], [*Sufijo*],
+  [*i*], [*Sufijo*],
   [0], [1810892],
   [1], [810892],
   [2], [10892],
   [3], [0892],
   [4], [892],
   [5], [92],
-  [6], [2]
+  [6], [2],
+  [7], []
 )
 ] \
 
-Y tras ordenar los sufijos lexicográficamente, obtenemos el siguiente arreglo:
+Y tras ordenar los sufijos lexicográficamente, obtenemos el siguiente arreglo,
+que conforma $"SA"$ y desde el cual podemos aprovechar y llenar $"LCP"$:
 
 #align(center)[
 #tablex(
-  columns: (50pt,) * 2,
-  align: (center, left),
-  [*Índice*], [*Sufijo*],
-  [3], [0892],
-  [2], [10892],
-  [0], [1810892],
-  [6], [2],
-  [1], [810892],
-  [4], [892],
-  [5], [92]
+  columns: (auto,) * 4,
+  align: (center, center, center, left),
+  [*i*], [*SA[i]*], [*LCP[i]*], [*Sufijo*],
+  [0], [7], [0], [],
+  [1], [3], [0], [0892],
+  [2], [2], [0], [10892],
+  [3], [0], [1], [#text(fill: red)[1]810892],
+  [4], [6], [0], [2],
+  [5], [1], [0], [810892],
+  [6], [4], [1], [#text(fill: red)[8]92],
+  [7], [5], [0], [92]
 )
 ] \
 
+Y con esto podemos construir finalmente $"PLCP"$:
+
+#align(center)[
+#tablex(
+  columns: (auto,) * 4,
+  align: (center, center, center, left),
+  [*SA[i]*], [*Phi[SA[i]]*], [*PLCP[SA[i]]*], [*Sufijo*],
+  [0], [2], [1], [#text(fill: red)[1]810892],
+  [1], [6], [0], [810892],
+  [2], [3], [0], [10892],
+  [3], [7], [0], [0892],
+  [4], [1], [1], [#text(fill: red)[8]92],
+  [5], [4], [0], [92],
+  [6], [0], [0], [2],
+  [7], [-1], [0], []
+)
+]
 ][
 Sea $P = {p_1 , p_2 , dots , p_n }$ un conjunto de puntos en el plano
 cartesiano. Definimos una *capa* como aquellos puntos que forman parte del
