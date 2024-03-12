@@ -1,5 +1,6 @@
 import scala.io.Source
 import scala.collection.mutable.Stack
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * A special stack that keeps track of the next-to-top element in constant time.
@@ -54,17 +55,29 @@ class SStack[T] {
   }
 }
 
-class Peeler(var points: List[(Double, Double)]) {
-  def solve: Int = {
-    val sortedPoints = points.sortBy(p => (p._1, -p._2))
-    var layers = 0
+/**
+ * Peels a set of points with multiple layers
+ */
+class Peeler(val points: ArrayBuffer[(Double, Double)]) {
+  private var solution = -1
 
+  /**
+   * Returns the number of layers of the given list of points.
+   */
+  def solve: Int = {
+    if (solution != -1) {
+      return solution
+    }
+
+    var layers = 0
     while (points.nonEmpty) {
-      points = points.filterNot(convexHull.contains(_))
+      // The result is a set, so this is O(1)
+      points --= convexHull
       layers += 1
     }
 
-    layers
+    solution = layers
+    solution
   }
 
   /**
@@ -113,6 +126,11 @@ class Peeler(var points: List[(Double, Double)]) {
 }
 
 @main def main(args: String*): Unit = {
+  if (args.length != 1) {
+    println("Usage: main.scala <filename>")
+    return
+  }
+
   val filename = args(0)
   val points = parseInstance(filename)
 
@@ -120,11 +138,9 @@ class Peeler(var points: List[(Double, Double)]) {
   println(solver.solve)
 }
 
-def parseInstance(filename: String): List[(Double, Double)] = {
-  val lines = Source.fromFile(filename).getLines
-  val points = lines.map(line => {
+def parseInstance(filename: String): ArrayBuffer[(Double, Double)] = {
+  Source.fromFile(filename).getLines.map(line => {
     val Array(x, y) = line.split(" ")
     (x.toDouble, y.toDouble)
-  }).toList
-  points
+  }).to(ArrayBuffer)
 }
