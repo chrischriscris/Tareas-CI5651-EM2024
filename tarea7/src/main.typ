@@ -93,7 +93,42 @@ conjunto de puntos $P$?
 Diseñe un algoritmo que pueda responder a esta consulta usando tiempo
 $O(n^2 log n)$ y memoria $O(n)$.
 ][
-Hacer el Graham scan $n$ veces xd.
+Sabemos que podemos hallar un _Convex Hull_ (o capa) de un conjunto de puntos
+en tiempo $O(n log n)$ usando el algoritmo de _Graham Scan_. Con esto, un
+algoritmo que resuelva el problema sería el siguiente:
+
+#pseudocode[
+```python
+def capas(puntos: Conjunto[Punto]) -> Entero:
+    capas = 0
+    while !puntos.vacío():
+        capas += 1
+        capa = graham_scan(puntos)
+        puntos.remover(capa)
+
+    return capas
+```
+]
+
+Veamos, la cantidad máxima de capas está acotada por $n$ (no pudiese haber más
+capas que puntos), por lo que si el cuerpo del ciclo no tarda más de
+$O(n log n)$, el algoritmo completo tendrá una complejidad de $O(n^2 log n)$.
+
+En este punto hay que tener especial cuidado en la implementación, ya que si
+la verificación de existencia en cada capa no es constante, la operación
+`remover` tendría en el peor caso que recorrer `capa` tantas veces como
+elementos haya en la capa, tomándose tiempo $O(n^2)$ en lugar de $O(n)$. Así,
+para cumplir con la complejidad esperada, se debe retornar una estructura como
+Conjunto que permita verificar existencia en tiempo constante, así cada
+iteración del ciclo tomará tiempo $O(n + n log n) = O(n log n)$, y el algoritmo
+completo tomará tiempo $O(n^2 log n)$.
+
+Luego, es trivial que la memoria utilizada por el algoritmo es $O(n)$, ya que
+_Graham Scan_ no necesita polinomialmente más memoria que la cantidad de puntos
+que recibe como entrada.
+
+Una implementación de este algoritmo en Scala se puede encontrar
+#link(GITFRONT_REPO + "tarea7/ej2/")[aquí].
 ][
 Considere una cadena de caracteres $S$, de longitud $n$. Se desea hallar la
 subcadena $T$ de $S$ más grande, tal que:
