@@ -1,6 +1,6 @@
 #import "template.typ": conf, question, pseudocode, GITFRONT_REPO
 
-#show: doc => conf("Tarea n: ", doc)
+#show: doc => conf("Tarea 8: Divide y Vencerás/Programación Dinámica", doc)
 
 #question[
   Pregunta 1
