@@ -1,59 +1,6 @@
-import scala.io.Source
-import scala.collection.mutable.Stack
+package peeler
+
 import scala.collection.mutable.ArrayBuffer
-
-/**
- * A special stack that keeps track of the next-to-top element in constant time.
- */
-class SStack[T] {
-  private val stack = Stack[T]()
-  private var _nextToTop: Option[T] = None
-
-  def this(elems: T*) = {
-    this()
-    for (elem <- elems) {
-      push(elem)
-    }
-  }
-
-  def push(elem: T): Unit = {
-    if (stack.length > 0) {
-      _nextToTop = Some(stack.top)
-    }
-
-    stack.push(elem)
-  }
-
-  def pop: T = {
-    val result = stack.pop
-
-    if (stack.length > 1) {
-      val temp = stack.pop
-      _nextToTop = Some(stack.top)
-      stack.push(temp)
-    } else {
-      _nextToTop = None
-    }
-
-    result
-  }
-
-  def top: T = {
-    stack.top
-  }
-
-  def nextToTop: T = {
-    _nextToTop.get
-  }
-
-  def toSet: Set[T] = {
-    stack.toSet
-  }
-
-  def length: Int = {
-    stack.length
-  }
-}
 
 /**
  * Peels a set of points with multiple layers
@@ -71,7 +18,7 @@ class Peeler(val points: ArrayBuffer[(Double, Double)]) {
 
     var layers = 0
     while (points.nonEmpty) {
-      // The result is a set, so this is O(1)
+      // The result is a set, so this is O(n)
       points --= convexHull
       layers += 1
     }
@@ -108,11 +55,9 @@ class Peeler(val points: ArrayBuffer[(Double, Double)]) {
     }
 
     val minPoint = points.minBy(p => (p._1, -p._2))
-    val filteredPoints = points.filter(_ != minPoint)
-    val sortedPoints = filteredPoints.sortWith(lessThan(minPoint))
+    val sortedPoints = points.filter(_ != minPoint).sortWith(lessThan(minPoint))
 
     val stack = new SStack[(Double, Double)](minPoint, sortedPoints(0))
-
     for (i <- 1 until sortedPoints.length) {
       val p = sortedPoints(i)
       while (stack.length > 1 && !lessThan(stack.nextToTop)(stack.top, p)) {
@@ -123,24 +68,4 @@ class Peeler(val points: ArrayBuffer[(Double, Double)]) {
 
     stack.toSet
   }
-}
-
-@main def main(args: String*): Unit = {
-  if (args.length != 1) {
-    println("Usage: main.scala <filename>")
-    return
-  }
-
-  val filename = args(0)
-  val points = parseInstance(filename)
-
-  val solver = new Peeler(points)
-  println(solver.solve)
-}
-
-def parseInstance(filename: String): ArrayBuffer[(Double, Double)] = {
-  Source.fromFile(filename).getLines.map(line => {
-    val Array(x, y) = line.split(" ")
-    (x.toDouble, y.toDouble)
-  }).to(ArrayBuffer)
 }
