@@ -8,13 +8,18 @@ número corresponde al coeficiente para $x^i$.
 
 Por ejemplo, si su carné es `12-02412`, entonces el polinomio será:
 
-$ P (x) &= 1x^0 + 2x^2 + 0x^3 + 2x^4 + 4x^5 + 1x^6 + 2x^7 \
+$ P (x) &= 1x^0 + 0x^1 + 2x^2 + 0x^3 + 2x^4 + 4x^5 + 1x^6 + 2x^7 \
       &= 1 + 2x^2 + 2x^4 + 4x^5 + x^6 + 2x^7 $
 
 Calcule y muestre el resultado de aplicar la DFT (Transformada Discreta de
 Fourier) al polinomio obtenido, usando las *raíces octavas* de la unidad.
 ][
-  Solución 1
+En este caso, el carné a considerar es `18-10892`, por lo que el polinomio es:
+
+$ P (x) &= 1x^0 + 8x^1 + 1x^2 + 0x^3 + 8x^4 + 9x^5 + 2x^6 \
+      &= 1 + 8x + x^2 + 8x^4 + 9x^5 + 2x^6 $
+
+Con esto, el arreglo de coeficientes es $[1, 8, 1, 0, 8, 9, 2]$.
 ][
   Considere un número entero positivo $X$. Definimos la función $"decomp"(X)$ como
   la cantidad de enteros positivos $a$, $b$, $c$ y $d$ de tal forma que
