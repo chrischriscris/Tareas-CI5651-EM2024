@@ -8,8 +8,8 @@ número corresponde al coeficiente para $x^i$.
 
 Por ejemplo, si su carné es `12-02412`, entonces el polinomio será:
 
-$ P (x) &= 1x^0 + 0x^1 + 2x^2 + 0x^3 + 2x^4 + 4x^5 + 1x^6 + 2x^7 \
-      &= 1 + 2x^2 + 2x^4 + 4x^5 + x^6 + 2x^7 $
+$ P (x) &= 1x^0 + 2x^1 + 0x^2 + 2x^3 + 4x^4 + 1x^5 + 2x^6 \
+      &= 1 + 2x + 2x^3 + 4x^4 + x^5 + 2x^6 $
 
 Calcule y muestre el resultado de aplicar la DFT (Transformada Discreta de
 Fourier) al polinomio obtenido, usando las *raíces octavas* de la unidad.
@@ -19,7 +19,23 @@ En este caso, el carné a considerar es `18-10892`, por lo que el polinomio es:
 $ P (x) &= 1x^0 + 8x^1 + 1x^2 + 0x^3 + 8x^4 + 9x^5 + 2x^6 \
       &= 1 + 8x + x^2 + 8x^4 + 9x^5 + 2x^6 $
 
-Con esto, el arreglo de coeficientes es $[1, 8, 1, 0, 8, 9, 2]$.
+Con esto, el vector de coeficientes es $(1, 8, 1, 0, 8, 9, 2, 0)$, ya que
+debemos completar hasta tener un vector de coeficientes de tamaño $2^k$.
+
+Luego, las raíces octavas de la unidad vendrán dadas por
+$omega^k = e^((pi k)/4 i) $, con $k in [0..7]$.
+
+Corriendo el algoritmo `FFT` con este vector obtenemos el siguiente resultado
+(comenzando por $omega$):
+
+$ "FFT"((1, 8, 1, 0, 8, 9, 2, 0), e^(pi/4 i)) &\
+=
+                                            &(29, -7 - i - e^(pi/4 i), 6 + 17i, -7 + i + e^((3pi)/4 i),\
+  &-5, -7 - e^(pi/2 i) + e^(pi/4 i), 6 - 17i, -7 + e^(pi/2 i) - e^((3pi)/4 i))\
+=                                           &(29, -7 - sqrt(2) / 2 - (sqrt(2)/2 + 1) i, 6 + 17i, -7 + sqrt(2) / 2 + (1 - sqrt(2)/2)i,\
+  &-5, -7 + sqrt(2) / 2 + (sqrt(2)/2 - 1)i, 6 - 17i, -7 - sqrt(2) / 2 + (sqrt(2)/2 + 1)i) $
+
+Lo que corresponde a $(P(omega^0), P(omega^1), dots, P(omega^7))$.
 ][
   Considere un número entero positivo $X$. Definimos la función $"decomp"(X)$ como
   la cantidad de enteros positivos $a$, $b$, $c$ y $d$ de tal forma que
