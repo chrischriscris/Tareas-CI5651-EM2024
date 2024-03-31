@@ -61,7 +61,12 @@ Lo que corresponde a $(P(omega^0), P(omega^1), dots, P(omega^7))$.
     modificar para calcular algo más?
   - Un cambio de perspectiva pudiera ser de utilidad.
 ][
-  Solución 2
+  Veamos que para $X < 2$ el valor de $"decomp"(X)$ es $0$.
+
+  $N$ tiene $N - 1$ descomposiciones en sumandos, que vienen dadas por
+  $1 + (N - 1), 2 + (N - 2), dots, (N - 1) + 1$.
+
+
 ][
   Sea $P = {(x_1 , y_1 ), (x_2 , y_2 ), dots, (x_n , y_n )}$ un conjunto de $n$
   puntos.
