@@ -70,17 +70,6 @@ Lo que corresponde a $(P(omega^0), P(omega^1), dots, P(omega^7))$.
   descomposiciones en factores si es un cuadrado perfecto, y $k$ en caso
   contrario.
 
-  Ejemplo: (Para 10)
-  1 + 9
-  2 + 8
-  3 + 7
-  4 + 6
-  5 + 5
-  6 + 4
-  7 + 3
-  8 + 2
-  9 + 1
-
 ][
   Sea $P = {(x_1 , y_1 ), (x_2 , y_2 ), dots, (x_n , y_n )}$ un conjunto de $n$
   puntos.
