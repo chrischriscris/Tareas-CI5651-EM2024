@@ -61,14 +61,36 @@ Lo que corresponde a $(P(omega^0), P(omega^1), dots, P(omega^7))$.
     modificar para calcular algo más?
   - Un cambio de perspectiva pudiera ser de utilidad.
 ][
-  Veamos que para $X < 2$ el valor de $"decomp"(X)$ es $0$.
+  Notemos lo siguiente:
 
-  $N$ tiene $N - 1$ descomposiciones en sumandos, que vienen dadas por
-  $1 + (N - 1), 2 + (N - 2), dots, (N - 1) + 1$.
+  - Para $X < 2$ el valor de $"decomp"(X)$ es $0$.
+  - $N$ tiene $N - 1$ descomposiciones en dos sumandos mayores que 0, que vienen
+    dadas por $1 + (N - 1), 2 + (N - 2), dots, (N - 1) + 1$.
+  - Por otro lado, $N$ tiene tanta descomposiciones en dos factores como divisores,
+    las cuales vendrán dadas por $d_1 times (N / d_1), d_2 times (N / d_2), dots, d_k times (N / d_k)$,
+    donde $d_1, d_2, dots, d_k$ son los divisores de $N$. Llamemos $D_N$ a la
+    cantidad de divisores de $N$.
+  - Para cada forma de descomponer $N$ en dos sumandos, podemos descomponer cada
+    sumando en dos factores de $D_i$ y $D_j$ formas respectivamente.
 
-  Por otro lado, sea $k$ la cantidad de divisores de $N$, $N$ tiene $k - 1$
-  descomposiciones en factores si es un cuadrado perfecto, y $k$ en caso
-  contrario.
+  Teniendo esto en cuenta, podemos expresar el valor de $"decomp"(X)$ como:
+
+  $ "decomp"(X) = sum_(i=1)^(X-1) D_i D_(X-i) $
+
+  El problema se reduce a hallar el máximo de esta expresión en el rango
+  $1 <= X <= N$. Podemos además aprovechar que la descomposición en sumandos es
+  simétrica para reducir el rango de búsqueda a $1 <= X <= N/2$.
+
+  Ejemplo:\
+  1 + 9 (1*3)\
+  2 + 8 (2*4)\
+  3 + 7 (2*2)\
+  4 + 6 (3*4)\
+  5 + 5 (2*2)\
+  6 + 4 (4*3)\
+  7 + 3 (2*2)\
+  8 + 2 (4*2)\
+  9 + 1 (3*1)\
 
 ][
   Sea $P = {(x_1 , y_1 ), (x_2 , y_2 ), dots, (x_n , y_n )}$ un conjunto de $n$
