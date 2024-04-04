@@ -78,20 +78,9 @@ Lo que corresponde a $(P(omega^0), P(omega^1), dots, P(omega^7))$.
   $ "decomp"(X) = sum_(i=1)^(X-1) D_i D_(X-i) $
 
   El problema se reduce a hallar el máximo de esta expresión en el rango
-  $1 <= X <= N$. Podemos además aprovechar que la descomposición en sumandos es
-  simétrica para reducir el rango de búsqueda a $1 <= X <= N/2$.
+  $1 <= X <= N$.
 
-  Ejemplo:\
-  1 + 9 (1*3)\
-  2 + 8 (2*4)\
-  3 + 7 (2*2)\
-  4 + 6 (3*4)\
-  5 + 5 (2*2)\
-  6 + 4 (4*3)\
-  7 + 3 (2*2)\
-  8 + 2 (4*2)\
-  9 + 1 (3*1)\
-
+  (Sin terminar ...)
 ][
   Sea $P = {(x_1 , y_1 ), (x_2 , y_2 ), dots, (x_n , y_n )}$ un conjunto de $n$
   puntos.
@@ -132,5 +121,5 @@ Lo que corresponde a $(P(omega^0), P(omega^1), dots, P(omega^7))$.
     *subconjuntos*?
   - La geometría es un área muy útil de las matemáticas.
 ][
-  Solución 3
+  F
 ]
