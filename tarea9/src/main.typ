@@ -7,7 +7,9 @@ Considere su número de carné (sin el guión), concatenado tres veces, como un
 número entero. Por ejemplo, si su carné es `12-34567`, entonces el entero a
 considerar sería:
 
-123456712345671234567
+#align(center)[
+  123456712345671234567
+]
 
 Muestre la ejecución del algoritmo de Miller–Rabin repetido, paso a paso (a
 nivel del ciclo principal de `MillerRabinRep`), para ver si el número es primo o
@@ -17,7 +19,8 @@ esperado? ¿Ejecutó las $k = 10$ iteraciones?
 _Nota: Puede usar el generador de números aleatorios que viene con su lenguaje de
 elección._
 ][
-  Solución 1
+En este caso, el carné es `18-10892`, por lo que el número a considerar es
+$181089218108921810892$.
 ][
   Sea $A$ y $B$ dos matrices $n times n$, para algún entero $n > 0$.
 
@@ -29,7 +32,10 @@ elección._
   _Nota: Puede usar el generador de números aleatorios que viene con su lenguaje de
   elección._
 ][
-  Solución n
+  Basta con utilizar el método de Freivalds k veces.
+
+  Una implementación de este algoritmo en Gleam se puede encontrar
+  #link(GITFRONT_REPO + "tarea9/ej2/")[aquí].
 ][
   Sea un grafo $G = (N, C)$, decimos que $V subset.eq N$ es un cubrimiento de
   vértices para $G$ si todas las conexiones tienen alguno de sus extremos en V .
