@@ -12,14 +12,19 @@ public class Main {
 
     String filename = args[0];
     double epsilon = Double.parseDouble(args[1]);
-
+    
+    InverseChecker inverseChecker = null;
     try {
-      InverseChecker inverseChecker = new InverseChecker(epsilon, filename);
-      String instance = inverseChecker.toString();
-      System.out.println("Instance: " + instance);
+      inverseChecker = new InverseChecker(filename, epsilon);
     } catch (IOException e) {
       System.out.println("Error reading file: " + e.getMessage());
       System.exit(1);
+    }
+
+    if (inverseChecker.isInverse()) {
+      System.out.println("The matrix is the inverse of the original matrix.");
+    } else {
+      System.out.println("The matrix is not the inverse of the original matrix.");
     }
   }
 }
