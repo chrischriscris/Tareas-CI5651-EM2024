@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.stream.IntStream;
 
 /**
- * Checks if a matrix is the inverse of another
+ * Checks if a matrix is the inverse of another with a given probability of error
  */
 public class InverseChecker {
   private final int iterations;
@@ -19,22 +19,34 @@ public class InverseChecker {
     parseInstance(filename);
   }
 
+  /**
+   * Checks if the matrix is the inverse of the other
+   * @return true if the matrix is the inverse, false otherwise
+   *
+   * The result has a probability of error of the given epsilon
+   */
   public boolean isInverse() {
     FreivaldsMethod freivalds = new FreivaldsMethod(A, AInverse, I);
     return IntStream.range(0, iterations).allMatch(freivalds::check);
   }
 
+  /**
+   * Parses the instance from the given file
+   * @param filename the file to parse
+   * @throws IOException if an I/O error occurs
+   *
+   * The file must be in the following format:
+   * n
+   * a11 a12 ... a1n
+   * a21 a22 ... a2n
+   * ...
+   * an1 an2 ... ann
+   * ainv11 ainv12 ... ainv1n
+   * ainv21 ainv22 ... ainv2n
+   * ...
+   * ainvn1 ainvn2 ... ainvnn
+   */
   private void parseInstance(String filename) throws IOException {
-    // Open the file in the following format:
-    // n
-    // a11 a12 ... a1n
-    // a21 a22 ... a2n
-    // ...
-    // an1 an2 ... ann
-    // ainv11 ainv12 ... ainv1n
-    // ainv21 ainv22 ... ainv2n
-    // ...
-    // ainvn1 ainvn2 ... ainvnn
     try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
       int n = Integer.parseInt(reader.readLine());
 

@@ -24,7 +24,7 @@ public class FreivaldsMethod {
 
     int n = A.length;
 
-    int[] X = new int[A[0].length];
+    int[] X = new int[n];
     for (int i = 0; i < X.length; i++) {
       X[i] = rng.nextInt(2);
     }
