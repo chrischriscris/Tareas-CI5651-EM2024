@@ -21,6 +21,18 @@ elección._
 ][
 En este caso, el carné es `18-10892`, por lo que el número a considerar es
 $181089218108921810892$.
+
+Notemos que, por construcción, para cualquier carnet el número resultante de
+concatenarlo 3 veces será compuesto, de la siguiente manera:
+
+Sea $c > 1$, $c in N$ un carnet dado, concatenar $c$ 3 veces será equivalente a:
+
+$ c + c*10000000 + c*100000000000000 &= c*(1 + 10000000 + 100000000000000)\
+                                   &= c*100000010000001 $
+
+Veamos entonces cuál es el resultado de la ejecución del algoritmo de
+Miller-Rabin:
+
 ][
   Sea $A$ y $B$ dos matrices $n times n$, para algún entero $n > 0$.
 
@@ -32,10 +44,32 @@ $181089218108921810892$.
   _Nota: Puede usar el generador de números aleatorios que viene con su lenguaje de
   elección._
 ][
-  Basta con utilizar el método de Freivalds k veces.
+Queremos saber si $A B = I_n$, sea $I_n$ la matriz identidad de grado $n$. Así,
+un algoritmo de Monte Carlo que nos permite confirmar esta sospecha con un error
+arbitrario $epsilon > 0$ y tiempo $O(n^2 log 1/epsilon)$ es ejecutar el método
+de Freivalds $k$ veces, con $k = lg(1/epsilon)$:
 
-  Una implementación de este algoritmo en Gleam se puede encontrar
-  #link(GITFRONT_REPO + "tarea9/ej2/")[aquí].
+#pseudocode[
+```python
+    def freivalds(A: Matriz, B: Matriz, C: Matriz) -> bool:
+        n = A.tamaño
+        x = vector_aleatorio(0, 1, n)
+
+        return x*A*B == x*C
+
+    def es_inversa(A: Matriz, B: Matriz, epsilon: Real) -> bool:
+        n = A.tamaño
+        k = ceil(log(1/epsilon))
+
+        I = matriz_identidad(n)
+        for _ in range(k):
+            if not freivalds(A, B, I):
+                return False
+        return True
+    ```
+]
+Una implementación de este algoritmo en Gleam se puede encontrar
+#link(GITFRONT_REPO + "tarea9/ej2/")[aquí].
 ][
   Sea un grafo $G = (N, C)$, decimos que $V subset.eq N$ es un cubrimiento de
   vértices para $G$ si todas las conexiones tienen alguno de sus extremos en V .
