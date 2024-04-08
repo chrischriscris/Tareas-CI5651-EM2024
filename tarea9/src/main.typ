@@ -62,19 +62,22 @@ de Freivalds $k$ veces, con $k = lg(1/epsilon)$:
         k = ceil(log(1/epsilon))
 
         I = matriz_identidad(n)
-        for _ in range(k):
+        i = 0
+        while i < k:
             if not freivalds(A, B, I):
                 return False
+
+            i = i + 1
         return True
     ```
 ]
-Una implementación de este algoritmo en Gleam se puede encontrar
+Una implementación de este algoritmo en Java se puede encontrar
 #link(GITFRONT_REPO + "tarea9/ej2/")[aquí].
 ][
   Sea un grafo $G = (N, C)$, decimos que $V subset.eq N$ es un cubrimiento de
   vértices para $G$ si todas las conexiones tienen alguno de sus extremos en V .
 
-  $ (forall a, b in N : {a, b} in C => a in V or b in V) $
+  $ (forall a, b in N : {a, b} in C => {a, b} sect V != emptyset) $
 
   Sea $"MIN−COVER"$ el problema de hallar un cubrimiento de vértices de
   cardinalidad mínima. Sabemos que $"MIN−COVER"$ es $"NP"$–completo.
