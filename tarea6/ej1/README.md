@@ -18,4 +18,4 @@ an bn
 La función específica que resuelve el problema es `multiswap` en el archivo [src/multiswap.lua](src/multiswap.lua).
 
 ---
-Hecho con <3 por chrischriscris
+Hecho con :heart: por chrischriscris

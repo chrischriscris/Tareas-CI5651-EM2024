@@ -11,4 +11,4 @@ Donde `a1`, `a2`, ..., `an` son los elementos del arreglo.
 La función específica que resuelve el problema es `good_arrays` en el archivo [good-arrays.sh](good-arrays.sh).
 
 ---
-Hecho con <3 por chrischriscris
+Hecho con :heart: por chrischriscris

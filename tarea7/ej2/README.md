@@ -26,4 +26,4 @@ Donde `x1 y1` son las coordenadas (reales) de un punto en el plano cartesiano.
 La función específica que resuelve el problema es `solve` en el archivo [peeler/Peeler.scala](peeler/Peeler.scala).
 
 ---
-Hecho con <3 por chrischriscris
+Hecho con :heart: por chrischriscris

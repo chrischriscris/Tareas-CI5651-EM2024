@@ -1,4 +1,4 @@
-# Ejercicio n
+# Ejercicio 3
 
 Para ejecutar el programa se debe ejecutar el siguiente comando:
 
@@ -10,4 +10,4 @@ La función específica que resuelve el problema es `approximateMinCover` en el 
 
 ---
 
-Hecho con <3 por chrischriscris
+Hecho con :heart: por chrischriscris

@@ -15,4 +15,4 @@ La función específica que resuelve el problema es `prefix-suffix` en el archiv
 El uso de la función en el código fuente de la solución se encuentra [aquí](../main.typ#L57).
 
 ---
-Hecho con <3 por chrischriscris
+Hecho con :heart: por chrischriscris

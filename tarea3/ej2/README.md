@@ -23,4 +23,4 @@ make bench
 La función que resuelve el problema es `Perrin` en el archivo [perrin/perrin.go](perrin/perrin.go).
 
 ---
-Hecho con <3 por chrischriscris
+Hecho con :heart: por chrischriscris

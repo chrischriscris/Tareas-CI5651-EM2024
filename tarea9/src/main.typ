@@ -1,4 +1,4 @@
-#import "template.typ": conf, question, pseudocode, GITFRONT_REPO
+#import "template.typ": conf, question, pseudocode, GITHUB_REPO
 
 #show: doc => conf("Tarea 9: Algoritmos probabilísticos y aproximados", doc)
 
@@ -83,7 +83,7 @@ de Freivalds $k$ veces, con $k = lg(1/epsilon)$:
     ```
 ]
 Una implementación de este algoritmo en Java se puede encontrar
-#link(GITFRONT_REPO + "tarea9/ej2/")[aquí].
+#link(GITHUB_REPO + "tarea9/ej2/")[aquí].
 ][
   Sea un grafo $G = (N, C)$, decimos que $V subset.eq N$ es un cubrimiento de
   vértices para $G$ si todas las conexiones tienen alguno de sus extremos en V .
@@ -135,5 +135,5 @@ Se concluye así que el algoritmo propuesto produce una respuesta que es a lo
 sumo el doble de la solución óptima.
 
 Una implementación de este algoritmo en Typescript se puede encontrar
-#link(GITFRONT_REPO + "tarea9/ej3/")[aquí].
+#link(GITHUB_REPO + "tarea9/ej3/")[aquí].
 ]

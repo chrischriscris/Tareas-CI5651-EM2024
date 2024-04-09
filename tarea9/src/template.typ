@@ -77,3 +77,4 @@
 }
 
 #let GITFRONT_REPO = "https://gitfront.io/r/chrischriscris/swaWSXShzVoW/Tareas-CI5651-EM2024/tree/";
+#let GITHUB_REPO = "https://github.com/chrischriscris/Tareas-CI5651-EM2024/tree/main/";

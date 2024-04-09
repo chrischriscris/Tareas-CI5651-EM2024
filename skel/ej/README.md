@@ -15,4 +15,4 @@ comando2
 La función específica que resuelve el problema es `función` en el archivo [ruta/archivo](ruta/archivo).
 
 ---
-Hecho con <3 por chrischriscris
+Hecho con :heart: por chrischriscris

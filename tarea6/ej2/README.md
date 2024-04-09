@@ -19,4 +19,4 @@ Partes faltantes de la implementación:
 - Algoritmo para subir por el árbol saltando entre cadenas para combinarlas y hallar el `forall` y `exists` de un camino.
 
 ---
-Hecho con <3 por chrischriscris
+Hecho con :heart: por chrischriscris

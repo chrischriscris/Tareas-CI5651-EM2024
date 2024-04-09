@@ -18,4 +18,4 @@ xn yn
 La función específica que resuelve el problema es `ryanairDP` en el archivo [src/ryanair.jl](src/ryanair.jl).
 
 ---
-Hecho con <3 por chrischriscris
+Hecho con :heart: por chrischriscris

@@ -15,4 +15,4 @@ Para ejecutar el programa se debe ejecutar el siguiente comando:
 *Nota*: El programa reporta las posiciones sin inicializar como `NULL`.
 
 ---
-Hecho con <3 por chrischriscris
+Hecho con :heart: por chrischriscris

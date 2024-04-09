@@ -15,4 +15,4 @@ make run
 La función específica que resuelve el problema es `minimax` en el archivo [src/TikTokToe.kt](src/TikTokToe.kt).
 
 ---
-Hecho con <3 por chrischriscris
+Hecho con :heart: por chrischriscris
