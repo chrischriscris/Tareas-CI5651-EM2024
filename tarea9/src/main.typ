@@ -25,7 +25,8 @@ $181089118108911810891$.
 Notemos que, por construcción, para cualquier carnet el número resultante de
 concatenarlo 3 veces será compuesto, de la siguiente manera:
 
-Sea $c > 1$, $c in N$ un carnet dado, concatenar $c$ 3 veces será equivalente a:
+Sea $c > 1$, $c in NN$ un carnet dado, concatenar $c$ 3 veces será equivalente
+a:
 
 $ c + c*10000000 + c*100000000000000 &= c*(1 + 10000000 + 100000000000000)\
                                    &= c*100000010000001 $
@@ -107,15 +108,31 @@ las aristas, obtendremos un cubrimiento de vértices. Veamos el algoritmo:
 #pseudocode[
 ```python
   def min_cover(G: Grafo) -> Conjunto:
-      V = {}
+      C = {}
       for u, v in G.aristas:
-          V = V.union({u, v})
+          C.unir({u, v})
           G.eliminar_vertice(u)
           G.eliminar_vertice(v)
 
-      return V
+      return C
   ```
 ]
+Notemos que, como en cada iteración escogemos una arista distinta y eliminamos
+sus vértices y respectivas aristas incidentes, el cubrimiento $C$ obtenido será
+equivalete a un _emparejamiento_, y de hecho, uno maximal (si en vez de guardar
+los vértices guardáramos las aristas). Llamemos $M$ a este emparejamiento.
+
+Por otro lado, tenemos también que un cubrimiento de vértices de cardinalidad
+mínima debe contener por definición al menos un vértice por cada arista del
+emparejamiento maximal (de no ser así, no cubriría todas las aristas), es decir,
+sea $C^*$ la solución óptima, entonces $|M| <= |C^*|$.
+
+Pero el algoritmo propuesto no guarda aristas, sino los dos vértices de la
+misma, por lo que $|C| = 2|M|$, y por lo tanto $(|C|)/2 <= |C^*|$, o lo que es
+lo mismo, $|C| <= 2|C^*|$.
+
+Se concluye así que el algoritmo propuesto produce una respuesta que es a lo
+sumo el doble de la solución óptima.
 
 Una implementación de este algoritmo en Typescript se puede encontrar
 #link(GITFRONT_REPO + "tarea9/ej3/")[aquí].
