@@ -3,6 +3,7 @@
 
 import logging
 from random import randint
+from sys import argv
 
 logging.basicConfig(level=logging.DEBUG, format="%(name)s: %(message)s")
 logger = logging.getLogger("miller-rabin")
@@ -28,16 +29,21 @@ def btest(a: int, n: int) -> bool:
     s = 1
     t = (n - 1) // 2
 
+    logger.debug(f"{t=}")
     while t % 2 != 1:
         s += 1
         t = t // 2
+        logger.debug(f"{t=}")
+    logger.debug(f"{s=}")
 
     x = expmod(a, t, n)
+    logger.debug(f"expmod({a}, {t}, {n}) = {x}")
     if x == 1 or x == n - 1:
         return True
 
     for _ in range(1, s):
         x = (x * x) % n
+        logger.debug(f"{x=}")
         if x == n - 1:
             return True
 
@@ -64,10 +70,10 @@ def miller_rabin_repeated(n: int, k: int) -> bool:
 
 
 def main():
-    c = 1810892
+    c = int(argv[1])
     c *= 100000010000001
 
-    # Disable logging
+    # Uncomment to disable logging
     # logger.setLevel(logging.CRITICAL)
     res = miller_rabin_repeated(c, 10)
     print(f"{c} is {'prime' if res else 'composite'}")

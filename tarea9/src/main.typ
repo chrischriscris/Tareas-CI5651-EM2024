@@ -3,9 +3,9 @@
 #show: doc => conf("Tarea 9: Algoritmos probabilísticos y aproximados", doc)
 
 #question[
-Considere su número de carné (sin el guión), concatenado tres veces, como un
-número entero. Por ejemplo, si su carné es `12-34567`, entonces el entero a
-considerar sería:
+Considere su número de carné (sin el guión) restando 1 si es par, concatenado
+tres veces, como un número entero. Por ejemplo, si su carné es `12-34567`,
+entonces el entero a considerar sería:
 
 #align(center)[
   123456712345671234567
@@ -20,7 +20,7 @@ _Nota: Puede usar el generador de números aleatorios que viene con su lenguaje 
 elección._
 ][
 En este caso, el carné es `18-10892`, por lo que el número a considerar es
-$181089218108921810892$.
+$181089118108911810891$.
 
 Notemos que, por construcción, para cualquier carnet el número resultante de
 concatenarlo 3 veces será compuesto, de la siguiente manera:
@@ -32,6 +32,16 @@ $ c + c*10000000 + c*100000000000000 &= c*(1 + 10000000 + 100000000000000)\
 
 Veamos entonces cuál es el resultado de la ejecución del algoritmo de
 Miller-Rabin:
+
+- El número aleatorio $a$ resulta ser $a = 106681647674259816197$ (generado por un
+  dado de 6 caras).
+- El primer ciclo itera 1 vez:
+  - $t = 90544559054455905445$.
+- $x = a^t mod 181089118108911810891 = 87323191318267542098$.
+- El resultado no es 1 ni $n - 1 = 181089118108911810890$.
+- Como $s = 1$ el segundo ciclo no itera.
+- El resultado no es 1 ni $n - 1 = 181089318108931810892$.
+- Se concluye que el número es compuesto.
 
 ][
   Sea $A$ y $B$ dos matrices $n times n$, para algún entero $n > 0$.
@@ -88,5 +98,25 @@ Una implementación de este algoritmo en Java se puede encontrar
   el doble de la solución óptima. Debe demostrar que esto último es cierto para su
   algoritmo propuesto.
 ][
-  Solución n
+Para resolver aproximadamente el problema del mínimo cubrimiento de vértices,
+basta con ir tomando aristas $A$ cualesquiera del grafo y eliminar las aristas
+incidentes a los vértices de $A$, pues ya estarán cubiertas por los vértices de
+$A$, que se agregarán al cubrimiento. Si repetimos esto hasta considerar todas
+las aristas, obtendremos un cubrimiento de vértices. Veamos el algoritmo:
+
+#pseudocode[
+```python
+  def min_cover(G: Grafo) -> Conjunto:
+      V = {}
+      for u, v in G.aristas:
+          V = V.union({u, v})
+          G.eliminar_vertice(u)
+          G.eliminar_vertice(v)
+
+      return V
+  ```
+]
+
+Una implementación de este algoritmo en Typescript se puede encontrar
+#link(GITFRONT_REPO + "tarea9/ej3/")[aquí].
 ]

@@ -1,18 +1,13 @@
 # Ejercicio n
 
-Para compilar el programa se debe ejecutar el siguiente comando:
-
-```bash
-comando1
-```
-
 Para ejecutar el programa se debe ejecutar el siguiente comando:
 
 ```bash
-comando2
+./find-cover.sh <filename>
 ```
 
-La función específica que resuelve el problema es `función` en el archivo [ruta/archivo](ruta/archivo).
+La función específica que resuelve el problema es `approximateMinCover` en el archivo [notExactlyMinCover/Graph/index.ts](notExactlyMinCover/Graph/index.ts).
 
 ---
+
 Hecho con <3 por chrischriscris
