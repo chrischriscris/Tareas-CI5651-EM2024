@@ -41,9 +41,8 @@ Miller-Rabin:
 - $x = a^t mod 181089118108911810891 = 87323191318267542098$.
 - El resultado no es 1 ni $n - 1 = 181089118108911810890$.
 - Como $s = 1$ el segundo ciclo no itera.
-- El resultado no es 1 ni $n - 1 = 181089318108931810892$.
-- Se concluye que el número es compuesto.
-
+- Se concluye que el número es compuesto, y no hace falta seguir con las
+  iteraciones restantes.
 ][
   Sea $A$ y $B$ dos matrices $n times n$, para algún entero $n > 0$.
 
